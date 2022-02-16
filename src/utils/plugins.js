@@ -1,0 +1,10 @@
+import css from "prettier/parser-postcss";
+import typescript from "prettier/parser-typescript";
+import babel from "prettier/parser-babel";
+import vue from "prettier/parser-html";
+import angular from "prettier/parser-angular";
+import html from "prettier/parser-html";
+import markdown from "prettier/parser-markdown";
+import php from "@prettier/plugin-php/standalone";
+import xml from "@prettier/plugin-xml";
+export default [css, typescript, babel, vue, angular, html, markdown, php, xml];
