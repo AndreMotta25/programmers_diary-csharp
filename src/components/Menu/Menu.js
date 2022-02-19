@@ -18,6 +18,8 @@ const Menu = ({ setModalActive }) => {
       setCards(cards);
       console.log(cards);
     };
+
+    // isso é só para testes
     setTimeout(() => {
       fetchdata();
     }, 3000);
@@ -30,6 +32,7 @@ const Menu = ({ setModalActive }) => {
     const dados2 = cards.filter((elem) => elem.nome === search);
     const dados3 = cards.filter((elem) => elem.nome.indexOf(search) !== -1);
     array_dados = [...dados, ...dados2, ...dados3];
+    // filtra os dados
     if (array_dados.length > 0) {
       array_dados.forEach((elem) => {
         if (array_filtrado.filter((item) => item.id === elem.id).length <= 0) {

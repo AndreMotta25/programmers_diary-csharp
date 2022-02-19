@@ -19,24 +19,28 @@ import pluginsLista from "../../utils/plugins";
 const Modal = ({ setModalActive }) => {
   const { editarItem, setEditar } = useContext(EditionContext);
   const { criationItem, setItemCriation } = useContext(CriationContext);
-  const [nome, setNome] = useState(editarItem.nome ? editarItem.nome : "");
+  const [nome, setNome] = useState(criationItem.nome ? criationItem.nome : "");
   const [desc, setDesc] = useState(
-    editarItem.descricao ? editarItem.descricao : ""
+    criationItem.descricao ? criationItem.descricao : ""
   );
-  const [id, setId] = useState(editarItem.id ? editarItem.id : "");
+  const [id, setId] = useState(criationItem.id ? criationItem.id : "");
   const [language, setLanguage] = useState(
-    editarItem.language ? editarItem.language : ""
+    criationItem.language ? criationItem.language : ""
   );
-  const [code, setCode] = useState(editarItem.code ? editarItem.code : "");
+  const [code, setCode] = useState(criationItem.code ? criationItem.code : "");
   const [label, setLabel] = useState(
-    editarItem.labelLanguage ? editarItem.labelLanguage : ""
+    criationItem.labelLanguage ? criationItem.labelLanguage : ""
   );
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
     console.log(e.currentTarget);
     console.log(e.target);
-    setModalActive(e.currentTarget !== e.target);
-    setEditar({});
+    if (e.currentTarget == e.target) {
+      setModalActive(false);
+      setItemCriation({});
+    }
+    // setModalActive(e.currentTarget !== e.target);
+    // setEditar({});
   }
   // evento de submit
   function handleSubmit(e) {

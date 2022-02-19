@@ -11,21 +11,23 @@ import codeLanguages from "../../utils/codeMirror";
 
 const Home = () => {
   const { criationItem, setItemCriation } = useContext(CriationContext);
-  const [itemCard, setItemCard] = useState("");
+  const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
 
   // defini no cabecalho a linguagem
   useEffect(() => {
-    console.log(criationItem);
+    console.log(itemCard);
     setItemCard(criationItem);
+    // setTextCode(criationItem.code);
   }, [criationItem]);
 
   // insere no contexto o codigo a cada digito
   useEffect(() => {
     if (itemCard) {
       setItemCriation({ ...criationItem, code: textCode });
-      console.log(criationItem);
+      console.log(itemCard);
+      console.log(textCode);
     }
   }, [textCode]);
   return (
@@ -34,10 +36,9 @@ const Home = () => {
         <BlackWrapper>
           <Header obj={itemCard}></Header>
           <CodeMirror
-            value={itemCard.code ? itemCard.code : textCode}
+            value={itemCard.code ? itemCard.code : ""}
             height="64vh"
             width={"100%"}
-            className="teste"
             onChange={(value, viewUpdate) => {
               console.log("value:", value);
               setTextCode(value);

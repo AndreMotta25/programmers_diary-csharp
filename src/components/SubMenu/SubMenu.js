@@ -9,8 +9,10 @@ import {
 } from "./styles";
 import url from "../../assets/teste.png";
 import { EditionContext } from "../../context/Edition/Edition";
+import { CriationContext } from "../../context/Criation/Criation";
 const SubMenu = ({ item, setModalActive }) => {
   const { editarItem, setEditar } = useContext(EditionContext);
+  const { criationItem, setItemCriation } = useContext(CriationContext);
   return (
     <>
       <WrapperSubMenu>
@@ -25,7 +27,7 @@ const SubMenu = ({ item, setModalActive }) => {
             <Button
               onClick={() => {
                 setModalActive((opt) => !opt);
-                setEditar(item);
+                setItemCriation(item);
               }}
             >
               Editar

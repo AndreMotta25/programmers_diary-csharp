@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 28.5%;
+  min-height: 28.5%;
 `;
 export const WrapperInfo = styled.div`
   display: flex;

@@ -7,7 +7,7 @@ import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
 
 const Header = ({ obj }) => {
-  console.log(obj);
+  // console.log(obj);
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [error, setErrors] = useState({});
   function save() {
