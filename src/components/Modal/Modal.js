@@ -12,12 +12,13 @@ import {
   Button,
 } from "./styles";
 import { AiOutlineCheck } from "react-icons/ai";
-import { EditionContext } from "../../context/Edition/Edition";
+// import { EditionContext } from "../../context/Edition/Edition";
 import { CriationContext } from "../../context/Criation/Criation";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
+import request from "../../utils/request";
 const Modal = ({ setModalActive }) => {
-  const { editarItem, setEditar } = useContext(EditionContext);
+  // const { editarItem, setEditar } = useContext(EditionContext);
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [nome, setNome] = useState(criationItem.nome ? criationItem.nome : "");
   const [desc, setDesc] = useState(
@@ -33,42 +34,34 @@ const Modal = ({ setModalActive }) => {
   );
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
-    console.log(e.currentTarget);
-    console.log(e.target);
     if (e.currentTarget == e.target) {
       setModalActive(false);
       setItemCriation({});
     }
-    // setModalActive(e.currentTarget !== e.target);
-    // setEditar({});
   }
   // evento de submit
   function handleSubmit(e) {
     e.preventDefault();
+    let obj = {
+      id: id ? id : "",
+      language: language,
+      labelLanguage: label,
+      nome: nome,
+      descricao: desc,
+      code: prettier.format(code, {
+        parser: language,
+        plugins: pluginsLista,
+      }),
+    };
     // caso nao exista
     if (!id) {
-      setItemCriation({
-        language: language,
-        labelLanguage: label,
-        name: nome,
-        description: desc,
-        code: "",
-      });
+      setItemCriation(obj);
       setModalActive(false);
     }
     // caso exista
     else {
-      setItemCriation({
-        id: id,
-        language: language,
-        labelLanguage: label,
-        name: nome,
-        description: desc,
-        code: prettier.format(code, {
-          parser: language,
-          plugins: pluginsLista,
-        }),
-      });
+      request.upDate(id, obj);
+      setItemCriation(obj);
       setModalActive(false);
     }
   }
@@ -120,3 +113,17 @@ const Modal = ({ setModalActive }) => {
 export default Modal;
 
 // posso retirar o contexto de editar, e usar so o de criar
+
+/*
+  {
+        id: id,
+        language: language,
+        labelLanguage: label,
+        name: nome,
+        description: desc,
+        code: prettier.format(code, {
+          parser: language,
+          plugins: pluginsLista,
+        }),
+      }
+*/

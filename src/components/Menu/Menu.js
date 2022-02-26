@@ -6,11 +6,13 @@ import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
 
-const Menu = ({ setModalActive }) => {
+const Menu = ({ setModalActive, cardAberto }) => {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
   const [result, setResult] = useState("");
+  console.log(cards);
+
   // busca os dados na api
   useEffect(() => {
     const fetchdata = async () => {
@@ -24,6 +26,7 @@ const Menu = ({ setModalActive }) => {
       fetchdata();
     }, 3000);
   }, []);
+
   // faz a pesquisa
   useEffect(() => {
     let array_dados = [];
@@ -45,7 +48,22 @@ const Menu = ({ setModalActive }) => {
     if (array_filtrado.length <= 0) {
       setResult("Nada achado...");
     }
+    // eslint-disable-next-line
   }, [search]);
+
+  // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
+  useEffect(() => {
+    let card = cards.find((card) => card.id === cardAberto.id);
+    if (card) {
+      card.nome = cardAberto.nome;
+      card.descricao = cardAberto.descricao;
+      card.language = cardAberto.language;
+      card.labelLanguage = cardAberto.labelLanguage;
+    }
+
+    setCards([...cards]);
+    // eslint-disable-next-line
+  }, [cardAberto]);
 
   return (
     <>

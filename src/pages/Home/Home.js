@@ -17,18 +17,12 @@ const Home = () => {
 
   // defini no cabecalho a linguagem
   useEffect(() => {
-    console.log(itemCard);
     setItemCard(criationItem);
-    // setTextCode(criationItem.code);
   }, [criationItem]);
 
   // insere no contexto o codigo a cada digito
   useEffect(() => {
-    if (itemCard) {
-      setItemCriation({ ...criationItem, code: textCode });
-      console.log(itemCard);
-      console.log(textCode);
-    }
+    setItemCriation({ ...criationItem, code: textCode });
   }, [textCode]);
   return (
     <>
@@ -52,7 +46,7 @@ const Home = () => {
           />
           {modalActive && <Modal setModalActive={setModalActive}></Modal>}
         </BlackWrapper>
-        <Menu setModalActive={setModalActive}></Menu>
+        <Menu setModalActive={setModalActive} cardAberto={itemCard}></Menu>
       </Wrapper>
     </>
   );

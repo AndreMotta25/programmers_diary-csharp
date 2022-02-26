@@ -2,11 +2,11 @@
   "cards": [
     {
       "id": 1,
+      "language": "css",
+      "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "language": "css",
-      "code": "p {overflow: hidden;text-overflow: ellipsis; display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}",
-      "labelLanguage": "css"
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n}\n"
     },
     {
       "id": 2,
