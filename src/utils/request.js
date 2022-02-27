@@ -8,7 +8,7 @@ export default {
     return await fetchData(url);
   },
   // atualizar
-  upDate: (id, obj) => {
+  atualizar: (id, obj) => {
     fetch(`http://localhost:3333/cards/${id}`, {
       method: "PUT",
       headers: {
@@ -17,7 +17,15 @@ export default {
       body: JSON.stringify(obj),
     });
   },
-
+  inserir(obj) {
+    fetch(`http://localhost:3333/cards/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+  },
   // excluir
   // inserir
 };

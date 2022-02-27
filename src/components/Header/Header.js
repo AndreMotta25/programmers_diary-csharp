@@ -5,11 +5,13 @@ import { CriationContext } from "../../context/Criation/Criation";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
+import request from "../../utils/request";
 
 const Header = ({ obj }) => {
-  // console.log(obj);
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [error, setErrors] = useState({});
+
+  /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
     try {
       if (Object.getOwnPropertyNames(criationItem).length > 0) {
@@ -20,6 +22,7 @@ const Header = ({ obj }) => {
           bracketSameLine: true,
         });
         // vai forcar a renderizacao da home
+        obj.id ? request.atualizar(obj.id, obj) : request.inserir(obj);
         setItemCriation({ ...criationItem, code: clearCode });
         setErrors({ err: false });
       }
