@@ -10,7 +10,7 @@ import {
 import url from "../../assets/teste.png";
 import { EditionContext } from "../../context/Edition/Edition";
 import { CriationContext } from "../../context/Criation/Criation";
-import request from "../../utils/request";
+import crud from "../../utils/crud";
 const SubMenu = ({ item, setModalActive, setCards, cards }) => {
   const { editarItem, setEditar } = useContext(EditionContext);
   const { criationItem, setItemCriation } = useContext(CriationContext);
@@ -26,7 +26,7 @@ const SubMenu = ({ item, setModalActive, setCards, cards }) => {
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {
-                request.excluir(item.id);
+                crud.excluir(item.id);
                 let cardsRestantes = cards.filter(
                   (card) => card.id !== item.id
                 );

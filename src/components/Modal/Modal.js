@@ -15,7 +15,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { CriationContext } from "../../context/Criation/Criation";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
-import request from "../../utils/request";
+import crud from "../../utils/crud";
 
 const Modal = ({ setModalActive }) => {
   const { criationItem, setItemCriation } = useContext(CriationContext);
@@ -54,12 +54,15 @@ const Modal = ({ setModalActive }) => {
     };
     // caso nao exista
     if (!id) {
+      obj.novo = true;
+      console.log(obj);
       setItemCriation(obj);
       setModalActive(false);
     }
     // caso exista
     else {
-      request.atualizar(id, obj);
+      obj.novo = false;
+      crud.atualizar(id, obj);
       setItemCriation(obj);
       setModalActive(false);
     }

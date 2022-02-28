@@ -4,9 +4,10 @@
       "id": 1,
       "language": "css",
       "labelLanguage": "css",
-      "nome": "encurtar texto com cs",
+      "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n}\n"
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n}\n",
+      "novo": false
     },
     {
       "id": 2,
@@ -39,6 +40,15 @@
       "language": "babel",
       "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
       "labelLanguage": "js"
+    },
+    {
+      "id": 7,
+      "language": "babel",
+      "labelLanguage": "js",
+      "nome": "teste1",
+      "descricao": "",
+      "code": "console.log(\"teste1\")",
+      "novo": false
     }
   ]
 }
