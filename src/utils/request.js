@@ -20,4 +20,12 @@ export default {
 
   // excluir
   // inserir
+  excluir(id) {
+    fetch(`http://localhost:3333/cards/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
 };
