@@ -89,6 +89,8 @@ const Menu = ({ setModalActive, cardAberto, novoCard }) => {
                 key={crypto.randomUUID()}
                 card={card}
                 setModalActive={setModalActive}
+                setCards={setCards}
+                cards={cards}
               />
             ))}
           {!search &&

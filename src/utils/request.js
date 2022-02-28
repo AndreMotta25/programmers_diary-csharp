@@ -3,11 +3,9 @@ async function fetchData(url) {
   return data;
 }
 export default {
-  // buscar
   getAll: async (url) => {
     return await fetchData(url);
   },
-  // atualizar
   atualizar: (id, obj) => {
     fetch(`http://localhost:3333/cards/${id}`, {
       method: "PUT",
@@ -26,8 +24,6 @@ export default {
       body: JSON.stringify(obj),
     });
   },
-  // excluir
-  // inserir
   excluir(id) {
     fetch(`http://localhost:3333/cards/${id}`, {
       method: "DELETE",
