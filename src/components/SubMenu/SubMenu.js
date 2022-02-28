@@ -8,12 +8,10 @@ import {
   Button,
 } from "./styles";
 import url from "../../assets/teste.png";
-import { EditionContext } from "../../context/Edition/Edition";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import crud from "../../utils/crud";
 const SubMenu = ({ item, setModalActive, setCards, cards }) => {
-  const { editarItem, setEditar } = useContext(EditionContext);
-  const { criationItem, setItemCriation } = useContext(CriationContext);
+  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
   return (
     <>
       <WrapperSubMenu>
@@ -40,7 +38,7 @@ const SubMenu = ({ item, setModalActive, setCards, cards }) => {
             <Button
               onClick={() => {
                 setModalActive((opt) => !opt);
-                setItemCriation(item);
+                addManipulableItem(item);
               }}
             >
               Editar

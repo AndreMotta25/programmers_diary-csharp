@@ -4,24 +4,24 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 import { BlackWrapper } from "./styles";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import CodeMirror from "@uiw/react-codemirror";
 import { oneDark } from "@codemirror/theme-one-dark";
 import codeLanguages from "../../utils/codeMirror";
 
 const Home = () => {
-  const { criationItem, setItemCriation } = useContext(CriationContext);
+  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
   const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
   // defini no cabecalho a linguagem e monta o objeto card
   useEffect(() => {
-    setItemCard(criationItem);
-  }, [criationItem]);
+    setItemCard(manipulableItem);
+  }, [manipulableItem]);
 
   // insere no contexto o codigo digitado
   useEffect(() => {
-    setItemCriation({ ...criationItem, code: textCode });
+    addManipulableItem({ ...manipulableItem, code: textCode });
   }, [textCode]);
   return (
     <>

@@ -12,30 +12,34 @@ import {
   Button,
 } from "./styles";
 import { AiOutlineCheck } from "react-icons/ai";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
 import crud from "../../utils/crud";
 
 const Modal = ({ setModalActive }) => {
-  const { criationItem, setItemCriation } = useContext(CriationContext);
-  const [nome, setNome] = useState(criationItem.nome ? criationItem.nome : "");
+  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
+  const [nome, setNome] = useState(
+    manipulableItem.nome ? manipulableItem.nome : ""
+  );
   const [desc, setDesc] = useState(
-    criationItem.descricao ? criationItem.descricao : ""
+    manipulableItem.descricao ? manipulableItem.descricao : ""
   );
-  const [id, setId] = useState(criationItem.id ? criationItem.id : "");
+  const [id, setId] = useState(manipulableItem.id ? manipulableItem.id : "");
   const [language, setLanguage] = useState(
-    criationItem.language ? criationItem.language : ""
+    manipulableItem.language ? manipulableItem.language : ""
   );
-  const [code, setCode] = useState(criationItem.code ? criationItem.code : "");
+  const [code, setCode] = useState(
+    manipulableItem.code ? manipulableItem.code : ""
+  );
   const [label, setLabel] = useState(
-    criationItem.labelLanguage ? criationItem.labelLanguage : ""
+    manipulableItem.labelLanguage ? manipulableItem.labelLanguage : ""
   );
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
     if (e.currentTarget == e.target) {
       setModalActive(false);
-      setItemCriation({});
+      addManipulableItem({});
     }
   }
   // evento de submit
@@ -56,14 +60,14 @@ const Modal = ({ setModalActive }) => {
     if (!id) {
       obj.novo = true;
       console.log(obj);
-      setItemCriation(obj);
+      addManipulableItem(obj);
       setModalActive(false);
     }
     // caso exista
     else {
       obj.novo = false;
       crud.atualizar(id, obj);
-      setItemCriation(obj);
+      addManipulableItem(obj);
       setModalActive(false);
     }
   }

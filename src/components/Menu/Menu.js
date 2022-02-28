@@ -5,10 +5,10 @@ import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 
 const Menu = ({ setModalActive, openCard }) => {
-  const { criationItem, setItemCriation } = useContext(CriationContext);
+  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
