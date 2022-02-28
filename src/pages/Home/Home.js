@@ -45,7 +45,7 @@ const Home = () => {
           />
           {modalActive && <Modal setModalActive={setModalActive}></Modal>}
         </BlackWrapper>
-        <Menu setModalActive={setModalActive} cardAberto={itemCard}></Menu>
+        <Menu setModalActive={setModalActive} openCard={itemCard}></Menu>
       </Wrapper>
     </>
   );

@@ -7,7 +7,7 @@ import { BsCodeSlash } from "react-icons/bs";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
 import { CriationContext } from "../../context/Criation/Criation";
 
-const Menu = ({ setModalActive, cardAberto }) => {
+const Menu = ({ setModalActive, openCard }) => {
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
@@ -54,24 +54,24 @@ const Menu = ({ setModalActive, cardAberto }) => {
 
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
-    let card = cards.find((card) => card.id === cardAberto.id);
+    let card = cards.find((card) => card.id === openCard.id);
     if (card) {
-      card.nome = cardAberto.nome;
-      card.descricao = cardAberto.descricao;
-      card.language = cardAberto.language;
-      card.labelLanguage = cardAberto.labelLanguage;
+      card.nome = openCard.nome;
+      card.descricao = openCard.descricao;
+      card.language = openCard.language;
+      card.labelLanguage = openCard.labelLanguage;
     }
     setCards([...cards]);
     // eslint-disable-next-line
-  }, [cardAberto]);
+  }, [openCard]);
 
   //coloca o novo item criado no fim da lista
   useEffect(() => {
-    if (cardAberto.novo) {
-      cardAberto.novo = false;
-      setCards([...cards, cardAberto]);
+    if (openCard.novo) {
+      openCard.novo = false;
+      setCards([...cards, openCard]);
     }
-  }, [cardAberto.novo]);
+  }, [openCard.novo]);
   return (
     <>
       <WrapperMenu>

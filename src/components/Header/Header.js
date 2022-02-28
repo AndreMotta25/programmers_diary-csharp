@@ -5,9 +5,9 @@ import { CriationContext } from "../../context/Criation/Criation";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
-import request from "../../utils/crud";
+import crud from "../../utils/crud";
 
-const Header = ({ obj }) => {
+const Header = ({ obj, cards }) => {
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [error, setErrors] = useState({});
 
@@ -22,8 +22,11 @@ const Header = ({ obj }) => {
           bracketSameLine: true,
         });
         // vai forcar a renderizacao da home
-        obj.id ? request.atualizar(obj.id, obj) : request.inserir(obj);
-        setItemCriation({ ...criationItem, code: clearCode });
+        obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj);
+        setItemCriation({
+          ...criationItem,
+          code: clearCode,
+        });
         setErrors({ err: false });
       }
     } catch (err) {

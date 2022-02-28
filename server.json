@@ -40,15 +40,6 @@
       "language": "babel",
       "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
       "labelLanguage": "js"
-    },
-    {
-      "id": 7,
-      "language": "babel",
-      "labelLanguage": "js",
-      "nome": "teste1",
-      "descricao": "",
-      "code": "console.log(\"teste1\")",
-      "novo": false
     }
   ]
 }
