@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Card from "../Card/Card";
 import { WrapperMenu, Result, WrapperCards, Button } from "./styles";
 import getData from "../../utils/request";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
+import { CriationContext } from "../../context/Criation/Criation";
 
-const Menu = ({ setModalActive, cardAberto }) => {
+const Menu = ({ setModalActive, cardAberto, novoCard }) => {
+  const { criationItem, setItemCriation } = useContext(CriationContext);
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
@@ -54,17 +56,23 @@ const Menu = ({ setModalActive, cardAberto }) => {
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
     let card = cards.find((card) => card.id === cardAberto.id);
+    console.log("asdasd");
     if (card) {
       card.nome = cardAberto.nome;
       card.descricao = cardAberto.descricao;
       card.language = cardAberto.language;
       card.labelLanguage = cardAberto.labelLanguage;
     }
-
     setCards([...cards]);
     // eslint-disable-next-line
   }, [cardAberto]);
 
+  // coloca o novo item criado no fim da lista
+  useEffect(() => {
+    if (novoCard.nome) {
+      setCards([...cards, novoCard]);
+    }
+  }, [novoCard.nome]);
   return (
     <>
       <WrapperMenu>
@@ -77,7 +85,11 @@ const Menu = ({ setModalActive, cardAberto }) => {
           />
           {!search &&
             cards.map((card) => (
-              <Card key={card.id} card={card} setModalActive={setModalActive} />
+              <Card
+                key={crypto.randomUUID()}
+                card={card}
+                setModalActive={setModalActive}
+              />
             ))}
           {!search &&
             cards.length <= 0 &&

@@ -14,13 +14,14 @@ const Home = () => {
   const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
-
-  // defini no cabecalho a linguagem
+  console.log(criationItem);
+  console.log(itemCard);
+  // defini no cabecalho a linguagem e monta o objeto card
   useEffect(() => {
     setItemCard(criationItem);
   }, [criationItem]);
 
-  // insere no contexto o codigo a cada digito
+  // insere no contexto o codigo digitado
   useEffect(() => {
     setItemCriation({ ...criationItem, code: textCode });
   }, [textCode]);
@@ -46,7 +47,11 @@ const Home = () => {
           />
           {modalActive && <Modal setModalActive={setModalActive}></Modal>}
         </BlackWrapper>
-        <Menu setModalActive={setModalActive} cardAberto={itemCard}></Menu>
+        <Menu
+          setModalActive={setModalActive}
+          cardAberto={itemCard}
+          novoCard={itemCard}
+        ></Menu>
       </Wrapper>
     </>
   );

@@ -6,7 +6,7 @@
       "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n}\n"
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n}\n"
     },
     {
       "id": 2,
@@ -47,6 +47,22 @@
       "language": "babel",
       "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
       "labelLanguage": "js"
+    },
+    {
+      "id": 7,
+      "language": "babel",
+      "labelLanguage": "js",
+      "nome": "testando a persistenca",
+      "descricao": "fazendo um pequeno teste para ver \nse a  persistencia ocorre",
+      "code": "console.log(\"ola mundo\");\n"
+    },
+    {
+      "id": 8,
+      "language": "babel",
+      "labelLanguage": "js",
+      "nome": "asdsa",
+      "descricao": "",
+      "code": ""
     }
   ]
 }

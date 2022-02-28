@@ -12,13 +12,12 @@ import {
   Button,
 } from "./styles";
 import { AiOutlineCheck } from "react-icons/ai";
-// import { EditionContext } from "../../context/Edition/Edition";
 import { CriationContext } from "../../context/Criation/Criation";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
 import request from "../../utils/request";
+
 const Modal = ({ setModalActive }) => {
-  // const { editarItem, setEditar } = useContext(EditionContext);
   const { criationItem, setItemCriation } = useContext(CriationContext);
   const [nome, setNome] = useState(criationItem.nome ? criationItem.nome : "");
   const [desc, setDesc] = useState(
@@ -60,7 +59,7 @@ const Modal = ({ setModalActive }) => {
     }
     // caso exista
     else {
-      request.upDate(id, obj);
+      request.atualizar(id, obj);
       setItemCriation(obj);
       setModalActive(false);
     }
@@ -111,19 +110,3 @@ const Modal = ({ setModalActive }) => {
 };
 
 export default Modal;
-
-// posso retirar o contexto de editar, e usar so o de criar
-
-/*
-  {
-        id: id,
-        language: language,
-        labelLanguage: label,
-        name: nome,
-        description: desc,
-        code: prettier.format(code, {
-          parser: language,
-          plugins: pluginsLista,
-        }),
-      }
-*/
