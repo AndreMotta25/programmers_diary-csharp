@@ -32,14 +32,6 @@
       "language": "babel",
       "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
       "labelLanguage": "js"
-    },
-    {
-      "id": 6,
-      "nome": "faz uma requisao ao banco de dados ",
-      "descricao": "pega os dados do nosso banco de dados em mysql",
-      "language": "babel",
-      "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
-      "labelLanguage": "js"
     }
   ]
 }

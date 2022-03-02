@@ -7,7 +7,7 @@ import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
 import crud from "../../utils/crud";
 
-const Header = ({ obj, cards }) => {
+const Header = ({ obj }) => {
   const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
   const [error, setErrors] = useState({});
 

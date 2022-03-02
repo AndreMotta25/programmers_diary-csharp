@@ -14,6 +14,7 @@ const Home = () => {
   const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
+
   // defini no cabecalho a linguagem e monta o objeto card
   useEffect(() => {
     setItemCard(manipulableItem);
@@ -21,7 +22,9 @@ const Home = () => {
 
   // insere no contexto o codigo digitado
   useEffect(() => {
-    addManipulableItem({ ...manipulableItem, code: textCode });
+    if (textCode) {
+      addManipulableItem({ ...manipulableItem, code: textCode });
+    }
   }, [textCode]);
   return (
     <>
