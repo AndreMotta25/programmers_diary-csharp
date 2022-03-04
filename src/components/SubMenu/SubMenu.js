@@ -21,7 +21,18 @@ const SubMenu = ({ item, setModalActive }) => {
         </WrapperDots>
 
         <List>
-          <ListItem data-submenu="submenu">Fechar</ListItem>
+          <ListItem data-submenu="submenu">
+            <Button
+              onClick={() => {
+                if (manipulableItem.aberto && manipulableItem.id === item.id) {
+                  manipulableItem.aberto = false;
+                  addManipulableItem({});
+                }
+              }}
+            >
+              Fechar
+            </Button>
+          </ListItem>
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {

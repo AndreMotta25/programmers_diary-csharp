@@ -29,10 +29,7 @@ const Modal = ({ setModalActive, modalActive }) => {
   const [label, setLabel] = useState("");
   const [newItem, setNewItem] = useState({});
   const [oldItem, setOldItem] = useState({});
-  const [mexidos, setMexidos] = useState([]);
 
-  console.log(oldItem);
-  console.log(newItem);
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
     if (e.currentTarget == e.target) {
@@ -67,7 +64,6 @@ const Modal = ({ setModalActive, modalActive }) => {
       addManipulableItem(obj);
     }
     setModalActive(false);
-    setMexidos([...mexidos, obj]);
   }
 
   // faz um reset no modal
@@ -103,16 +99,13 @@ const Modal = ({ setModalActive, modalActive }) => {
     }
   }, [newItem]);
 
+  // faz o inverso do efeito de cima"
   useEffect(() => {
     if (possuiAtributos(manipulableItem) >= 1) {
       newItem.aberto = false;
       oldItem.aberto = true;
     }
   }, [oldItem]);
-
-  useEffect(() => {
-    console.log(mexidos);
-  }, [mexidos]);
 
   return (
     <>
