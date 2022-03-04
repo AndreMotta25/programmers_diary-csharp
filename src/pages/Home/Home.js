@@ -14,7 +14,6 @@ const Home = () => {
   const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
-
   // defini no cabecalho a linguagem e monta o objeto card
   useEffect(() => {
     setItemCard(manipulableItem);
@@ -26,6 +25,7 @@ const Home = () => {
       addManipulableItem({ ...manipulableItem, code: textCode });
     }
   }, [textCode]);
+
   return (
     <>
       <Wrapper>
@@ -46,7 +46,10 @@ const Home = () => {
             ]}
             theme={oneDark}
           />
-          {modalActive && <Modal setModalActive={setModalActive}></Modal>}
+          <Modal
+            setModalActive={setModalActive}
+            modalActive={modalActive}
+          ></Modal>
         </BlackWrapper>
         <Menu setModalActive={setModalActive} openCard={itemCard}></Menu>
       </Wrapper>

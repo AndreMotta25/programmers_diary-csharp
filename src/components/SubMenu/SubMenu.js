@@ -21,7 +21,7 @@ const SubMenu = ({ item, setModalActive }) => {
         </WrapperDots>
 
         <List>
-          <ListItem data-submenu="submenu">Abrir</ListItem>
+          <ListItem data-submenu="submenu">Fechar</ListItem>
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {
@@ -38,7 +38,7 @@ const SubMenu = ({ item, setModalActive }) => {
                 addManipulableItem(item);
               }}
             >
-              Editar
+              Abrir
             </Button>
           </ListItem>
         </List>

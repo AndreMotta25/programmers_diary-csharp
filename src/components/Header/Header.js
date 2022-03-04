@@ -8,7 +8,8 @@ import Error from "../Error/Error";
 import crud from "../../utils/crud";
 
 const Header = ({ obj }) => {
-  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
+  const { manipulableItem, addManipulableItem, allCards } =
+    useContext(ManipulateContext);
   const [error, setErrors] = useState({});
 
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
@@ -23,6 +24,7 @@ const Header = ({ obj }) => {
         });
         // vai forcar a renderizacao da home
         obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj);
+        obj.id = obj.id ? obj.id : allCards[allCards.length - 2].id + 1;
         addManipulableItem({
           ...manipulableItem,
           code: clearCode,
@@ -30,11 +32,9 @@ const Header = ({ obj }) => {
         setErrors({ err: false });
       }
     } catch (err) {
-      console.log(err);
       setErrors({ err: err });
     }
   }
-  console.log(error);
   return (
     <>
       <HeaderWrapper>

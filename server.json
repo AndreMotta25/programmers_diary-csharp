@@ -11,11 +11,12 @@
     },
     {
       "id": 2,
+      "language": "babel",
+      "labelLanguage": "js",
       "nome": "funcao que retira todas as letras e deixa so numeros",
       "descricao": "filtra uma string, retirando o  texto",
-      "labelLanguage": "js",
-      "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
-      "language": "babel"
+      "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
+      "novo": false
     },
     {
       "id": 3,
@@ -27,11 +28,12 @@
     },
     {
       "id": 4,
+      "language": "babel",
+      "labelLanguage": "js",
       "nome": "exclui tudo do banco de dados ",
       "descricao": "faz um delete total no banco de dados, sem precisar de permisao de usuario",
-      "language": "babel",
-      "code": "function removeLetters(text) {return text.replace(/[^0-9]+/g, '');}",
-      "labelLanguage": "js"
+      "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
+      "novo": false
     }
   ]
 }
