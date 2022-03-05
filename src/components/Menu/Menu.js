@@ -28,8 +28,9 @@ const Menu = ({ setModalActive, openCard }) => {
       const cards = await crud.getAll("http://localhost:3333/cards");
       addCards(cards);
     };
-
-    fetchdata();
+    setTimeout(() => {
+      fetchdata();
+    }, 3000);
   }, []);
 
   // faz a pesquisa

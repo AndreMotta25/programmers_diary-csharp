@@ -20,7 +20,6 @@ export const Save = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-
   &:hover {
     background-color: #913eca;
     transition: all 0.5s ease;
