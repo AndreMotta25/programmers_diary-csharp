@@ -6,8 +6,9 @@
       "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n}\n",
-      "novo": false
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 30px;\n  height: 30px;\n}\n",
+      "novo": false,
+      "aberto": false
     },
     {
       "id": 2,

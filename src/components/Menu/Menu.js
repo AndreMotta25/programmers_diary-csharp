@@ -10,7 +10,6 @@ import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 const Menu = ({ setModalActive, openCard }) => {
   const { manipulableItem, addManipulableItem, allCards, addCards } =
     useContext(ManipulateContext);
-  //const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
   const [result, setResult] = useState("");

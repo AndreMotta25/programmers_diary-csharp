@@ -26,6 +26,7 @@ const SubMenu = ({ item, setModalActive }) => {
               onClick={() => {
                 if (manipulableItem.aberto && manipulableItem.id === item.id) {
                   manipulableItem.aberto = false;
+                  crud.atualizar(manipulableItem.id, manipulableItem);
                   addManipulableItem({});
                 }
               }}
