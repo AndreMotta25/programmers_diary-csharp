@@ -11,6 +11,10 @@ export const BlackWrapper = styled.div`
   flex-direction: column;
   overflow: hidden;
 
+  @media screen and (min-width: 901px) and (max-width: 1100px) {
+    width: 80%;
+  }
+
   & *::-webkit-scrollbar {
     width: 7px;
     height: 7px;

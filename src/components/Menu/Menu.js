@@ -1,9 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import Card from "../Card/Card";
-import { WrapperMenu, Result, WrapperCards, Button } from "./styles";
+import {
+  WrapperMenu,
+  Result,
+  WrapperCards,
+  Button,
+  ButtonMenu,
+  ButtonFecharMenu,
+} from "./styles";
 import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
+import { AiOutlineMenu } from "react-icons/ai";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 
@@ -13,7 +21,7 @@ const Menu = ({ setModalActive, openCard }) => {
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
   const [result, setResult] = useState("");
-
+  const [menuAtivo, setMenuAtivo] = useState(false);
   // busca os dados na api
   useEffect(() => {
     const fetchdata = async () => {
@@ -71,7 +79,21 @@ const Menu = ({ setModalActive, openCard }) => {
 
   return (
     <>
-      <WrapperMenu>
+      <ButtonMenu
+        onClick={() => {
+          setMenuAtivo(true);
+        }}
+      >
+        <AiOutlineMenu size={"20px"} />
+      </ButtonMenu>
+      <WrapperMenu mobile={menuAtivo}>
+        <ButtonFecharMenu
+          onClick={() => {
+            setMenuAtivo(false);
+          }}
+        >
+          <AiOutlineMenu size={"20px"} />
+        </ButtonFecharMenu>
         <WrapperCards>
           <SearchBar
             value={search}
@@ -108,7 +130,7 @@ const Menu = ({ setModalActive, openCard }) => {
             setModalActive((opt) => !opt);
           }}
         >
-          <BsCodeSlash size={"39px"} color="#8333C8" />{" "}
+          <BsCodeSlash size={"25px"} color="#8333C8" />{" "}
         </Button>
       </WrapperMenu>
     </>

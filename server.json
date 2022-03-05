@@ -6,9 +6,9 @@
       "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 30px;\n  height: 30px;\n}\n",
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 30px;\n}\n",
       "novo": false,
-      "aberto": false
+      "aberto": true
     },
     {
       "id": 2,
@@ -34,7 +34,8 @@
       "nome": "exclui tudo do banco de dados ",
       "descricao": "faz um delete total no banco de dados, sem precisar de permisao de usuario",
       "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
-      "novo": false
+      "novo": false,
+      "aberto": false
     }
   ]
 }

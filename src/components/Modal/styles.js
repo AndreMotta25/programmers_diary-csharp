@@ -10,6 +10,7 @@ export const ShadowContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9999;
 `;
 export const Container = styled.div`
   width: 60%;
@@ -19,6 +20,9 @@ export const Container = styled.div`
   display: flex;
   padding: 20px;
   flex-direction: column;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+  }
 `;
 export const Form = styled.form`
   height: 93%;
