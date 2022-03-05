@@ -1,40 +1,44 @@
 import React, { useEffect, useState, useContext } from "react";
 import Card from "../Card/Card";
-import { WrapperMenu, Result, WrapperCards, Button } from "./styles";
+import {
+  WrapperMenu,
+  Result,
+  WrapperCards,
+  Button,
+  ButtonMenu,
+  ButtonFecharMenu,
+} from "./styles";
 import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
+import { AiOutlineMenu } from "react-icons/ai";
 import CardSkeleton from "../CardSkeleton/CardSkeleton";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 
 const Menu = ({ setModalActive, openCard }) => {
-  const { criationItem, setItemCriation } = useContext(CriationContext);
-  const [cards, setCards] = useState([]);
+  const { manipulableItem, addManipulableItem, allCards, addCards } =
+    useContext(ManipulateContext);
   const [search, setSearch] = useState("");
   const [found, setFound] = useState([]);
   const [result, setResult] = useState("");
-
+  const [menuAtivo, setMenuAtivo] = useState(false);
   // busca os dados na api
   useEffect(() => {
     const fetchdata = async () => {
       const cards = await crud.getAll("http://localhost:3333/cards");
-      setCards(cards);
-      console.log(cards);
+      addCards(cards);
     };
 
-    // isso é só para testes
-    setTimeout(() => {
-      fetchdata();
-    }, 3000);
+    fetchdata();
   }, []);
 
   // faz a pesquisa
   useEffect(() => {
     let array_dados = [];
     let array_filtrado = [];
-    const dados = cards.filter((elem) => elem.labelLanguage === search);
-    const dados2 = cards.filter((elem) => elem.nome === search);
-    const dados3 = cards.filter((elem) => elem.nome.indexOf(search) !== -1);
+    const dados = allCards.filter((elem) => elem.labelLanguage === search);
+    const dados2 = allCards.filter((elem) => elem.nome === search);
+    const dados3 = allCards.filter((elem) => elem.nome.indexOf(search) !== -1);
     array_dados = [...dados, ...dados2, ...dados3];
     // filtra os dados
     if (array_dados.length > 0) {
@@ -50,18 +54,18 @@ const Menu = ({ setModalActive, openCard }) => {
       setResult("Nada achado...");
     }
     // eslint-disable-next-line
-  }, [search, cards]);
+  }, [search, allCards]);
 
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
-    let card = cards.find((card) => card.id === openCard.id);
+    let card = allCards.find((card) => card.id === openCard.id);
     if (card) {
       card.nome = openCard.nome;
       card.descricao = openCard.descricao;
       card.language = openCard.language;
       card.labelLanguage = openCard.labelLanguage;
     }
-    setCards([...cards]);
+    addCards([...allCards]);
     // eslint-disable-next-line
   }, [openCard]);
 
@@ -69,12 +73,27 @@ const Menu = ({ setModalActive, openCard }) => {
   useEffect(() => {
     if (openCard.novo) {
       openCard.novo = false;
-      setCards([...cards, openCard]);
+      addCards([...allCards, openCard]);
     }
   }, [openCard.novo]);
+
   return (
     <>
-      <WrapperMenu>
+      <ButtonMenu
+        onClick={() => {
+          setMenuAtivo(true);
+        }}
+      >
+        <AiOutlineMenu size={"20px"} />
+      </ButtonMenu>
+      <WrapperMenu mobile={menuAtivo}>
+        <ButtonFecharMenu
+          onClick={() => {
+            setMenuAtivo(false);
+          }}
+        >
+          <AiOutlineMenu size={"20px"} />
+        </ButtonFecharMenu>
         <WrapperCards>
           <SearchBar
             value={search}
@@ -83,17 +102,15 @@ const Menu = ({ setModalActive, openCard }) => {
             }}
           />
           {!search &&
-            cards.map((card) => (
+            allCards.map((card) => (
               <Card
                 key={crypto.randomUUID()}
                 card={card}
                 setModalActive={setModalActive}
-                setCards={setCards}
-                cards={cards}
               />
             ))}
           {!search &&
-            cards.length <= 0 &&
+            allCards.length <= 0 &&
             [1, 2, 3, 4].map((id) => (
               <CardSkeleton key={crypto.randomUUID()} />
             ))}
@@ -104,8 +121,6 @@ const Menu = ({ setModalActive, openCard }) => {
                 key={crypto.randomUUID()}
                 card={card}
                 setModalActive={setModalActive}
-                setCards={setCards}
-                cards={cards}
               />
             ))) ||
             (found.length <= 0 && search && <Result>{result}</Result>)}
@@ -115,7 +130,7 @@ const Menu = ({ setModalActive, openCard }) => {
             setModalActive((opt) => !opt);
           }}
         >
-          <BsCodeSlash size={"39px"} color="#8333C8" />{" "}
+          <BsCodeSlash size={"25px"} color="#8333C8" />{" "}
         </Button>
       </WrapperMenu>
     </>

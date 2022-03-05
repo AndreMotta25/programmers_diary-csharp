@@ -8,12 +8,11 @@ import {
   Button,
 } from "./styles";
 import url from "../../assets/teste.png";
-import { EditionContext } from "../../context/Edition/Edition";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import crud from "../../utils/crud";
-const SubMenu = ({ item, setModalActive, setCards, cards }) => {
-  const { editarItem, setEditar } = useContext(EditionContext);
-  const { criationItem, setItemCriation } = useContext(CriationContext);
+const SubMenu = ({ item, setModalActive }) => {
+  const { manipulableItem, addManipulableItem, deleteItem } =
+    useContext(ManipulateContext);
   return (
     <>
       <WrapperSubMenu>
@@ -22,15 +21,23 @@ const SubMenu = ({ item, setModalActive, setCards, cards }) => {
         </WrapperDots>
 
         <List>
-          <ListItem data-submenu="submenu">Abrir</ListItem>
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {
-                crud.excluir(item.id);
-                let cardsRestantes = cards.filter(
-                  (card) => card.id !== item.id
-                );
-                setCards(cardsRestantes);
+                if (manipulableItem.aberto && manipulableItem.id === item.id) {
+                  manipulableItem.aberto = false;
+                  crud.atualizar(manipulableItem.id, manipulableItem);
+                  addManipulableItem({});
+                }
+              }}
+            >
+              Fechar
+            </Button>
+          </ListItem>
+          <ListItem data-submenu="submenu">
+            <Button
+              onClick={() => {
+                deleteItem(item.id);
               }}
             >
               Excluir
@@ -40,10 +47,10 @@ const SubMenu = ({ item, setModalActive, setCards, cards }) => {
             <Button
               onClick={() => {
                 setModalActive((opt) => !opt);
-                setItemCriation(item);
+                addManipulableItem(item);
               }}
             >
-              Editar
+              Abrir
             </Button>
           </ListItem>
         </List>

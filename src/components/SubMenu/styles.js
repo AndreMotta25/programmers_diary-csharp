@@ -19,7 +19,7 @@ export const List = styled.ul`
   padding: 10px;
   border-radius: 5px;
   position: absolute;
-  bottom: -105px;
+  bottom: -115px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
 
   /* Faz o triangulo */

@@ -12,30 +12,29 @@ import {
   Button,
 } from "./styles";
 import { AiOutlineCheck } from "react-icons/ai";
-import { CriationContext } from "../../context/Criation/Criation";
+import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import prettier from "prettier";
 import pluginsLista from "../../utils/plugins";
 import crud from "../../utils/crud";
+import possuiAtributos from "../../utils/possuiAtributos";
 
-const Modal = ({ setModalActive }) => {
-  const { criationItem, setItemCriation } = useContext(CriationContext);
-  const [nome, setNome] = useState(criationItem.nome ? criationItem.nome : "");
-  const [desc, setDesc] = useState(
-    criationItem.descricao ? criationItem.descricao : ""
-  );
-  const [id, setId] = useState(criationItem.id ? criationItem.id : "");
-  const [language, setLanguage] = useState(
-    criationItem.language ? criationItem.language : ""
-  );
-  const [code, setCode] = useState(criationItem.code ? criationItem.code : "");
-  const [label, setLabel] = useState(
-    criationItem.labelLanguage ? criationItem.labelLanguage : ""
-  );
+const Modal = ({ setModalActive, modalActive }) => {
+  const { manipulableItem, addManipulableItem, allCards } =
+    useContext(ManipulateContext);
+  const [nome, setNome] = useState("");
+  const [desc, setDesc] = useState("");
+  const [id, setId] = useState("");
+  const [language, setLanguage] = useState("");
+  const [code, setCode] = useState("");
+  const [label, setLabel] = useState("");
+  const [newItem, setNewItem] = useState({});
+  const [oldItem, setOldItem] = useState({});
+
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
     if (e.currentTarget == e.target) {
       setModalActive(false);
-      setItemCriation({});
+      if (!manipulableItem.aberto) addManipulableItem({});
     }
   }
   // evento de submit
@@ -55,59 +54,102 @@ const Modal = ({ setModalActive }) => {
     // caso nao exista
     if (!id) {
       obj.novo = true;
-      console.log(obj);
-      setItemCriation(obj);
-      setModalActive(false);
+      setNewItem(obj);
+      addManipulableItem(obj);
     }
     // caso exista
     else {
       obj.novo = false;
-      crud.atualizar(id, obj);
-      setItemCriation(obj);
-      setModalActive(false);
+      setOldItem(obj);
+      addManipulableItem(obj);
     }
+    setModalActive(false);
   }
+
+  // faz um reset no modal
+  useEffect(() => {
+    setNome("");
+    setDesc("");
+    setId("");
+    setLanguage("");
+    setCode("");
+    setLabel("");
+  }, [modalActive]);
+
+  // atribui valores ao modal
+  useEffect(() => {
+    if (possuiAtributos(manipulableItem) >= 1) {
+      setNome(manipulableItem.nome);
+      setDesc(manipulableItem.descricao);
+      setId(manipulableItem.id);
+      setLanguage(manipulableItem.language);
+      setCode(manipulableItem.code);
+      setLabel(manipulableItem.labelLanguage);
+    }
+    return () => {
+      manipulableItem.aberto = false;
+    };
+  }, [manipulableItem]);
+
+  // caso crie um novo item, o antigo sera "fechado"
+  useEffect(() => {
+    if (possuiAtributos(manipulableItem) >= 1) {
+      newItem.aberto = true;
+      oldItem.aberto = false;
+    }
+  }, [newItem]);
+
+  // faz o inverso do efeito de cima"
+  useEffect(() => {
+    if (possuiAtributos(manipulableItem) >= 1) {
+      newItem.aberto = false;
+      oldItem.aberto = true;
+    }
+  }, [oldItem]);
+
   return (
     <>
-      <ShadowContainer onClick={handleClick}>
-        <Container className="modal">
-          <Form onSubmit={handleSubmit}>
-            <ContainerMestre>
-              <Container1>
-                <InputComponente
-                  label="Nome"
-                  border="1px solid #ccc"
-                  value={nome}
-                  onChange={(e) => {
-                    setNome(e.target.value);
-                  }}
-                ></InputComponente>
-                <TextArea
-                  label="Descricao"
-                  border="1px solid #ccc"
-                  value={desc}
-                  onChange={(e) => {
-                    setDesc(e.target.value);
-                  }}
-                />
-              </Container1>
-              <Container2>
-                <Select
-                  label="Linguagens"
-                  value={language}
-                  onChange={(e) => {
-                    setLanguage(e.target.value);
-                    setLabel(e.target.selectedOptions[0].textContent);
-                  }}
-                ></Select>
-              </Container2>
-            </ContainerMestre>
-            <Button>
-              <AiOutlineCheck size={"20px"} color="#8333C8" />
-            </Button>
-          </Form>
-        </Container>
-      </ShadowContainer>
+      {modalActive && (
+        <ShadowContainer onClick={handleClick}>
+          <Container className="modal">
+            <Form onSubmit={handleSubmit}>
+              <ContainerMestre>
+                <Container1>
+                  <InputComponente
+                    label="Nome"
+                    border="1px solid #ccc"
+                    value={nome}
+                    onChange={(e) => {
+                      setNome(e.target.value);
+                    }}
+                  ></InputComponente>
+                  <TextArea
+                    label="Descricao"
+                    border="1px solid #ccc"
+                    value={desc}
+                    onChange={(e) => {
+                      setDesc(e.target.value);
+                    }}
+                  />
+                </Container1>
+                <Container2>
+                  <Select
+                    label="Linguagens"
+                    value={language}
+                    onChange={(e) => {
+                      setLanguage(e.target.value);
+                      setLabel(e.target.selectedOptions[0].textContent);
+                    }}
+                  ></Select>
+                </Container2>
+              </ContainerMestre>
+              <Button>
+                <AiOutlineCheck size={"20px"} color="#8333C8" />
+              </Button>
+            </Form>
+          </Container>
+        </ShadowContainer>
+      )}
     </>
   );
 };

@@ -12,6 +12,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   min-height: 28.5%;
+
+  @media screen and (min-width: 1441px) and (max-width: 1900px),
+    screen and (min-width: 1901px) {
+    min-height: 20%;
+    margin-bottom: 40px;
+  }
 `;
 export const WrapperInfo = styled.div`
   display: flex;
@@ -19,7 +25,8 @@ export const WrapperInfo = styled.div`
   align-items: center;
 `;
 export const Info = styled.p`
-  font-size: 14px;
+  //font-size: 14px;
+  font-size: clamp(0.8rem, 1vw, (2rem));
   color: white;
   letter-spacing: 1px;
   margin-bottom: 10px;
@@ -30,7 +37,7 @@ export const Info = styled.p`
   -webkit-box-orient: vertical;
 `;
 export const Language = styled.div`
-  font-size: 14px;
+  font-size: clamp(1rem, 1vw, (2rem));
   text-transform: uppercase;
   background-color: #282828;
   color: white;
@@ -52,4 +59,7 @@ export const Name = styled.h2`
   border-radius: 5px;
   color: white;
   font-size: 18px;
+  @media screen and (min-width: 1900px) {
+    font-size: clamp(1rem, 1vw + 1rem, (2rem+0.5rem));
+  }
 `;
