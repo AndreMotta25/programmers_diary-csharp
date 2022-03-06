@@ -3,12 +3,13 @@ import { HeaderWrapper, Title, Save } from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import prettier from "prettier";
-import pluginsLista from "../../utils/plugins";
+//import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
 import crud from "../../utils/crud";
+import { pluginsLista } from "../../utils/utils";
 
 const Header = ({ obj }) => {
-  const { manipulableItem, addManipulableItem, allCards } =
+  const { manipulableItem, addManipulableItem, allCards, addCards } =
     useContext(ManipulateContext);
   const [error, setErrors] = useState({});
 
@@ -29,6 +30,8 @@ const Header = ({ obj }) => {
           ...manipulableItem,
           code: clearCode,
         });
+        allCards[allCards.length - 1].id = obj.id;
+        addCards(allCards);
         setErrors({ err: false });
       }
     } catch (err) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { ContainerSelect, DescriptionSelect, List } from "./styles";
-import linguagens from "../../utils/linguagens";
+import { linguagens } from "../../utils/utils";
 
 function Select({ label, options, ...otherProps }) {
   return (

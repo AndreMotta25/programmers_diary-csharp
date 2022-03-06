@@ -28,9 +28,7 @@ const Menu = ({ setModalActive, openCard }) => {
       const cards = await crud.getAll("http://localhost:3333/cards");
       addCards(cards);
     };
-    setTimeout(() => {
-      fetchdata();
-    }, 3000);
+    fetchdata();
   }, []);
 
   // faz a pesquisa
@@ -71,13 +69,21 @@ const Menu = ({ setModalActive, openCard }) => {
   }, [openCard]);
 
   //coloca o novo item criado no fim da lista
-  useEffect(() => {
-    if (openCard.novo) {
-      openCard.novo = false;
-      addCards([...allCards, openCard]);
-    }
-  }, [openCard.novo]);
+  // useEffect(() => {
+  //   if (openCard.novo) {
+  //     openCard.novo = false;
+  //     console.log(openCard);
+  //     console.log(manipulableItem);
+  //     addCards([...allCards, openCard]);
+  //   }
+  // }, [openCard.novo]);
 
+  useEffect(() => {
+    if (manipulableItem.novo) {
+      manipulableItem.novo = false;
+      addCards([...allCards, manipulableItem]);
+    }
+  }, [manipulableItem.novo]);
   return (
     <>
       <ButtonMenu
