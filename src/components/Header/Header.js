@@ -3,10 +3,9 @@ import { HeaderWrapper, Title, Save } from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import prettier from "prettier";
-//import pluginsLista from "../../utils/plugins";
 import Error from "../Error/Error";
 import crud from "../../utils/crud";
-import { pluginsLista } from "../../utils/utils";
+import { pluginsLista, possuiAtributos } from "../../utils/utils";
 
 const Header = ({ obj }) => {
   const { manipulableItem, addManipulableItem, allCards, addCards } =
@@ -16,7 +15,7 @@ const Header = ({ obj }) => {
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
     try {
-      if (Object.getOwnPropertyNames(manipulableItem).length > 0) {
+      if (possuiAtributos(manipulableItem) > 0) {
         const clearCode = prettier.format(manipulableItem.code, {
           parser: obj.language,
           plugins: pluginsLista,

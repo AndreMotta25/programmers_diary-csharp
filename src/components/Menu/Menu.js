@@ -68,16 +68,6 @@ const Menu = ({ setModalActive, openCard }) => {
     // eslint-disable-next-line
   }, [openCard]);
 
-  //coloca o novo item criado no fim da lista
-  // useEffect(() => {
-  //   if (openCard.novo) {
-  //     openCard.novo = false;
-  //     console.log(openCard);
-  //     console.log(manipulableItem);
-  //     addCards([...allCards, openCard]);
-  //   }
-  // }, [openCard.novo]);
-
   useEffect(() => {
     if (manipulableItem.novo) {
       manipulableItem.novo = false;

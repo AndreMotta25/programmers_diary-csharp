@@ -14,14 +14,11 @@ import {
 import { AiOutlineCheck } from "react-icons/ai";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import prettier from "prettier";
-//import pluginsLista from "../../utils/plugins";
-//import crud from "../../utils/crud";
-import possuiAtributos from "../../utils/possuiAtributos";
-import { pluginsLista } from "../../utils/utils";
+//import possuiAtributos from "../../utils/possuiAtributos";
+import { pluginsLista, possuiAtributos } from "../../utils/utils";
 
 const Modal = ({ setModalActive, modalActive }) => {
-  const { manipulableItem, addManipulableItem, allCards } =
-    useContext(ManipulateContext);
+  const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);
   const [nome, setNome] = useState("");
   const [desc, setDesc] = useState("");
   const [id, setId] = useState("");

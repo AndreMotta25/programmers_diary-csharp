@@ -97,3 +97,7 @@ export const linguagens = [
     value: "xml",
   },
 ];
+
+export function possuiAtributos(obj) {
+  return Object.getOwnPropertyNames(obj).length;
+}
