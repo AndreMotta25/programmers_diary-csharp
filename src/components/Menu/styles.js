@@ -8,7 +8,7 @@ export const WrapperMenu = styled.div`
   gap: 5%;
 
   @media screen and (max-width: 900px) {
-    display: ${({ mobile }) => (mobile == true ? "block" : "none")};
+    display: ${({ mobile }) => (mobile === true ? "block" : "none")};
     position: absolute;
     background-image: linear-gradient(to right, #e981d9, #6d22c4 0%);
     width: 70%;

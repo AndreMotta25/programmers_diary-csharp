@@ -36,16 +36,6 @@
       "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
       "novo": false,
       "aberto": false
-    },
-    {
-      "id": 5,
-      "language": "babel",
-      "labelLanguage": "js",
-      "nome": "teste1",
-      "descricao": "",
-      "code": "console.log(\"tes\");\n",
-      "novo": false,
-      "aberto": true
     }
   ]
 }

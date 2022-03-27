@@ -19,3 +19,9 @@ export const Label = styled.label`
 export const Container = styled.div`
   width: ${({ width }) => (width ? width : "100%")}; ;
 `;
+
+export const Error = styled.div`
+  font-size: 18px;
+  color: red;
+  font-weight: bold;
+`;

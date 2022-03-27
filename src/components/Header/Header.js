@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { HeaderWrapper, Title, Save } from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";

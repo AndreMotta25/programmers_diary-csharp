@@ -23,3 +23,8 @@ export const Container = styled.div`
   width: ${({ width }) => (width ? width : "100%")};
   height: 70%;
 `;
+export const Error = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+`;

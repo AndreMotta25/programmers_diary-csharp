@@ -22,3 +22,8 @@ export const List = styled.select`
   font-family: "Roboto Slab", serif;
   font-size: 18px;
 `;
+export const Error = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
+`;

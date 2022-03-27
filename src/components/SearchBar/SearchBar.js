@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import InputComponente from "../Input/Input";
 import { Container, Icone } from "./styles";
 import { BsSearch } from "react-icons/bs";
