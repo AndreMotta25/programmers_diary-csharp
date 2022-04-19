@@ -10,6 +10,7 @@ export const Text = styled.textarea`
   font-family: "Roboto Slab", serif;
   border-radius: 5px;
   padding-left: 5px;
+  margin-bottom: 5px;
 `;
 
 export const Label = styled.label`
