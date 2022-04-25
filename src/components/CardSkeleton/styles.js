@@ -12,6 +12,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   min-height: 28.5%;
+
+  @media screen and (min-width: 1441px) and (max-width: 1900px),
+    screen and (min-width: 1901px) {
+    min-height: 20%;
+    margin-bottom: 40px;
+  }
 `;
 export const WrapperInfo = styled.div`
   display: flex;
@@ -19,28 +25,10 @@ export const WrapperInfo = styled.div`
   align-items: center;
 `;
 export const Info = styled.p`
-  font-size: 14px;
-  color: white;
-  letter-spacing: 1px;
   margin-bottom: 10px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
 `;
 export const Language = styled.div``;
 export const Name = styled.h2`
   margin-bottom: 10px;
-  text-align: center;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  font-size: 18px;
 `;
 export const Menu = styled.div``;

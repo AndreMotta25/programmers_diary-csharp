@@ -8,7 +8,7 @@ const Card = ({ card, setModalActive }) => {
   return (
     <Wrapper
       style={{
-        borderColor: card.id == manipulableItem.id ? "white" : "black",
+        borderColor: card.id === manipulableItem.id ? "white" : "black",
       }}
     >
       <Name>{card.nome}</Name>

@@ -21,4 +21,10 @@ export const List = styled.select`
   padding: 6px;
   font-family: "Roboto Slab", serif;
   font-size: 18px;
+  margin-bottom: 5px;
+`;
+export const Error = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
 `;

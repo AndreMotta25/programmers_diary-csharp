@@ -6,7 +6,7 @@ export const Input = styled.input`
   width: 100%;
   outline: none;
   border: ${({ border }) => (border ? border : "none")};
-  margin-bottom: 35px;
+  margin-bottom: 5px;
   font-family: "Roboto Slab", serif;
 `;
 export const Label = styled.label`
@@ -18,4 +18,11 @@ export const Label = styled.label`
 `;
 export const Container = styled.div`
   width: ${({ width }) => (width ? width : "100%")}; ;
+`;
+
+export const Error = styled.div`
+  font-size: 18px;
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px;
 `;

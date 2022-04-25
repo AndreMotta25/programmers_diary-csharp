@@ -1,8 +1,8 @@
 import React from "react";
-import { ContainerSelect, DescriptionSelect, List } from "./styles";
-import linguagens from "../../utils/linguagens";
+import { ContainerSelect, DescriptionSelect, List, Error } from "./styles";
+import { linguagens } from "../../utils/utils";
 
-function Select({ label, options, ...otherProps }) {
+function Select({ label, options, error, ...otherProps }) {
   return (
     <ContainerSelect>
       <DescriptionSelect>{label}</DescriptionSelect>
@@ -14,6 +14,7 @@ function Select({ label, options, ...otherProps }) {
           </option>
         ))}
       </List>
+      <Error>{error}</Error>
     </ContainerSelect>
   );
 }

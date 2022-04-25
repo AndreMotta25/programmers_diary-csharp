@@ -28,7 +28,6 @@ const Menu = ({ setModalActive, openCard }) => {
       const cards = await crud.getAll("http://localhost:3333/cards");
       addCards(cards);
     };
-
     fetchdata();
   }, []);
 
@@ -69,14 +68,12 @@ const Menu = ({ setModalActive, openCard }) => {
     // eslint-disable-next-line
   }, [openCard]);
 
-  //coloca o novo item criado no fim da lista
   useEffect(() => {
-    if (openCard.novo) {
-      openCard.novo = false;
-      addCards([...allCards, openCard]);
+    if (manipulableItem.novo) {
+      manipulableItem.novo = false;
+      addCards([...allCards, manipulableItem]);
     }
-  }, [openCard.novo]);
-
+  }, [manipulableItem.novo]);
   return (
     <>
       <ButtonMenu

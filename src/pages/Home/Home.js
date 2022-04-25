@@ -7,7 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import CodeMirror from "@uiw/react-codemirror";
 import { oneDark } from "@codemirror/theme-one-dark";
-import codeLanguages from "../../utils/codeMirror";
+import { codeLanguages } from "../../utils/utils";
 
 const Home = () => {
   const { manipulableItem, addManipulableItem } = useContext(ManipulateContext);

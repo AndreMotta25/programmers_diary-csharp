@@ -10,6 +10,7 @@ export const Text = styled.textarea`
   font-family: "Roboto Slab", serif;
   border-radius: 5px;
   padding-left: 5px;
+  margin-bottom: 5px;
 `;
 
 export const Label = styled.label`
@@ -22,4 +23,9 @@ export const Label = styled.label`
 export const Container = styled.div`
   width: ${({ width }) => (width ? width : "100%")};
   height: 70%;
+`;
+export const Error = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  color: red;
 `;

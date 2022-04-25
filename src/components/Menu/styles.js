@@ -5,10 +5,10 @@ export const WrapperMenu = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 5%;
 
   @media screen and (max-width: 900px) {
-    display: ${({ mobile }) => (mobile == true ? "block" : "none")};
+    display: ${({ mobile }) => (mobile === true ? "block" : "none")};
     position: absolute;
     background-image: linear-gradient(to right, #e981d9, #6d22c4 0%);
     width: 70%;
@@ -69,17 +69,22 @@ export const ButtonZoom = styled.button`
 `;
 export const Button = styled(ButtonZoom)`
   width: 51%;
-  height: 40px;
+  height: 5%;
+  min-height: 40px;
   background-color: #282828;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
   margin: 0 auto;
+  align-self: center;
 `;
 
 export const ButtonMenu = styled(ButtonZoom)`
   min-width: 10%;
-  background-color: white;
+  background-color: #a66aec;
   margin: 0 auto;
   display: none;
+  &:hover {
+    background-color: #913eca;
+  }
   @media screen and (max-width: 900px) {
     display: flex;
     position: absolute;
