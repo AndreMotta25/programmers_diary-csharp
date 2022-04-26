@@ -27,7 +27,7 @@ const Modal = ({ setModalActive, modalActive }) => {
   const [newItem, setNewItem] = useState({});
   const [oldItem, setOldItem] = useState({});
   const [errors, setErros] = useState({});
-
+  console.log(manipulableItem);
   // caso o container do modal seja clicado, o modal  fecha
   function handleClick(e) {
     if (e.currentTarget == e.target) {
@@ -63,11 +63,15 @@ const Modal = ({ setModalActive, modalActive }) => {
           plugins: pluginsLista,
         }),
       };
+      console.log(obj);
       // caso nao exista
       if (!id) {
         obj.novo = true;
+        console.log(obj);
         setNewItem(obj);
         addManipulableItem(obj);
+        console.log("aqui");
+        console.log(obj);
       }
       // caso exista
       else {

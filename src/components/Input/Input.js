@@ -3,7 +3,6 @@ import React from "react";
 import { Input, Label, Container, Error } from "./styles";
 
 const InputComponente = ({ label, width, error, ...otherProps }) => {
-  console.log(error);
   return (
     <>
       <Container width={width}>

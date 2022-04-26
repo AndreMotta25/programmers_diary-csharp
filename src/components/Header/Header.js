@@ -12,6 +12,16 @@ const Header = ({ obj }) => {
     useContext(ManipulateContext);
   const [error, setErrors] = useState({});
 
+  // caso o card seja novo vai atribuir um id, caso já existe vai atualiza-lo no banco
+  function atribuirIdCardOrUpdate(obj) {
+    if (obj.novo) {
+      allCards[allCards.length - 1].id = allCards[allCards.length - 2].id + 1;
+      obj.id = allCards[allCards.length - 2].id + 1;
+      obj.novo = false;
+    } else {
+      obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj); // caso ja tenha um id
+    }
+  }
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
     try {
@@ -22,14 +32,10 @@ const Header = ({ obj }) => {
           jsxSingleQuote: true,
           bracketSameLine: true,
         });
-        // vai forcar a renderizacao da home
-        obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj);
-        obj.id = obj.id ? obj.id : allCards[allCards.length - 2].id + 1;
-        addManipulableItem({
-          ...manipulableItem,
-          code: clearCode,
-        });
-        allCards[allCards.length - 1].id = obj.id;
+        atribuirIdCardOrUpdate(obj);
+        addManipulableItem({ ...manipulableItem, code: clearCode });
+        let card = allCards.findIndex((card) => card.id === obj.id);
+        allCards[card] = manipulableItem;
         addCards(allCards);
         setErrors({ err: false });
       }

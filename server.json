@@ -6,9 +6,9 @@
       "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 20px;\n}\n",
+      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 10px;\n}\n",
       "novo": false,
-      "aberto": true
+      "aberto": false
     },
     {
       "id": 2,
@@ -17,7 +17,8 @@
       "nome": "funcao que retira todas as letras e deixa so numeros",
       "descricao": "filtra uma string, retirando o  texto",
       "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
-      "novo": false
+      "novo": false,
+      "aberto": false
     },
     {
       "id": 3,
@@ -25,15 +26,17 @@
       "descricao": "vai fazer uma pesquisa no google de modo automatico",
       "language": "babel",
       "code": "p {overflow: hidden;text-overflow: ellipsis; display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;}",
-      "labelLanguage": "js"
+      "labelLanguage": "js",
+      "novo": false,
+      "aberto": false
     },
     {
       "id": 4,
-      "language": "babel",
-      "labelLanguage": "js",
-      "nome": "exclui tudo do banco de dados ",
-      "descricao": "faz um delete total no banco de dados, sem precisar de permisao de usuario",
-      "code": "function removeLetters(text) {\n  return text.replace(/[^0-9]+/g, \"\");\n}\n",
+      "language": "css",
+      "labelLanguage": "css",
+      "nome": "ererere",
+      "descricao": "sadsad",
+      "code": "p {\n}\n",
       "novo": false,
       "aberto": false
     }
