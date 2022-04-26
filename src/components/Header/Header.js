@@ -14,12 +14,12 @@ const Header = ({ obj }) => {
 
   // caso o card seja novo vai atribuir um id, caso já existe vai atualiza-lo no banco
   function atribuirIdCardOrUpdate(obj) {
+    obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj); // caso ja tenha um id
     if (obj.novo) {
+      // aqui vamos estar "adivinhado" um id pro card
       allCards[allCards.length - 1].id = allCards[allCards.length - 2].id + 1;
       obj.id = allCards[allCards.length - 2].id + 1;
       obj.novo = false;
-    } else {
-      obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj); // caso ja tenha um id
     }
   }
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
