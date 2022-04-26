@@ -6,9 +6,9 @@
       "labelLanguage": "css",
       "nome": "encurtar texto com css",
       "descricao": "limitar a quantidade de caracteres num elemento html, com css",
-      "code": "p {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  display: -webkit-box;\n  -webkit-line-clamp: 5;\n  -webkit-box-orient: vertical;\n  display: flex;\n  width: 1px;\n}\n",
+      "code": "p {\n  top: 40px;\n  left: -8px;\n  opacity: 0;\n  visibility: hidden;\n\n}",
       "novo": false,
-      "aberto": false
+      "aberto": true
     },
     {
       "id": 2,
@@ -34,9 +34,9 @@
       "id": 4,
       "language": "babel",
       "labelLanguage": "js",
-      "nome": "sdaasd",
-      "descricao": "asdasd",
-      "code": "console.log();\n",
+      "nome": "slide",
+      "descricao": "teste",
+      "code": "export default class SlideTeste {\n  #items;\n  #name;\n  #description;\n  #progress;\n\n  constructor(lista, name, description) {\n    this.#items = lista;\n    this.#name = document.querySelector(name);\n    this.#description = document.querySelector(description);\n  }\n\n  gerarSlide() {\n    let contador = 0;\n    setInterval(() => {\n      if (contador >= this.#items.length) contador = 0;\n      this.inserirDados(this.#items[contador]);\n      contador += 1;\n      this.#progress.atribuirValor();\n    }, 2500);\n  }\n\n  inserirNome(name) {\n    this.#name.textContent = name;\n  }\n  inserirDescription(description) {\n    this.#description.textContent = description;\n  }\n  inserirDados(obj) {}\n\n  set progress(obj) {\n    this.#progress = obj;\n  }\n}\n",
       "novo": false,
       "aberto": false
     }

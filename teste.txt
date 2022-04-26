@@ -1,0 +1,6 @@
+Oba devs, venho hj mostrar para vcs o meu mais novo projeto: O diário do programador.
+Fiz esse projeto inspirado numa dificuldade minha de se lembrar de alguns trechos de código que considero importante e para não perder,  
+fiz esse app onde posso nomear o código e pesquisa-lo de forma simples pelo nome do card ou pelo tipo da linguagem e o melhor é que  
+não tem a necessidade de criar qualquer arquivo. O app é todo feito em react contando com  bibliotecas: Prettier que serve para formatar o 
+código(muito utilizada no vscode) e a  codeMirror utilizada para colorir e auto-completar o código(utilizada principalmente no fiddle) e o app ainda conta com tratamento de erros.  
+Foi bastante desafiador aprender tais bibliotecas pois não as conhecia afundo antes.

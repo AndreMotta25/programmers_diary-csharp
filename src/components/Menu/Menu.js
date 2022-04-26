@@ -76,6 +76,7 @@ const Menu = ({ setModalActive, openCard }) => {
       addCards([...allCards, manipulableItem]);
     }
   }, [manipulableItem.novo]);
+
   return (
     <>
       <ButtonMenu

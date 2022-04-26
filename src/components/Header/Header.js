@@ -15,17 +15,19 @@ const Header = ({ obj }) => {
   // caso o card seja novo vai atribuir um id, caso já existe vai atualiza-lo no banco
   function atribuirIdCardOrUpdate(obj) {
     obj.id ? crud.atualizar(obj.id, obj) : crud.inserir(obj); // caso ja tenha um id
+    console.log(obj);
     if (obj.novo) {
       // aqui vamos estar "adivinhado" um id pro card
       allCards[allCards.length - 1].id = allCards[allCards.length - 2].id + 1;
       obj.id = allCards[allCards.length - 2].id + 1;
       obj.novo = false;
+      crud.atualizar(obj.id, obj);
     }
   }
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
     try {
-      if (possuiAtributos(manipulableItem) > 0) {
+      if (manipulableItem.nome) {
         const clearCode = prettier.format(manipulableItem.code, {
           parser: obj.language,
           plugins: pluginsLista,
@@ -38,6 +40,8 @@ const Header = ({ obj }) => {
         allCards[card] = manipulableItem;
         addCards(allCards);
         setErrors({ err: false });
+      } else {
+        setErrors({ err: "Crie um card antes de começar a digitar" });
       }
     } catch (err) {
       setErrors({ err: err });
