@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProgrammersDiary.Domain.Entities;
 
-namespace ProgrammersDiary.Domain.Data.Context
+namespace ProgrammersDiary.Data.Context
 {
     public class DataContext : DbContext
     {

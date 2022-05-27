@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProgrammersDiary.Domain.Data.Context;
+using ProgrammersDiary.Data.Context;
 
 #nullable disable
 
-namespace ProgrammersDiary.Domain.Data.Migrations
+namespace ProgrammersDiary.Data.SqlServer.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot

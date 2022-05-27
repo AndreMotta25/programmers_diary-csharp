@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProgrammersDiary.Domain.Entities;
-using ProgrammersDiary.Domain.Interfaces;
+using ProgrammersDiary.Domain.Interfaces.Services;
 
-namespace ProgrammersDiary.BackEnd.Controllers
+namespace ProgrammersDiary.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -17,8 +17,8 @@ namespace ProgrammersDiary.BackEnd.Controllers
         [HttpGet]
         public ActionResult<List<Linguagem>> GetAll(){
             var linguagens = _cardService.ObterTodos();
-            if(linguagens is null)
-               return NotFound(); 
+            // if(linguagens is null)
+            //    return NotFound(); 
             return Ok(linguagens);   
         }
     }

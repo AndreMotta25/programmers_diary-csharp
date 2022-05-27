@@ -1,8 +1,12 @@
 
 using ProgrammersDiary.Domain.Interfaces;
 using ProgrammersDiary.Domain.Services;
-using ProgrammersDiary.Domain.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using ProgrammersDiary.Data.Context;
+using ProgrammersDiary.Domain.Interfaces.Services;
+using ProgrammersDiary.Domain.Interfaces.Repository;
+using SqlServer.Repository;
+using ProgrammersDiary.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +24,9 @@ builder.Services.AddDbContext<DataContext>(options => {
 
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ILinguagemService, LinguagemService>();
+builder.Services.AddScoped<ICardRepository, CardRepository>();
+builder.Services.AddScoped<ILinguagemRepository, LinguagemRepository>();
+
 var app = builder.Build();
 
 

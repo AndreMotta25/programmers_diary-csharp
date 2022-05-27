@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProgrammersDiary.Domain.Data.Context;
+using ProgrammersDiary.Data.Context;
 
 #nullable disable
 
-namespace ProgrammersDiary.Domain.Data.Migrations
+namespace ProgrammersDiary.Data.SqlServer.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220502201616_seeds")]
-    partial class seeds
+    [Migration("20220527232203_inicio")]
+    partial class inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,7 +78,7 @@ namespace ProgrammersDiary.Domain.Data.Migrations
                         {
                             Id = 1,
                             LabelLinguagem = "js",
-                            Nome = "javascript"
+                            Nome = "babel"
                         },
                         new
                         {
@@ -89,8 +89,50 @@ namespace ProgrammersDiary.Domain.Data.Migrations
                         new
                         {
                             Id = 3,
+                            LabelLinguagem = "json",
+                            Nome = "babel"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            LabelLinguagem = "ts",
+                            Nome = "typescript"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            LabelLinguagem = "scss",
+                            Nome = "scss"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            LabelLinguagem = "less",
+                            Nome = "less"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            LabelLinguagem = "markdown",
+                            Nome = "markdown"
+                        },
+                        new
+                        {
+                            Id = 8,
                             LabelLinguagem = "html",
                             Nome = "html"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            LabelLinguagem = "php",
+                            Nome = "php"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            LabelLinguagem = "xml",
+                            Nome = "xml"
                         });
                 });
 

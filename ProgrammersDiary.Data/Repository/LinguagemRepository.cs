@@ -1,17 +1,13 @@
+using ProgrammersDiary.Data.Context;
 using ProgrammersDiary.Domain.Entities;
 using ProgrammersDiary.Domain.Interfaces.Repository;
-using ProgrammersDiary.Domain.Interfaces.Services;
 
-namespace ProgrammersDiary.Domain.Services
+namespace ProgrammersDiary.Data.Repository
 {
-    public class LinguagemService : ILinguagemService
+    public class LinguagemRepository : ILinguagemRepository
     {
-        private readonly ILinguagemRepository _repository;
-
-        public LinguagemService(ILinguagemRepository repository)
-        {
-            _repository = repository;
-        }
+        public DataContext _context;
+        public LinguagemRepository(DataContext context) => _context = context; 
         public void Atualizar()
         {
             throw new NotImplementedException();
@@ -27,19 +23,14 @@ namespace ProgrammersDiary.Domain.Services
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
+        public void Dispose() => _context.Dispose();
 
         public Linguagem? ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Linguagem> ObterTodos()
-        {
-            return  _repository.ObterTodos();
-        }
+        public List<Linguagem> ObterTodos() => 
+            _context.Linguagens.ToList();
     }
 }

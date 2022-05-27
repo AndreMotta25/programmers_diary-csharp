@@ -1,6 +1,6 @@
 using ProgrammersDiary.Domain.Entities;
 
-namespace ProgrammersDiary.BackEnd.DTOs
+namespace ProgrammersDiary.Api.DTOs
 {
     public class CardRequest
     {

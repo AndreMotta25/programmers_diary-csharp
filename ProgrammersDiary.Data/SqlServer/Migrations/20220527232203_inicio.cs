@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace ProgrammersDiary.Domain.Data.Migrations
+namespace ProgrammersDiary.Data.SqlServer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,6 +14,7 @@ namespace ProgrammersDiary.Domain.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    LabelLinguagem = table.Column<string>(type: "varchar(50)", nullable: false),
                     Nome = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
@@ -40,6 +41,23 @@ namespace ProgrammersDiary.Domain.Data.Migrations
                         column: x => x.LinguagemId,
                         principalTable: "Linguagens",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Linguagens",
+                columns: new[] { "Id", "LabelLinguagem", "Nome" },
+                values: new object[,]
+                {
+                    { 1, "js", "babel" },
+                    { 2, "css", "css" },
+                    { 3, "json", "babel" },
+                    { 4, "ts", "typescript" },
+                    { 5, "scss", "scss" },
+                    { 6, "less", "less" },
+                    { 7, "markdown", "markdown" },
+                    { 8, "html", "html" },
+                    { 9, "php", "php" },
+                    { 10, "xml", "xml" }
                 });
 
             migrationBuilder.CreateIndex(
