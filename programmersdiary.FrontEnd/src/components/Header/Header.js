@@ -44,9 +44,6 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
           id: identificador ? identificador : itemManipulavel.id,
           codigo: codigo,
         });
-
-        // console.log(itemManipulavel.codigo);
-        // console.log(codigo);
       };
       funcaoTest();
     }
@@ -82,7 +79,6 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
       setErrors({ err: "Crie um card antes de começar a digitar" });
     }
   }
-  console.log(itemManipulavel);
 
   return (
     <>

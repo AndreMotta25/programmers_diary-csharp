@@ -24,7 +24,7 @@ const SubMenu = ({
   const { OldItem, addOldItem } = useContext(OldItemContext);
   return (
     <>
-      <WrapperSubMenu>
+      <WrapperSubMenu id="wrapperMenu">
         <WrapperDots>
           <DotsMenu src={url} />
         </WrapperDots>
@@ -59,10 +59,10 @@ const SubMenu = ({
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {
-                setModalActive((opt) => !opt);
+                // setModalActive((opt) => !opt);
                 // addManipulableItem(item);
                 // addOldItem(item);
-                setCardVelho(item);
+                // setCardVelho(item);
               }}
             >
               Abrir

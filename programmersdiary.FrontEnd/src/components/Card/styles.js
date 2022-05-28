@@ -12,7 +12,9 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   min-height: 28.5%;
-
+  cursor: pointer;
+  /* position: relative; */
+  /* z-index: 9998; */
   @media screen and (min-width: 1441px) and (max-width: 1900px),
     screen and (min-width: 1901px) {
     min-height: 20%;

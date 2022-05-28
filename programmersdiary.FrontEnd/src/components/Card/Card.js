@@ -12,13 +12,22 @@ const Card = ({
   setManipulavelItem,
   setCardVelho,
 }) => {
-  // console.log(`${card.id} x ${itemManipulavel.id}`);
-  // console.log(card);
-  // console.log(itemManipulavel);
   return (
     <Wrapper
       style={{
         borderColor: color,
+      }}
+      onClick={(e) => {
+        if (
+          !e.currentTarget ==
+          document.querySelector("#wrapperMenu").contains(e.target)
+        ) {
+          setCardVelho(card);
+          setModalActive((opt) => !opt);
+          console.log(e);
+        } else {
+          console.log("adsad");
+        }
       }}
     >
       <Name>{card.nome}</Name>

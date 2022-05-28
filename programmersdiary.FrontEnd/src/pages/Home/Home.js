@@ -150,7 +150,6 @@ const Home = () => {
     e.preventDefault();
     const error = checkFields();
     if (possuiAtributos(error) == 0) {
-      // caso nao exista
       if (!id) {
         let obj = {
           id: id ? id : "",
@@ -166,16 +165,15 @@ const Home = () => {
           novo: true,
           salvo: false,
         };
-        setLinguagemObj({});
+
         if (itemManipulavel.aberto && !itemManipulavel.salvo)
           alert("Salve antes de iniciar outro card");
         else {
           setManipulavelItem(obj);
           setLimpar((v) => !v);
+          setLinguagemObj({});
         }
-      }
-      // caso exista
-      else {
+      } else {
         let obj = {
           aberto: true,
           novo: false,
