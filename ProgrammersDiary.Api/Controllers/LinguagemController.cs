@@ -15,8 +15,8 @@ namespace ProgrammersDiary.Api.Controllers
             _cardService = cardService;
         }
         [HttpGet]
-        public ActionResult<List<Linguagem>> GetAll(){
-            var linguagens = _cardService.ObterTodos();
+        public async Task<ActionResult<List<Linguagem>>> GetAll(){
+            var linguagens = await _cardService.ObterTodos();
             // if(linguagens is null)
             //    return NotFound(); 
             return Ok(linguagens);   

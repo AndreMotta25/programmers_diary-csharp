@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ProgrammersDiary.Data.Context;
 using ProgrammersDiary.Domain.Entities;
 using ProgrammersDiary.Domain.Interfaces.Repository;
@@ -8,29 +9,30 @@ namespace ProgrammersDiary.Data.Repository
     {
         public DataContext _context;
         public LinguagemRepository(DataContext context) => _context = context; 
-        public void Atualizar()
+        public Task Atualizar()
         {
             throw new NotImplementedException();
         }
 
-        public int Criar(Linguagem entidade)
+        public Task<int> Criar(Linguagem entidade)
         {
             throw new NotImplementedException();
         }
 
-        public void Deletar(int id)
+        public Task Deletar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Dispose() => _context.Dispose();
+        public async ValueTask DisposeAsync() =>
+            await _context.DisposeAsync();
 
-        public Linguagem? ObterPorId(int id)
+        public Task<Linguagem?> ObterPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Linguagem> ObterTodos() => 
-            _context.Linguagens.ToList();
+        public async Task<List<Linguagem>> ObterTodos() => 
+            await _context.Linguagens.ToListAsync();
     }
 }
