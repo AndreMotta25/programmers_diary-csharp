@@ -25,6 +25,8 @@ const Menu = ({
   setManipulavelItem,
   itemManipulavel,
   setTextCode,
+  setCards,
+  cards,
 }) => {
   // const { manipulableItem, addManipulableItem, allCards, addCards } =
   //   useContext(ManipulateContext);
@@ -35,7 +37,7 @@ const Menu = ({
   const [result, setResult] = useState("");
   const [menuAtivo, setMenuAtivo] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [cards, setCards] = useState([]);
+  // const [cards, setCards] = useState([]);
   const [deleteItem, setDelete] = useState({});
 
   // busca os dados na api

@@ -45,8 +45,8 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
           codigo: codigo,
         });
 
-        console.log(itemManipulavel.codigo);
-        console.log(codigo);
+        // console.log(itemManipulavel.codigo);
+        // console.log(codigo);
       };
       funcaoTest();
     }

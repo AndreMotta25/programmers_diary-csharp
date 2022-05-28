@@ -12,7 +12,13 @@ import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import { OldItemContext } from "../../context/OldItem/OldItem";
 
 // import crud from "../../utils/crud";
-const SubMenu = ({ item, setModalActive, setDelete }) => {
+const SubMenu = ({
+  item,
+  setModalActive,
+  setDelete,
+  setCardVelho,
+  setManipulavelItem,
+}) => {
   const { manipulableItem, addManipulableItem, deleteItem } =
     useContext(ManipulateContext);
   const { OldItem, addOldItem } = useContext(OldItemContext);
@@ -55,7 +61,8 @@ const SubMenu = ({ item, setModalActive, setDelete }) => {
               onClick={() => {
                 setModalActive((opt) => !opt);
                 // addManipulableItem(item);
-                addOldItem(item);
+                // addOldItem(item);
+                setCardVelho(item);
               }}
             >
               Abrir
