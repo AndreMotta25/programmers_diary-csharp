@@ -12,33 +12,32 @@ namespace SqlServer.Repository
         public CardRepository(DataContext context) => _context = context;
 
 
-        public void Atualizar() =>
-            _context.SaveChanges();
+        public async Task Atualizar() =>
+            await _context.SaveChangesAsync();
 
-        public int Criar(Card entidade)
+        public async  Task<int> Criar(Card entidade)
         {
-            _context.Cards.Add(entidade);
-            _context.SaveChanges();
+            await _context.Cards.AddAsync(entidade);
+            await _context.SaveChangesAsync();
             return entidade.Id;
         }
 
-        public void Deletar(int id)
+        public async Task Deletar(int id)
         {
-            var card = ObterPorId(id);
+            var card = await ObterPorId(id);
             if (card is null )
                 throw new Exception("O card solicitado não existe");
             _context.Cards.Remove(card);    
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Dispose() =>
-            _context.Dispose();
+        public async Task<Card?> ObterPorId(int id) => 
+            await _context.Cards.Include(card => card.Linguagem).FirstOrDefaultAsync(card => card.Id == id);
 
-        public Card? ObterPorId(int id) => 
-            _context.Cards.Include(card => card.Linguagem).FirstOrDefault(card => card.Id == id);
+        public async Task<List<Card>> ObterTodos() =>
+           await _context.Cards.Include(card => card.Linguagem).ToListAsync();
 
-        public List<Card> ObterTodos() =>
-            _context.Cards.Include(card => card.Linguagem).ToList();
-        
+        public async ValueTask DisposeAsync() =>
+            await _context.DisposeAsync();
     }
 }

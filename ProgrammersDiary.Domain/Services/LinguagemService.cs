@@ -1,6 +1,7 @@
 using ProgrammersDiary.Domain.Entities;
 using ProgrammersDiary.Domain.Interfaces.Repository;
 using ProgrammersDiary.Domain.Interfaces.Services;
+using ProgrammersDiary.Domain.Interfaces.Shared;
 
 namespace ProgrammersDiary.Domain.Services
 {
@@ -12,34 +13,27 @@ namespace ProgrammersDiary.Domain.Services
         {
             _repository = repository;
         }
-        public void Atualizar()
+        public async Task<List<Linguagem>> ObterTodos() => 
+            await _repository.ObterTodos();
+
+        Task IShared<Linguagem>.Atualizar()
         {
             throw new NotImplementedException();
         }
 
-        public int Criar(Linguagem entidade)
+        Task<int> IShared<Linguagem>.Criar(Linguagem entidade)
         {
             throw new NotImplementedException();
         }
 
-        public void Deletar(int id)
+        Task IShared<Linguagem>.Deletar(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
-
-        public Linguagem? ObterPorId(int id)
+        Task<Linguagem?> IShared<Linguagem>.ObterPorId(int id)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Linguagem> ObterTodos()
-        {
-            return  _repository.ObterTodos();
         }
     }
 }

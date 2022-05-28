@@ -18,33 +18,24 @@ namespace ProgrammersDiary.Domain.Services
             _repository = repository;
         }
  
-        public Card? ObterPorId(int id)
-        {
-            return _repository.ObterPorId(id);
-        }
+        public async Task<Card?> ObterPorId(int id) => 
+            await _repository.ObterPorId(id);
 
-        public List<Card> ObterTodos()
-        {
-            return _repository.ObterTodos();
-        }
+        public async Task<List<Card>> ObterTodos() =>
+            await _repository.ObterTodos();
 
         // REVIEW: Falta a regra de negocio aqui
-        public int Criar(Card entidade)
-        {
-            return _repository.Criar(entidade);
-        }
+        public async Task<int> Criar(Card entidade) => 
+            await _repository.Criar(entidade);
 
-        public void Atualizar()
+        public async Task Atualizar()
         {
-            _repository.Atualizar();
+            await _repository.Atualizar();
         }
-        public void Deletar(int id )
+        public async Task Deletar(int id )
         {
-            _repository.Deletar(id);
+            await _repository.Deletar(id);
         }
-        public void Dispose()
-        {
-            _repository.Dispose();
-        }
+        
     }
 }

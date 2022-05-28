@@ -25,15 +25,15 @@ namespace ProgrammersDiary.Api.Controllers
 
         // Pegar uma lista de cards
         [HttpGet]
-        public ActionResult<List<Card>> GetTodos() {
-            var cards = _cardService.ObterTodos(); 
+        public async Task<ActionResult<List<Card>>> GetTodos() {
+            var cards = await _cardService.ObterTodos(); 
             return Ok(cards);
         }
 
         // Pegar por id
         [HttpGet("{id}")]
-        public ActionResult<Card?> GetCardPorId(int id) {
-            Card? card = _cardService.ObterPorId(id); 
+        public async Task<ActionResult<Card?>> GetCardPorId(int id) {
+            Card? card = await _cardService.ObterPorId(id); 
             if(card is null) 
                 return  NotFound();
             return Ok(card);
@@ -41,15 +41,15 @@ namespace ProgrammersDiary.Api.Controllers
 
         // Criar
         [HttpPost]
-        public ActionResult CriarCard(CardRequest cardRequest) {
-            var id = _cardService.Criar(cardRequest.ConverteParaEntidade());
+        public async Task<ActionResult> CriarCard(CardRequest cardRequest) {
+            var id = await _cardService.Criar(cardRequest.ConverteParaEntidade());
             return CreatedAtAction(nameof(GetCardPorId), new {Id = id},id);
         }
 
         // Atualizar
         [HttpPut("{id}")]
-        public ActionResult AtualizarCard(int id, CardRequest cardAtualizado){
-            var cardOriginal = _cardService.ObterPorId(id);
+        public async Task<ActionResult> AtualizarCard(int id, CardRequest cardAtualizado){
+            var cardOriginal = await _cardService.ObterPorId(id);
             if(cardOriginal is null)
                 return NotFound();
             cardOriginal.AtualizarDados(cardAtualizado.ConverteParaEntidade()); 
@@ -58,14 +58,14 @@ namespace ProgrammersDiary.Api.Controllers
                 passar para o metodo atualizar pq o entity ja fica rastreando o objeto modificado, então depois de atualizado é só chamar 
                 o saveChanges()
             */  
-            _cardService.Atualizar();    
+            await _cardService.Atualizar();    
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteCard(int id) {
+        public async Task<ActionResult> DeleteCard(int id) {
             try{
-                _cardService.Deletar(id);
+                await _cardService.Deletar(id);
                 return NoContent();
             }
             catch(Exception ex) {
