@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Menu from "../../components/Menu/Menu";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import Card from "../../components/Card/Card";
@@ -7,19 +7,13 @@ import TextArea from "../../components/TextArea/TextArea";
 import Select from "../../components/Select/";
 import {
   BlackWrapper,
-  WrapperMenu,
   Result,
   WrapperCards,
   Button,
-  ButtonMenu,
-  ButtonFecharMenu,
-  Container,
-  ShadowContainer,
   Form,
   Container1,
   Container2,
   ContainerMestre,
-  Button2,
 } from "./styles";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
@@ -31,13 +25,11 @@ import {
   pluginsLista,
 } from "../../utils/utils";
 import crud from "../../utils/crud.js";
-import Menu2 from "../../components/Menu2/Menu2";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
-  const [itemCard, setItemCard] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
   const [linguagens, setLinguagens] = useState([]);
@@ -51,17 +43,11 @@ const Home = () => {
   const [id, setId] = useState("");
   const [language, setLanguage] = useState("");
   const [code, setCode] = useState("");
-  const [label, setLabel] = useState("");
   const [errors, setErros] = useState({});
   const [linguagemObj, setLinguagemObj] = useState({});
   const [limpar, setLimpar] = useState(false);
-
+  const [newItem, setNewItem] = useState({});
   const [cardVelho, setCardVelho] = useState({});
-
-  // defini no cabecalho a linguagem e monta o objeto card
-  useEffect(() => {
-    setItemCard(itemManipulavel);
-  }, [itemManipulavel]);
 
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
@@ -103,7 +89,7 @@ const Home = () => {
     setId("");
     setLanguage("");
     setCode("");
-    setLabel("");
+    setLinguagemObj({});
   }, [limpar]);
 
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
@@ -123,7 +109,7 @@ const Home = () => {
     if (itemManipulavel.novo === true) {
       setCards([...cards, itemManipulavel]);
     }
-  }, [itemManipulavel]);
+  }, [newItem]);
 
   // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  para assim permanecer "aberto"
   useEffect(() => {
@@ -132,6 +118,18 @@ const Home = () => {
       setTextCode(itemManipulavel.codigo);
       cards[cardIndice].id = itemManipulavel.id;
       setCards([...cards]);
+      return;
+    }
+  }, [itemManipulavel]);
+
+  // Salva o conteudo de um card já existente
+  useEffect(() => {
+    let cardIndice = cards.findIndex((card) => card.id === itemManipulavel.id);
+    if (cardIndice >= 0 && itemManipulavel.salvo === true) {
+      setTextCode(itemManipulavel.codigo);
+      cards[cardIndice].codigo = itemManipulavel.codigo;
+      setCards([...cards]);
+      return;
     }
   }, [itemManipulavel]);
 
@@ -171,7 +169,8 @@ const Home = () => {
         else {
           setManipulavelItem(obj);
           setLimpar((v) => !v);
-          setLinguagemObj({});
+          // setLinguagemObj({});
+          setNewItem(obj);
         }
       } else {
         let obj = {
@@ -216,7 +215,9 @@ const Home = () => {
             }}
             extensions={[
               codeLanguages[
-                itemCard.labelLinguagem ? itemCard.labelLinguagem : "js"
+                itemManipulavel.labelLinguagem
+                  ? itemManipulavel.labelLinguagem
+                  : "js"
               ],
             ]}
             theme={oneDark}
@@ -279,12 +280,10 @@ const Home = () => {
             </Form>
           </Modal>
         </BlackWrapper>
-        <Menu2
+        <Menu
           setModalActive={setModalActive}
           setCards={setCards}
           cards={cards}
-          setManipulavelItem={setManipulavelItem}
-          itemManipulavel={itemManipulavel}
           search={search}
           setLoading={setLoading}
           setFound={setFound}
@@ -322,7 +321,7 @@ const Home = () => {
               ))) ||
               (found.length <= 0 && search && <Result>{result}</Result>)}
           </WrapperCards>
-        </Menu2>
+        </Menu>
       </Wrapper>
     </>
   );

@@ -56,18 +56,6 @@ const SubMenu = ({
               Excluir
             </Button>
           </ListItem>
-          <ListItem data-submenu="submenu">
-            <Button
-              onClick={() => {
-                // setModalActive((opt) => !opt);
-                // addManipulableItem(item);
-                // addOldItem(item);
-                // setCardVelho(item);
-              }}
-            >
-              Abrir
-            </Button>
-          </ListItem>
         </List>
       </WrapperSubMenu>
     </>

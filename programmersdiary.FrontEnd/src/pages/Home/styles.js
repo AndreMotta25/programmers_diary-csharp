@@ -34,27 +34,6 @@ export const BlackWrapper = styled.div`
   }
 `;
 
-// ======================================
-
-export const WrapperMenu = styled.div`
-  height: 100%;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  gap: 5%;
-  align-items: center;
-  @media screen and (max-width: 900px) {
-    display: ${({ mobile }) => (mobile === true ? "block" : "none")};
-    position: absolute;
-    background-image: linear-gradient(to right, #e981d9, #6d22c4 0%);
-    width: 70%;
-    box-shadow: 10px 0px 20px rgba(0, 0, 0, 70%);
-  }
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
-`;
-
 export const WrapperCards = styled.div`
   width: 100%;
   padding: 30px 38px;
@@ -74,9 +53,6 @@ export const WrapperCards = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: violet;
   }
-  /* @media screen and (max-width: 900px) {
-    height: 80%;
-  } */
 `;
 export const Result = styled.span`
   font-weight: bold;
@@ -113,59 +89,7 @@ export const Button = styled(ButtonZoom)`
   align-self: center;
 `;
 
-export const ButtonMenu = styled(ButtonZoom)`
-  min-width: 10%;
-  background-color: #a66aec;
-  margin: 0 auto;
-  display: none;
-  &:hover {
-    background-color: #913eca;
-  }
-  @media screen and (max-width: 900px) {
-    display: flex;
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    height: 33px;
-  }
-`;
-
-export const ButtonFecharMenu = styled(Button)`
-  margin-top: 10px;
-  width: 20%;
-  display: none;
-  margin-right: 43px;
-  margin-bottom: 10px;
-  color: white;
-  @media screen and (max-width: 900px) {
-    display: flex;
-  }
-`;
-// =========================================
-export const ShadowContainer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 70%);
-  left: 0;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-`;
-export const Container = styled.div`
-  width: 60%;
-  height: 68%;
-  background-color: white;
-  border-radius: 5px;
-  display: flex;
-  padding: 20px;
-  flex-direction: column;
-  @media screen and (max-width: 900px) {
-    width: 100%;
-  }
-`;
+// formulario
 export const Form = styled.form`
   height: 93%;
 `;
@@ -180,24 +104,4 @@ export const ContainerMestre = styled.div`
   display: flex;
   gap: 40px;
   width: 100%;
-`;
-export const Button2 = styled.button`
-  background-color: #282828;
-  padding: 5px 40px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  margin: 0 auto;
-  display: block;
-
-  &:hover {
-    background-color: #8333c8;
-    opacity: 0.8;
-    transition: all 0.5s ease;
-    & svg {
-      color: black !important;
-      transition: all 0.5s ease;
-    }
-  }
 `;
