@@ -27,4 +27,4 @@ const Card = ({ card, setModalActive, color, setCardVelho, setDeletar }) => {
   );
 };
 
-export default React.memo(Card);
+export default Card;
