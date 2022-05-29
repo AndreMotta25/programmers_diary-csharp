@@ -20,7 +20,8 @@ const Card = ({
       }}
       onClick={(e) => {
         e.stopPropagation();
-        if (!e.target.classList.contains("protected")) {
+        let menuClicado = e.currentTarget.querySelector(".subMenu");
+        if (!menuClicado.contains(e.target)) {
           setCardVelho(card);
           setModalActive(true);
         }
@@ -43,4 +44,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default React.memo(Card);

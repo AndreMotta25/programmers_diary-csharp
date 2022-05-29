@@ -10,7 +10,7 @@ import {
 import url from "../../assets/teste.png";
 import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 import { OldItemContext } from "../../context/OldItem/OldItem";
-
+import { AiFillDelete } from "react-icons/ai";
 // import crud from "../../utils/crud";
 const SubMenu = ({
   item,
@@ -23,7 +23,7 @@ const SubMenu = ({
     useContext(ManipulateContext);
   return (
     <>
-      <WrapperSubMenu className="protected">
+      <WrapperSubMenu className="protected subMenu">
         <WrapperDots className="protected">
           <DotsMenu src={url} className="protected" />
         </WrapperDots>
@@ -36,7 +36,7 @@ const SubMenu = ({
                 setDelete({ ...item, decisao: true });
               }}
             >
-              Excluir
+              <AiFillDelete size={"20px"} color={"red"} className="protected" />
             </Button>
           </ListItem>
         </List>

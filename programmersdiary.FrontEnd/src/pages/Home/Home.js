@@ -136,7 +136,12 @@ const Home = () => {
 
   useEffect(() => {
     if (deletar.decisao === true) {
-      crud.excluir(deletar.id);
+      // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
+      if (deletar.id === itemManipulavel.id) {
+        setTextCode("");
+        setManipulavelItem({});
+      } else crud.excluir(deletar.id);
+
       let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
       setCards(cardsRestantes);
       setDeletar({});
