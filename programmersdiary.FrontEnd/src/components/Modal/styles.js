@@ -24,38 +24,3 @@ export const Container = styled.div`
     width: 100%;
   }
 `;
-export const Form = styled.form`
-  height: 93%;
-`;
-export const Container1 = styled.div`
-  width: 50%;
-`;
-export const Container2 = styled.div`
-  width: 50%;
-`;
-export const ContainerMestre = styled.div`
-  height: 100%;
-  display: flex;
-  gap: 40px;
-  width: 100%;
-`;
-export const Button = styled.button`
-  background-color: #282828;
-  padding: 5px 40px;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  margin: 0 auto;
-  display: block;
-
-  &:hover {
-    background-color: #8333c8;
-    opacity: 0.8;
-    transition: all 0.5s ease;
-    & svg {
-      color: black !important;
-      transition: all 0.5s ease;
-    }
-  }
-`;

@@ -28,6 +28,7 @@ import crud from "../../utils/crud.js";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
+
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
   const [textCode, setTextCode] = useState("");
@@ -196,7 +197,7 @@ const Home = () => {
       setModalActive(false);
     }
   }
-
+  console.log(itemManipulavel);
   return (
     <>
       <Wrapper>
@@ -222,13 +223,7 @@ const Home = () => {
             ]}
             theme={oneDark}
           />
-          <Modal
-            setModalActive={setModalActive}
-            modalActive={modalActive}
-            ListaLinguagens={linguagens}
-            setManipulavelItem={setManipulavelItem}
-            itemManipulavel={itemManipulavel}
-          >
+          <Modal setModalActive={setModalActive} modalActive={modalActive}>
             <Form onSubmit={handleSubmit}>
               <ContainerMestre>
                 <Container1>

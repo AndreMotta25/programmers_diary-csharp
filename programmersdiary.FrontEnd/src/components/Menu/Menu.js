@@ -32,7 +32,9 @@ const Menu = ({
   useEffect(() => {
     let array_dados = [];
     let array_filtrado = [];
-    const dados = cards.filter((elem) => elem.labelLanguage === search);
+    const dados = cards.filter(
+      (elem) => elem.linguagem.labelLinguagem === search
+    );
     const dados2 = cards.filter((elem) => elem.nome === search);
     const dados3 = cards.filter((elem) => elem.nome.indexOf(search) !== -1);
     array_dados = [...dados, ...dados2, ...dados3];
