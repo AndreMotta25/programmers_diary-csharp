@@ -12,20 +12,19 @@ import { AiFillDelete } from "react-icons/ai";
 const SubMenu = ({ item, setDelete }) => {
   return (
     <>
-      <WrapperSubMenu className="protected subMenu">
-        <WrapperDots className="protected">
-          <DotsMenu src={url} className="protected" />
+      <WrapperSubMenu className="subMenu">
+        <WrapperDots>
+          <DotsMenu src={url} />
         </WrapperDots>
 
-        <List className="protected">
-          <ListItem data-submenu="submenu" className="protected">
+        <List>
+          <ListItem data-submenu="submenu">
             <Button
-              className="protected"
               onClick={() => {
                 setDelete({ ...item, decisao: true });
               }}
             >
-              <AiFillDelete size={"20px"} color={"red"} className="protected" />
+              <AiFillDelete size={"18px"} color={"red"} />
             </Button>
           </ListItem>
         </List>

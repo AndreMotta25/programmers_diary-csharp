@@ -1,18 +1,8 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
 import { WrapperInfo, Wrapper, Language, Info, Name } from "./styles";
 import SubMenu from "../SubMenu/SubMenu";
-import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 
-const Card = ({
-  card,
-  setModalActive,
-  color,
-  setDelete,
-  itemManipulavel,
-  setManipulavelItem,
-  setCardVelho,
-  setDeletar,
-}) => {
+const Card = ({ card, setModalActive, color, setCardVelho, setDeletar }) => {
   return (
     <Wrapper
       style={{
@@ -31,14 +21,7 @@ const Card = ({
       <Info>{card.descricao}</Info>
       <WrapperInfo>
         <Language>{card.linguagem.labelLinguagem}</Language>
-        {/* aqui vamos passar o obj */}
-        <SubMenu
-          item={card}
-          setModalActive={setModalActive}
-          setDelete={setDeletar}
-          setManipulavelItem={setManipulavelItem}
-          setCardVelho={setCardVelho}
-        />
+        <SubMenu item={card} setDelete={setDeletar} />
       </WrapperInfo>
     </Wrapper>
   );

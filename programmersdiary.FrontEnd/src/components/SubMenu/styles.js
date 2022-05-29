@@ -20,7 +20,7 @@ export const List = styled.ul`
   padding: 10px;
   border-radius: 5px;
   position: absolute;
-  bottom: -55px;
+  bottom: -42.5px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
   z-index: 9999;
 
@@ -40,7 +40,7 @@ export const List = styled.ul`
 `;
 
 export const ListItem = styled.li`
-  padding: 5px;
+  padding: 0;
   font-weight: 500;
   letter-spacing: 1px;
   font-family: "Roboto Slab", serif;
@@ -48,6 +48,7 @@ export const ListItem = styled.li`
   width: 100%;
   text-align: center;
   border-radius: 5px;
+
   &:hover {
     background-color: #282828;
     color: white;
@@ -74,8 +75,13 @@ export const Button = styled.button`
   font-family: "Roboto Slab", serif;
   font-size: 16px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
   &:hover {
     background-color: #282828;
     color: white;
+    border-radius: 5px;
   }
 `;
