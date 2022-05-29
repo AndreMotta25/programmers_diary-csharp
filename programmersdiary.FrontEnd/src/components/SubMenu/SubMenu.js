@@ -33,23 +33,6 @@ const SubMenu = ({
             <Button
               className="protected"
               onClick={() => {
-                console.log("manipulableItem: ", manipulableItem);
-                console.log("Item: ", item);
-                if (manipulableItem.aberto && manipulableItem.id === item.id) {
-                  manipulableItem.aberto = false;
-                  // crud.atualizar(manipulableItem.id, manipulableItem);
-                  addManipulableItem({});
-                  console.log("teste");
-                }
-              }}
-            >
-              Fechar
-            </Button>
-          </ListItem>
-          <ListItem data-submenu="submenu" className="protected">
-            <Button
-              className="protected"
-              onClick={() => {
                 setDelete({ ...item, decisao: true });
               }}
             >
