@@ -57,14 +57,14 @@ export const ButtonZoom = styled.button`
   justify-content: center;
   border-radius: 5px;
   border: none;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
+  transition: box-shadow 200ms, transform 200ms, background-color 200ms;
+  &&:active {
+    box-shadow: 0px 0px 0px;
+    transform: translateX(4px), translateY(4px);
+  }
   &:hover {
     background-color: #322929;
-    transition: all 0.5s ease;
-    & svg {
-      transform: scale(1.2);
-      transition: all 0.5s ease;
-      color: white !important;
-    }
   }
 `;
 export const Button = styled(ButtonZoom)`
@@ -72,7 +72,6 @@ export const Button = styled(ButtonZoom)`
   height: 5%;
   min-height: 40px;
   background-color: #282828;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
   margin: 0 auto;
   align-self: center;
 `;

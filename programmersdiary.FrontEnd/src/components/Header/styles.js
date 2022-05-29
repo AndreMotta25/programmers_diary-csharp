@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ButtonZoom } from "../../components/Menu/styles";
 
 export const HeaderWrapper = styled.header`
   display: flex;
@@ -13,7 +14,7 @@ export const Title = styled.h1`
   color: #46fc42;
   letter-spacing: 1px;
 `;
-export const Save = styled.button`
+export const Save = styled(ButtonZoom)`
   padding: 0px 30px;
   background-color: #a66aec;
   border-radius: 5px;

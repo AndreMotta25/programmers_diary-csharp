@@ -7,7 +7,10 @@ const SearchBar = ({ ...otherProps }) => {
   return (
     <>
       <Container>
-        <InputComponente {...otherProps} />
+        <InputComponente
+          style={{ boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)" }}
+          {...otherProps}
+        />
         <Icone>
           <BsSearch size={"20px"} />
         </Icone>

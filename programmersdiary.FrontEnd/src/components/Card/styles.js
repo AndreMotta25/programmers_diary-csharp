@@ -13,8 +13,12 @@ export const Wrapper = styled.div`
   justify-content: space-around;
   min-height: 28.5%;
   cursor: pointer;
-  /* position: relative; */
-  /* z-index: 9998; */
+  transition: box-shadow 300ms, transform 300ms;
+  &&:active {
+    box-shadow: 0px 0px 0px;
+    transform: translateX(4px), translateY(4px);
+  }
+
   @media screen and (min-width: 1441px) and (max-width: 1900px),
     screen and (min-width: 1901px) {
     min-height: 20%;
@@ -27,7 +31,6 @@ export const WrapperInfo = styled.div`
   align-items: center;
 `;
 export const Info = styled.p`
-  //font-size: 14px;
   font-size: clamp(0.8rem, 1vw, (2rem));
   color: white;
   letter-spacing: 1px;
