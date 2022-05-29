@@ -21,17 +21,17 @@ const SubMenu = ({
 }) => {
   const { manipulableItem, addManipulableItem, deleteItem } =
     useContext(ManipulateContext);
-  const { OldItem, addOldItem } = useContext(OldItemContext);
   return (
     <>
-      <WrapperSubMenu id="wrapperMenu">
-        <WrapperDots>
-          <DotsMenu src={url} />
+      <WrapperSubMenu className="protected">
+        <WrapperDots className="protected">
+          <DotsMenu src={url} className="protected" />
         </WrapperDots>
 
-        <List>
-          <ListItem data-submenu="submenu">
+        <List className="protected">
+          <ListItem data-submenu="submenu" className="protected">
             <Button
+              className="protected"
               onClick={() => {
                 console.log("manipulableItem: ", manipulableItem);
                 console.log("Item: ", item);
@@ -46,11 +46,11 @@ const SubMenu = ({
               Fechar
             </Button>
           </ListItem>
-          <ListItem data-submenu="submenu">
+          <ListItem data-submenu="submenu" className="protected">
             <Button
+              className="protected"
               onClick={() => {
-                // deleteItem(item.id);
-                setDelete(item);
+                setDelete({ ...item, decisao: true });
               }}
             >
               Excluir

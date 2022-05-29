@@ -11,6 +11,7 @@ const Card = ({
   itemManipulavel,
   setManipulavelItem,
   setCardVelho,
+  setDeletar,
 }) => {
   return (
     <Wrapper
@@ -18,15 +19,10 @@ const Card = ({
         borderColor: color,
       }}
       onClick={(e) => {
-        if (
-          !e.currentTarget ==
-          document.querySelector("#wrapperMenu").contains(e.target)
-        ) {
+        e.stopPropagation();
+        if (!e.target.classList.contains("protected")) {
           setCardVelho(card);
-          setModalActive((opt) => !opt);
-          console.log(e);
-        } else {
-          console.log("adsad");
+          setModalActive(true);
         }
       }}
     >
@@ -38,7 +34,7 @@ const Card = ({
         <SubMenu
           item={card}
           setModalActive={setModalActive}
-          setDelete={setDelete}
+          setDelete={setDeletar}
           setManipulavelItem={setManipulavelItem}
           setCardVelho={setCardVelho}
         />

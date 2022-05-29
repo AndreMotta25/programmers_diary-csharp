@@ -49,7 +49,7 @@ const Home = () => {
   const [limpar, setLimpar] = useState(false);
   const [newItem, setNewItem] = useState({});
   const [cardVelho, setCardVelho] = useState({});
-
+  const [deletar, setDeletar] = useState({});
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
       itemManipulavel.salvo = false;
@@ -133,6 +133,15 @@ const Home = () => {
       return;
     }
   }, [itemManipulavel]);
+
+  useEffect(() => {
+    if (deletar.decisao === true) {
+      crud.excluir(deletar.id);
+      let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
+      setCards(cardsRestantes);
+      setDeletar({});
+    }
+  }, [deletar]);
 
   function checkFields() {
     const error = {};
@@ -297,6 +306,7 @@ const Home = () => {
                   itemManipulavel={itemManipulavel}
                   setManipulavelItem={setManipulavelItem}
                   setCardVelho={setCardVelho}
+                  setDeletar={setDeletar}
                 />
               ))}
             {!search &&
