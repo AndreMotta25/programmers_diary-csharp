@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   List,
   ListItem,
@@ -8,19 +8,8 @@ import {
   Button,
 } from "./styles";
 import url from "../../assets/teste.png";
-import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
-import { OldItemContext } from "../../context/OldItem/OldItem";
 import { AiFillDelete } from "react-icons/ai";
-// import crud from "../../utils/crud";
-const SubMenu = ({
-  item,
-  setModalActive,
-  setDelete,
-  setCardVelho,
-  setManipulavelItem,
-}) => {
-  const { manipulableItem, addManipulableItem, deleteItem } =
-    useContext(ManipulateContext);
+const SubMenu = ({ item, setDelete }) => {
   return (
     <>
       <WrapperSubMenu className="protected subMenu">
