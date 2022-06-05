@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import {
   List,
   ListItem,
@@ -8,23 +8,11 @@ import {
   Button,
 } from "./styles";
 import url from "../../assets/teste.png";
-import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
-import { OldItemContext } from "../../context/OldItem/OldItem";
-
-// import crud from "../../utils/crud";
-const SubMenu = ({
-  item,
-  setModalActive,
-  setDelete,
-  setCardVelho,
-  setManipulavelItem,
-}) => {
-  const { manipulableItem, addManipulableItem, deleteItem } =
-    useContext(ManipulateContext);
-  const { OldItem, addOldItem } = useContext(OldItemContext);
+import { AiFillDelete } from "react-icons/ai";
+const SubMenu = ({ item, setDelete }) => {
   return (
     <>
-      <WrapperSubMenu id="wrapperMenu">
+      <WrapperSubMenu className="subMenu">
         <WrapperDots>
           <DotsMenu src={url} />
         </WrapperDots>
@@ -33,27 +21,10 @@ const SubMenu = ({
           <ListItem data-submenu="submenu">
             <Button
               onClick={() => {
-                console.log("manipulableItem: ", manipulableItem);
-                console.log("Item: ", item);
-                if (manipulableItem.aberto && manipulableItem.id === item.id) {
-                  manipulableItem.aberto = false;
-                  // crud.atualizar(manipulableItem.id, manipulableItem);
-                  addManipulableItem({});
-                  console.log("teste");
-                }
+                setDelete({ ...item, decisao: true });
               }}
             >
-              Fechar
-            </Button>
-          </ListItem>
-          <ListItem data-submenu="submenu">
-            <Button
-              onClick={() => {
-                // deleteItem(item.id);
-                setDelete(item);
-              }}
-            >
-              Excluir
+              <AiFillDelete size={"18px"} color={"red"} />
             </Button>
           </ListItem>
         </List>

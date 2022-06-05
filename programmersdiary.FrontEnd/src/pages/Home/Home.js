@@ -49,7 +49,7 @@ const Home = () => {
   const [limpar, setLimpar] = useState(false);
   const [newItem, setNewItem] = useState({});
   const [cardVelho, setCardVelho] = useState({});
-
+  const [deletar, setDeletar] = useState({});
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
       itemManipulavel.salvo = false;
@@ -80,6 +80,7 @@ const Home = () => {
       setLanguage(cardVelho.linguagem.nome);
       setCode(cardVelho.codigo);
       setLinguagemObj(cardVelho.linguagem);
+      setCardVelho({});
     }
   }, [cardVelho]);
 
@@ -91,12 +92,23 @@ const Home = () => {
     setLanguage("");
     setCode("");
     setLinguagemObj({});
+    console.log("limpando");
   }, [limpar]);
+
+  // adiciona o card novo a lista no menu
+  useEffect(() => {
+    if (itemManipulavel.novo === true) {
+      setCards([...cards, newItem]);
+    }
+  }, [newItem]);
 
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
     let card = cards.find((card) => card.id === itemManipulavel.id);
-    if (card && !card.novo) {
+    console.log(itemManipulavel);
+    console.log(card);
+    if (card && itemManipulavel.aberto) {
+      console.log("mudando linguagem");
       card.nome = itemManipulavel.nome;
       card.descricao = itemManipulavel.descricao;
       card.linguagem = itemManipulavel.linguagem;
@@ -104,13 +116,6 @@ const Home = () => {
     setCards([...cards]);
     // eslint-disable-next-line
   }, [nome, desc, language]);
-
-  // adiciona o card novo a lista no menu
-  useEffect(() => {
-    if (itemManipulavel.novo === true) {
-      setCards([...cards, itemManipulavel]);
-    }
-  }, [newItem]);
 
   // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  para assim permanecer "aberto"
   useEffect(() => {
@@ -133,6 +138,20 @@ const Home = () => {
       return;
     }
   }, [itemManipulavel]);
+
+  useEffect(() => {
+    if (deletar.decisao === true) {
+      // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
+      if (deletar.id === itemManipulavel.id) {
+        setTextCode("");
+        setManipulavelItem({});
+      } else crud.excluir(deletar.id);
+
+      let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
+      setCards(cardsRestantes);
+      setDeletar({});
+    }
+  }, [deletar]);
 
   function checkFields() {
     const error = {};
@@ -183,8 +202,8 @@ const Home = () => {
           nome: nome,
           linguagem: linguagemObj,
           linguagemId: linguagemObj.id,
-          codigo: cardVelho.codigo,
-          id: cardVelho.id,
+          codigo: code,
+          id: id,
         };
 
         if (itemManipulavel.aberto && !itemManipulavel.salvo) {
@@ -297,6 +316,7 @@ const Home = () => {
                   itemManipulavel={itemManipulavel}
                   setManipulavelItem={setManipulavelItem}
                   setCardVelho={setCardVelho}
+                  setDeletar={setDeletar}
                 />
               ))}
             {!search &&

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ButtonZoom } from "../../components/Menu/styles";
 
 export const BlackWrapper = styled.div`
   background-color: #282828;
@@ -59,32 +60,11 @@ export const Result = styled.span`
   font-family: "Roboto Slab", serif;
   font-size: 18px;
 `;
-
-export const ButtonZoom = styled.button`
-  cursor: pointer;
-  outline: none;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  border: none;
-  &:hover {
-    background-color: #322929;
-    transition: all 0.5s ease;
-    & svg {
-      transform: scale(1.2);
-      transition: all 0.5s ease;
-      color: white !important;
-    }
-  }
-`;
 export const Button = styled(ButtonZoom)`
   width: 51%;
   height: 5%;
   min-height: 40px;
   background-color: #282828;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 30%);
   margin: 0 auto;
   align-self: center;
 `;

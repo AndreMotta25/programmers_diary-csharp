@@ -10,6 +10,7 @@ export const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   z-index: 1000;
+
   @media screen and (max-width: 900px) {
     top: 0px;
   }

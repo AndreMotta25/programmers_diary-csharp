@@ -1,32 +1,19 @@
-import React, { useContext, useMemo } from "react";
+import React from "react";
 import { WrapperInfo, Wrapper, Language, Info, Name } from "./styles";
 import SubMenu from "../SubMenu/SubMenu";
-import { ManipulateContext } from "../../context/ManipulaItem/ManipulateItem";
 
-const Card = ({
-  card,
-  setModalActive,
-  color,
-  setDelete,
-  itemManipulavel,
-  setManipulavelItem,
-  setCardVelho,
-}) => {
+const Card = ({ card, setModalActive, color, setCardVelho, setDeletar }) => {
   return (
     <Wrapper
       style={{
         borderColor: color,
       }}
       onClick={(e) => {
-        if (
-          !e.currentTarget ==
-          document.querySelector("#wrapperMenu").contains(e.target)
-        ) {
+        e.stopPropagation();
+        let menuClicado = e.currentTarget.querySelector(".subMenu");
+        if (!menuClicado.contains(e.target)) {
           setCardVelho(card);
-          setModalActive((opt) => !opt);
-          console.log(e);
-        } else {
-          console.log("adsad");
+          setModalActive(true);
         }
       }}
     >
@@ -34,14 +21,7 @@ const Card = ({
       <Info>{card.descricao}</Info>
       <WrapperInfo>
         <Language>{card.linguagem.labelLinguagem}</Language>
-        {/* aqui vamos passar o obj */}
-        <SubMenu
-          item={card}
-          setModalActive={setModalActive}
-          setDelete={setDelete}
-          setManipulavelItem={setManipulavelItem}
-          setCardVelho={setCardVelho}
-        />
+        <SubMenu item={card} setDelete={setDeletar} />
       </WrapperInfo>
     </Wrapper>
   );

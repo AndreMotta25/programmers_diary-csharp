@@ -31,24 +31,14 @@ const Menu = ({
   // faz a pesquisa
   useEffect(() => {
     let array_dados = [];
-    let array_filtrado = [];
     const dados = cards.filter(
-      (elem) => elem.linguagem.labelLinguagem === search
+      (elem) =>
+        elem.linguagem.labelLinguagem.includes(search) ||
+        elem.nome.includes(search)
     );
-    const dados2 = cards.filter((elem) => elem.nome === search);
-    const dados3 = cards.filter((elem) => elem.nome.indexOf(search) !== -1);
-    array_dados = [...dados, ...dados2, ...dados3];
-    // filtra os dados
-    if (array_dados.length > 0) {
-      array_dados.forEach((elem) => {
-        if (array_filtrado.filter((item) => item.id === elem.id).length <= 0) {
-          array_filtrado.push(elem);
-        }
-      });
-      setFound(array_filtrado);
-    }
-    setFound(array_filtrado ? array_filtrado : []);
-    if (array_filtrado.length <= 0) {
+    array_dados = [...dados];
+    setFound(array_dados ? array_dados : []);
+    if (array_dados.length <= 0) {
       setResult("Nada achado...");
     }
     // eslint-disable-next-line
