@@ -313,8 +313,6 @@ const Home = () => {
                   card={card}
                   setModalActive={setModalActive}
                   color={card.id === itemManipulavel.id ? "white" : "black"}
-                  itemManipulavel={itemManipulavel}
-                  setManipulavelItem={setManipulavelItem}
                   setCardVelho={setCardVelho}
                   setDeletar={setDeletar}
                 />
@@ -332,6 +330,9 @@ const Home = () => {
                   key={crypto.randomUUID()}
                   card={card}
                   setModalActive={setModalActive}
+                  color={card.id === itemManipulavel.id ? "white" : "black"}
+                  setCardVelho={setCardVelho}
+                  setDeletar={setDeletar}
                 />
               ))) ||
               (found.length <= 0 && search && <Result>{result}</Result>)}
@@ -343,16 +344,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/* 
-        <Menu
-          setModalActive={setModalActive}
-          openCard={itemCard}
-          salvo={itemManipulavel.salvo == true ? itemManipulavel : {}}
-          setManipulavelItem={setManipulavelItem}
-          itemManipulavel={itemManipulavel}
-          setTextCode={setTextCode}
-          setCards={setCards}
-          cards={cards}
-        ></Menu> 
-        */
