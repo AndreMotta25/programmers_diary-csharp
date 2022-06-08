@@ -7,6 +7,7 @@ using ProgrammersDiary.Domain.Interfaces.Services;
 using ProgrammersDiary.Domain.Interfaces.Repository;
 using SqlServer.Repository;
 using ProgrammersDiary.Data.Repository;
+using ProgrammersDiary.Api.IocInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,8 @@ builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ILinguagemService, LinguagemService>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<ILinguagemRepository, LinguagemRepository>();
+builder.Services.AddTokenService(builder.Configuration);
+builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();
 

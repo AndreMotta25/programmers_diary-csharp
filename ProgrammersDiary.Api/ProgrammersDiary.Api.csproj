@@ -17,5 +17,6 @@
 <ProjectReference Include="..\ProgrammersDiary.Domain\ProgrammersDiary.Domain.csproj" />
 <ProjectReference Include="..\ProgrammersDiary.Data\ProgrammersDiary.Data.csproj" />
 <ProjectReference Include="..\ProgrammersDiary.Identity\ProgrammersDiary.Identity.csproj" />
+<ProjectReference Include="..\ProgrammersDiary.Application\ProgrammersDiary.Application.csproj" />
 </ItemGroup>
 </Project>
