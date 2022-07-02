@@ -50,6 +50,15 @@ const Home = () => {
   const [newItem, setNewItem] = useState({});
   const [cardVelho, setCardVelho] = useState({});
   const [deletar, setDeletar] = useState({});
+
+  function atualizarConteudoCard(indice) {
+    cards[indice].id = itemManipulavel.id;
+    cards[indice].codigo = itemManipulavel.codigo;
+    setTextCode(itemManipulavel.codigo);
+    setCards([...cards]);
+    return;
+  }
+
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
       itemManipulavel.salvo = false;
@@ -117,27 +126,38 @@ const Home = () => {
     // eslint-disable-next-line
   }, [nome, desc, language]);
 
-  // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  para assim permanecer "aberto"
+  // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  __OU__  Salva o conteudo de um card já existente  para assim permanecer "aberto"
   useEffect(() => {
     let cardIndice = cards.findIndex((card) => card.id === "");
-    if (cardIndice >= 0 && itemManipulavel.salvo === true) {
-      setTextCode(itemManipulavel.codigo);
-      cards[cardIndice].id = itemManipulavel.id;
-      setCards([...cards]);
-      return;
-    }
-  }, [itemManipulavel]);
+    cardIndice =
+      cardIndice >= 0
+        ? cardIndice
+        : cards.findIndex((card) => card.id === itemManipulavel.id);
 
-  // Salva o conteudo de um card já existente
-  useEffect(() => {
-    let cardIndice = cards.findIndex((card) => card.id === itemManipulavel.id);
-    if (cardIndice >= 0 && itemManipulavel.salvo === true) {
-      setTextCode(itemManipulavel.codigo);
-      cards[cardIndice].codigo = itemManipulavel.codigo;
-      setCards([...cards]);
-      return;
-    }
+    if (cardIndice >= 0 && itemManipulavel.salvo === true)
+      atualizarConteudoCard(cardIndice);
   }, [itemManipulavel]);
+  // // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  para assim permanecer "aberto"
+  // useEffect(() => {
+  //   let cardIndice = cards.findIndex((card) => card.id === "");
+  //   if (cardIndice >= 0 && itemManipulavel.salvo === true) {
+  //     setTextCode(itemManipulavel.codigo);
+  //     cards[cardIndice].id = itemManipulavel.id;
+  //     setCards([...cards]);
+  //     return;
+  //   }
+  // }, [itemManipulavel]);
+
+  // // Salva o conteudo de um card já existente
+  // useEffect(() => {
+  //   let cardIndice = cards.findIndex((card) => card.id === itemManipulavel.id);
+  //   if (cardIndice >= 0 && itemManipulavel.salvo === true) {
+  //     setTextCode(itemManipulavel.codigo);
+  //     cards[cardIndice].codigo = itemManipulavel.codigo;
+  //     setCards([...cards]);
+  //     return;
+  //   }
+  // }, [itemManipulavel]);
 
   useEffect(() => {
     if (deletar.decisao === true) {
