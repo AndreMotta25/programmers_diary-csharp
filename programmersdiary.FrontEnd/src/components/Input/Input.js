@@ -1,15 +1,14 @@
 import React from "react";
-
-import { Input, Label, Container, Error } from "./styles";
+import * as S from "./styles";
 
 const InputComponente = ({ label, width, error, ...otherProps }) => {
   return (
     <>
-      <Container width={width}>
-        {label && <Label>{label}</Label>}
-        <Input type="text" {...otherProps}></Input>
-        <Error>{error}</Error>
-      </Container>
+      <S.Container width={width}>
+        {label && <S.Label>{label}</S.Label>}
+        <S.Input type="text" {...otherProps}></S.Input>
+        <S.Error>{error}</S.Error>
+      </S.Container>
     </>
   );
 };

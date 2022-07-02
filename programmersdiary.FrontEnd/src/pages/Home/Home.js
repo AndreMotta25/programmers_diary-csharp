@@ -5,16 +5,16 @@ import Card from "../../components/Card/Card";
 import InputComponente from "../../components/Input/Input";
 import TextArea from "../../components/TextArea/TextArea";
 import Select from "../../components/Select/";
-import {
-  BlackWrapper,
-  Result,
-  WrapperCards,
-  Button,
-  Form,
-  Container1,
-  Container2,
-  ContainerMestre,
-} from "./styles";
+// import {
+//   BlackWrapper,
+//   Result,
+//   WrapperCards,
+//   Button,
+//   Form,
+//   Container1,
+//   Container2,
+//   ContainerMestre,
+// } from "./styles";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
 import CodeMirror from "@uiw/react-codemirror";
@@ -28,6 +28,8 @@ import crud from "../../utils/crud.js";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
+
+import * as S from "./styles";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -114,10 +116,7 @@ const Home = () => {
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
     let card = cards.find((card) => card.id === itemManipulavel.id);
-    console.log(itemManipulavel);
-    console.log(card);
     if (card && itemManipulavel.aberto) {
-      console.log("mudando linguagem");
       card.nome = itemManipulavel.nome;
       card.descricao = itemManipulavel.descricao;
       card.linguagem = itemManipulavel.linguagem;
@@ -209,7 +208,6 @@ const Home = () => {
         else {
           setManipulavelItem(obj);
           setLimpar((v) => !v);
-          // setLinguagemObj({});
           setNewItem(obj);
         }
       } else {
@@ -236,11 +234,10 @@ const Home = () => {
       setModalActive(false);
     }
   }
-  console.log(itemManipulavel);
   return (
     <>
       <Wrapper>
-        <BlackWrapper>
+        <S.BlackWrapper>
           <Header
             itemManipulavel={itemManipulavel}
             setManipulavelItem={setManipulavelItem}
@@ -250,7 +247,7 @@ const Home = () => {
             value={textCode}
             height="64vh"
             width={"100%"}
-            onChange={(value, viewUpdate) => {
+            onChange={(value) => {
               setTextCode(value);
             }}
             extensions={[
@@ -263,9 +260,9 @@ const Home = () => {
             theme={oneDark}
           />
           <Modal setModalActive={setModalActive} modalActive={modalActive}>
-            <Form onSubmit={handleSubmit}>
-              <ContainerMestre>
-                <Container1>
+            <S.Form onSubmit={handleSubmit}>
+              <S.ContainerMestre>
+                <S.Container1>
                   <InputComponente
                     label="Nome"
                     border="1px solid #ccc"
@@ -284,8 +281,8 @@ const Home = () => {
                     }}
                     error={errors.desc}
                   />
-                </Container1>
-                <Container2>
+                </S.Container1>
+                <S.Container2>
                   <Select
                     label="Linguagens"
                     value={language}
@@ -298,22 +295,14 @@ const Home = () => {
                     }}
                     error={errors.language}
                   ></Select>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setLimpar((v) => !v);
-                    }}
-                  >
-                    teste
-                  </button>
-                </Container2>
-              </ContainerMestre>
-              <Button>
+                </S.Container2>
+              </S.ContainerMestre>
+              <S.Button>
                 <AiOutlineCheck size={"20px"} color="#8333C8" />
-              </Button>
-            </Form>
+              </S.Button>
+            </S.Form>
           </Modal>
-        </BlackWrapper>
+        </S.BlackWrapper>
         <Menu
           setModalActive={setModalActive}
           setCards={setCards}
@@ -324,7 +313,7 @@ const Home = () => {
           setResult={setResult}
           setSearch={setSearch}
         >
-          <WrapperCards>
+          <S.WrapperCards>
             {!search &&
               !loading &&
               cards.map((card) => (
@@ -340,7 +329,7 @@ const Home = () => {
             {!search &&
               cards.length <= 0 &&
               loading &&
-              [1, 2, 3, 4].map((id) => (
+              [1, 2, 3, 4].map(() => (
                 <CardSkeleton key={crypto.randomUUID()} />
               ))}
             {(search &&
@@ -355,8 +344,8 @@ const Home = () => {
                   setDeletar={setDeletar}
                 />
               ))) ||
-              (found.length <= 0 && search && <Result>{result}</Result>)}
-          </WrapperCards>
+              (found.length <= 0 && search && <S.Result>{result}</S.Result>)}
+          </S.WrapperCards>
         </Menu>
       </Wrapper>
     </>

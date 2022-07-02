@@ -1,20 +1,20 @@
 import React from "react";
-import { WrapperInfo, Wrapper, Language, Info, Name, Menu } from "./styles";
+import * as S from "./styles";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const CardSkeleton = () => {
   return (
-    <Wrapper>
-      <Name>
+    <S.Wrapper>
+      <S.Name>
         <Skeleton
           width={"100%"}
           enableAnimation={true}
           highlightColor="#282828"
           style={{ marginBottom: "6px" }}
         />
-      </Name>
-      <Info>
+      </S.Name>
+      <S.Info>
         <Skeleton
           style={{ marginBottom: "6px" }}
           enableAnimation={true}
@@ -26,26 +26,26 @@ const CardSkeleton = () => {
           enableAnimation={true}
           highlightColor="#282828"
         />
-      </Info>
-      <WrapperInfo>
-        <Language>
+      </S.Info>
+      <S.WrapperInfo>
+        <S.Language>
           <Skeleton
             style={{ marginBottom: "6px" }}
             width={40}
             enableAnimation={true}
             highlightColor="#282828"
           />
-        </Language>
-        <Menu>
+        </S.Language>
+        <S.Menu>
           <Skeleton
             style={{ marginBottom: "6px" }}
             width={40}
             enableAnimation={true}
             highlightColor="#282828"
           />
-        </Menu>
-      </WrapperInfo>
-    </Wrapper>
+        </S.Menu>
+      </S.WrapperInfo>
+    </S.Wrapper>
   );
 };
 

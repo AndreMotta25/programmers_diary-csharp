@@ -1,6 +1,5 @@
 import React from "react";
-
-import { Container, ShadowContainer } from "./styles";
+import * as S from "./styles";
 
 const Modal = ({ setModalActive, modalActive, children }) => {
   // caso o container do modal seja clicado, o modal  fecha
@@ -13,9 +12,9 @@ const Modal = ({ setModalActive, modalActive, children }) => {
   return (
     <>
       {modalActive && (
-        <ShadowContainer onClick={handleClick}>
-          <Container className="modal">{children}</Container>
-        </ShadowContainer>
+        <S.ShadowContainer onClick={handleClick}>
+          <S.Container className="modal">{children}</S.Container>
+        </S.ShadowContainer>
       )}
     </>
   );

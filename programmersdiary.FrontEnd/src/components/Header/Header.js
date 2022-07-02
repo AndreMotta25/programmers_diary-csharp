@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HeaderWrapper, Title, Save } from "./styles";
+import * as S from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import prettier from "prettier";
 import Error from "../Error/Error";
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
-  const [code, setCode] = useState(codigo);
+  const [setCode] = useState(codigo);
 
   useEffect(() => {
     let identificador;
@@ -83,18 +83,18 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   return (
     <>
       <div>
-        <HeaderWrapper>
-          <Title>
+        <S.HeaderWrapper>
+          <S.Title>
             {error.err ? (
               <Error texto={error.err} />
             ) : itemManipulavel.linguagem ? (
               itemManipulavel.linguagem.labelLinguagem
             ) : null}
-          </Title>
-          <Save onClick={save}>
+          </S.Title>
+          <S.Save onClick={save}>
             <AiOutlineSave size="30px" />
-          </Save>
-        </HeaderWrapper>
+          </S.Save>
+        </S.HeaderWrapper>
       </div>
     </>
   );

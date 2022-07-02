@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { WrapperMenu, Button, ButtonMenu, ButtonFecharMenu } from "./styles";
+import * as S from "./styles";
 import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
@@ -46,21 +46,21 @@ const Menu = ({
 
   return (
     <>
-      <ButtonMenu
+      <S.ButtonMenu
         onClick={() => {
           setMenuAtivo(true);
         }}
       >
         <AiOutlineMenu size={"20px"} />
-      </ButtonMenu>
-      <WrapperMenu mobile={menuAtivo}>
-        <ButtonFecharMenu
+      </S.ButtonMenu>
+      <S.WrapperMenu mobile={menuAtivo}>
+        <S.ButtonFecharMenu
           onClick={() => {
             setMenuAtivo(false);
           }}
         >
           <AiOutlineMenu size={"20px"} />
-        </ButtonFecharMenu>
+        </S.ButtonFecharMenu>
         <SearchBar
           value={search}
           onChange={(e) => {
@@ -68,14 +68,14 @@ const Menu = ({
           }}
         />
         {children}
-        <Button
+        <S.Button
           onClick={() => {
             setModalActive((opt) => !opt);
           }}
         >
           <BsCodeSlash size={"25px"} color="#8333C8" />{" "}
-        </Button>
-      </WrapperMenu>
+        </S.Button>
+      </S.WrapperMenu>
     </>
   );
 };

@@ -1,16 +1,16 @@
 import React from "react";
 import { VscError } from "react-icons/vsc";
-import { Container, ErroGerado, ContainerErro } from "./styles";
+import * as S from "./styles";
 
 const Error = ({ texto }) => {
   return (
     <>
-      <Container>
+      <S.Container>
         <VscError size={"25px"} color="red" />
-        <ContainerErro>
-          <ErroGerado>{String(texto)}</ErroGerado>
-        </ContainerErro>
-      </Container>
+        <S.ContainerErro>
+          <S.ErroGerado>{String(texto)}</S.ErroGerado>
+        </S.ContainerErro>
+      </S.Container>
     </>
   );
 };

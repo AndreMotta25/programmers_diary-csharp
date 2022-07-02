@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ContainerSelect, DescriptionSelect, List, Error } from "./styles";
-// import { linguagens } from "../../utils/utils";
+import React from "react";
+import * as S from "./styles";
 
 function Select({
   label,
@@ -11,9 +10,9 @@ function Select({
   ...otherProps
 }) {
   return (
-    <ContainerSelect>
-      <DescriptionSelect>{label}</DescriptionSelect>
-      <List {...otherProps} value={value}>
+    <S.ContainerSelect>
+      <S.DescriptionSelect>{label}</S.DescriptionSelect>
+      <S.List {...otherProps} value={value}>
         <option defaultValue>Escolha uma linguagem abaixo</option>
         {ListaLinguagens.map((option, indice) => (
           <option
@@ -24,9 +23,9 @@ function Select({
             {option.labelLinguagem}
           </option>
         ))}
-      </List>
-      <Error>{error}</Error>
-    </ContainerSelect>
+      </S.List>
+      <S.Error>{error}</S.Error>
+    </S.ContainerSelect>
   );
 }
 

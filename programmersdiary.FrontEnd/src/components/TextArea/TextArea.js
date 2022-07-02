@@ -1,14 +1,14 @@
 import React from "react";
-import { Text, Container, Label, Error } from "./styles";
+import * as S from "./styles";
 
 const TextArea = ({ label, width, error, ...otherProps }) => {
   return (
     <>
-      <Container width={width}>
-        {label && <Label>{label}</Label>}
-        <Text {...otherProps}></Text>
-        <Error>{error}</Error>
-      </Container>
+      <S.Container width={width}>
+        {label && <S.Label>{label}</S.Label>}
+        <S.Text {...otherProps}></S.Text>
+        <S.Error>{error}</S.Error>
+      </S.Container>
     </>
   );
 };

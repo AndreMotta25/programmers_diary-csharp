@@ -1,34 +1,28 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  WrapperSubMenu,
-  DotsMenu,
-  WrapperDots,
-  Button,
-} from "./styles";
 import url from "../../assets/teste.png";
 import { AiFillDelete } from "react-icons/ai";
+import * as S from "./styles";
+
 const SubMenu = ({ item, setDelete }) => {
   return (
     <>
-      <WrapperSubMenu className="subMenu">
-        <WrapperDots>
-          <DotsMenu src={url} />
-        </WrapperDots>
+      <S.WrapperSubMenu className="subMenu">
+        <S.WrapperDots>
+          <S.DotsMenu src={url} />
+        </S.WrapperDots>
 
-        <List>
-          <ListItem data-submenu="submenu">
-            <Button
+        <S.List>
+          <S.ListItem data-submenu="submenu">
+            <S.Button
               onClick={() => {
                 setDelete({ ...item, decisao: true });
               }}
             >
               <AiFillDelete size={"18px"} color={"red"} />
-            </Button>
-          </ListItem>
-        </List>
-      </WrapperSubMenu>
+            </S.Button>
+          </S.ListItem>
+        </S.List>
+      </S.WrapperSubMenu>
     </>
   );
 };
