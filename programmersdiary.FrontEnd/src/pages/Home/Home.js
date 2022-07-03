@@ -21,6 +21,7 @@ import prettier from "prettier";
 
 import * as S from "./styles";
 import ErroComun from "../../components/ErroComum/ErroComun";
+import api from "../../utils/cardRepository";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -156,7 +157,7 @@ const Home = () => {
       if (deletar.id === itemManipulavel.id) {
         setTextCode("");
         setManipulavelItem({});
-      } else crud.excluir(deletar.id);
+      } else api.delete(`${deletar.id}`);
 
       let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
       setCards(cardsRestantes);

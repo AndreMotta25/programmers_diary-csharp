@@ -6,7 +6,7 @@ import Error from "../Error/Error";
 import crud from "../../utils/crud";
 import { pluginsLista } from "../../utils/utils";
 import { toast } from "react-toastify";
-
+import api from "../../utils/cardRepository";
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
@@ -19,31 +19,39 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
     let identificador;
     if (itemManipulavel.aberto === true && !error.err) {
       let salvar = async () => {
-        if (itemManipulavel.id) {
-          itemManipulavel.codigo = codigo;
-          crud.atualizar(itemManipulavel.id, itemManipulavel);
-        } else {
-          itemManipulavel.codigo = codigo;
-          identificador = await crud.inserir(itemManipulavel);
-        }
+        try {
+          if (itemManipulavel.id) {
+            itemManipulavel.codigo = codigo;
+            await api.put(`${itemManipulavel.id}`, itemManipulavel);
+          } else {
+            itemManipulavel.codigo = codigo;
+            identificador = await api.post("", itemManipulavel);
+          }
 
-        toast.success("salvando", {
-          autoClose: 200,
-          theme: "dark",
-          delay: 100,
-        });
+          toast.success("salvando", {
+            autoClose: 200,
+            theme: "dark",
+            delay: 100,
+          });
 
-        /*
+          /*
           Vai forçar a renderização de todos os componentes que usam esse contexto, assim corrigindo
           o problema do assincrono
         */
-        setManipulavelItem({
-          ...itemManipulavel,
-          novo: false,
-          salvo: true,
-          id: identificador ? identificador : itemManipulavel.id,
-          codigo: codigo,
-        });
+          setManipulavelItem({
+            ...itemManipulavel,
+            novo: false,
+            salvo: true,
+            id: identificador ? identificador : itemManipulavel.id,
+            codigo: codigo,
+          });
+        } catch (e) {
+          toast.error("Ocorreu um erro", {
+            autoClose: 200,
+            theme: "dark",
+            delay: 100,
+          });
+        }
       };
       salvar();
     }
@@ -69,6 +77,7 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
     }
   }, [codigo]);
 
+  // VOU TER QUE ALTERAR ISSO DEPOIS, NÃO FAZ O MINIMO SENTIDO SER ASSIM
   /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
     // try {
