@@ -2,17 +2,15 @@ import React from "react";
 import { VscError } from "react-icons/vsc";
 import * as S from "./styles";
 
-const Error = ({ texto }) => {
+const ErroComun = ({ texto }) => {
   return (
     <>
       <S.Container>
         <VscError size={"25px"} color="red" />
-        <S.ContainerErro>
-          <S.ErroGerado>{String(texto)}</S.ErroGerado>
-        </S.ContainerErro>
+        <S.Erro>{texto}</S.Erro>
       </S.Container>
     </>
   );
 };
 
-export default React.memo(Error);
+export default React.memo(ErroComun);

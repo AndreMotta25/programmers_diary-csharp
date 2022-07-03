@@ -4,6 +4,7 @@ import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
+import api from "../../utils/cardRepository";
 
 const Menu = ({
   setModalActive,
@@ -15,15 +16,20 @@ const Menu = ({
   setFound,
   setSearch,
   setResult,
+  setErro,
 }) => {
   const [menuAtivo, setMenuAtivo] = useState(false);
 
   // busca os dados na api(talvez mudar para home)
   useEffect(() => {
     const fetchdata = async () => {
-      const cards = await crud.getAll("card");
-      setCards(cards);
-      setLoading(false);
+      try {
+        const cards = await api.get();
+        setCards(cards.data);
+        setLoading(false);
+      } catch (e) {
+        setErro("Ocorreu um erro inesperado!");
+      }
     };
     fetchdata();
   }, []);

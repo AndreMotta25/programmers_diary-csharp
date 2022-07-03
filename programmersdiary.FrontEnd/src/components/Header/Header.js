@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
-  const [setCode] = useState(codigo);
+  const [code, setCode] = useState(codigo);
 
   useEffect(() => {
     let identificador;

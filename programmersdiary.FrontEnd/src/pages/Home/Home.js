@@ -5,16 +5,6 @@ import Card from "../../components/Card/Card";
 import InputComponente from "../../components/Input/Input";
 import TextArea from "../../components/TextArea/TextArea";
 import Select from "../../components/Select/";
-// import {
-//   BlackWrapper,
-//   Result,
-//   WrapperCards,
-//   Button,
-//   Form,
-//   Container1,
-//   Container2,
-//   ContainerMestre,
-// } from "./styles";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
 import CodeMirror from "@uiw/react-codemirror";
@@ -30,6 +20,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
 
 import * as S from "./styles";
+import ErroComun from "../../components/ErroComum/ErroComun";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -52,6 +43,7 @@ const Home = () => {
   const [newItem, setNewItem] = useState({});
   const [cardVelho, setCardVelho] = useState({});
   const [deletar, setDeletar] = useState({});
+  const [erro, setErro] = useState("");
 
   function atualizarConteudoCard(indice) {
     cards[indice].id = itemManipulavel.id;
@@ -312,9 +304,11 @@ const Home = () => {
           setFound={setFound}
           setResult={setResult}
           setSearch={setSearch}
+          setErro={setErro}
         >
           <S.WrapperCards>
             {!search &&
+              !erro &&
               !loading &&
               cards.map((card) => (
                 <Card
@@ -327,12 +321,14 @@ const Home = () => {
                 />
               ))}
             {!search &&
+              !erro &&
               cards.length <= 0 &&
               loading &&
               [1, 2, 3, 4].map(() => (
                 <CardSkeleton key={crypto.randomUUID()} />
               ))}
             {(search &&
+              !erro &&
               found.length > 0 &&
               found.map((card) => (
                 <Card
@@ -345,6 +341,7 @@ const Home = () => {
                 />
               ))) ||
               (found.length <= 0 && search && <S.Result>{result}</S.Result>)}
+            {cards.length <= 0 && <ErroComun texto={erro} />}
           </S.WrapperCards>
         </Menu>
       </Wrapper>
