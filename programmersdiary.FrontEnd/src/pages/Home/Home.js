@@ -14,14 +14,13 @@ import {
   possuiAtributos,
   pluginsLista,
 } from "../../utils/utils";
-import crud from "../../utils/crud.js";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
 
 import * as S from "./styles";
 import ErroComun from "../../components/ErroComum/ErroComun";
-import api from "../../utils/cardRepository";
+import axios from "axios";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -63,7 +62,7 @@ const Home = () => {
   // faz um fetch para pegar todas as linguagens do banco de
   useEffect(() => {
     async function getAll() {
-      let listaLinguagens = await crud.getAll("linguagem");
+      let listaLinguagens = await (await axios.get("linguagem")).data;
       setLinguagens(listaLinguagens);
     }
     getAll();
@@ -96,7 +95,6 @@ const Home = () => {
     setLanguage("");
     setCode("");
     setLinguagemObj({});
-    console.log("limpando");
   }, [limpar]);
 
   // adiciona o card novo a lista no menu
@@ -129,27 +127,6 @@ const Home = () => {
     if (cardIndice >= 0 && itemManipulavel.salvo === true)
       atualizarConteudoCard(cardIndice);
   }, [itemManipulavel]);
-  // // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  para assim permanecer "aberto"
-  // useEffect(() => {
-  //   let cardIndice = cards.findIndex((card) => card.id === "");
-  //   if (cardIndice >= 0 && itemManipulavel.salvo === true) {
-  //     setTextCode(itemManipulavel.codigo);
-  //     cards[cardIndice].id = itemManipulavel.id;
-  //     setCards([...cards]);
-  //     return;
-  //   }
-  // }, [itemManipulavel]);
-
-  // // Salva o conteudo de um card já existente
-  // useEffect(() => {
-  //   let cardIndice = cards.findIndex((card) => card.id === itemManipulavel.id);
-  //   if (cardIndice >= 0 && itemManipulavel.salvo === true) {
-  //     setTextCode(itemManipulavel.codigo);
-  //     cards[cardIndice].codigo = itemManipulavel.codigo;
-  //     setCards([...cards]);
-  //     return;
-  //   }
-  // }, [itemManipulavel]);
 
   useEffect(() => {
     if (deletar.decisao === true) {

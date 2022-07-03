@@ -3,7 +3,6 @@ import * as S from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import prettier from "prettier";
 import Error from "../Error/Error";
-import crud from "../../utils/crud";
 import { pluginsLista } from "../../utils/utils";
 import { toast } from "react-toastify";
 import api from "../../utils/cardRepository";

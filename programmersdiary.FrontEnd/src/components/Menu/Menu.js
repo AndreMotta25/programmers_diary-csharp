@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./styles";
-import crud from "../../utils/crud";
 import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
