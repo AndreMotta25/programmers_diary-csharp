@@ -11,6 +11,10 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ProgrammersDiary.frontEnd",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgrammersDiary.Data", "ProgrammersDiary.Data\ProgrammersDiary.Data.csproj", "{4B9635D8-D31F-4012-9FCC-68B8FD691864}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersDiary.Identity", "ProgrammersDiary.Identity\ProgrammersDiary.Identity.csproj", "{5189062B-D296-4740-B20E-0D68A9AB6873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersDiary.Application", "ProgrammersDiary.Application\ProgrammersDiary.Application.csproj", "{2425E368-5FFF-4C1D-B92D-0BF90AA8B686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{4B9635D8-D31F-4012-9FCC-68B8FD691864}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B9635D8-D31F-4012-9FCC-68B8FD691864}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B9635D8-D31F-4012-9FCC-68B8FD691864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5189062B-D296-4740-B20E-0D68A9AB6873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5189062B-D296-4740-B20E-0D68A9AB6873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5189062B-D296-4740-B20E-0D68A9AB6873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5189062B-D296-4740-B20E-0D68A9AB6873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2425E368-5FFF-4C1D-B92D-0BF90AA8B686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2425E368-5FFF-4C1D-B92D-0BF90AA8B686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2425E368-5FFF-4C1D-B92D-0BF90AA8B686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2425E368-5FFF-4C1D-B92D-0BF90AA8B686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

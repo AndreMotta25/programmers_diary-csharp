@@ -23,7 +23,8 @@ namespace ProgrammersDiary.Domain.Data.Mappings
                    .WithMany(linguagem => linguagem.Cards)
                    .HasForeignKey(card => card.LinguagemId)
                    .OnDelete(DeleteBehavior.NoAction);
-                    // O delete não vai ser em cascata   
+                    // O delete não vai ser em cascata
+                    // depois temos que mudar isso para cascata   
 
         }
     }

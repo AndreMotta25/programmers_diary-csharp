@@ -24,6 +24,9 @@ namespace ProgrammersDiary.Api.Controllers
         }
 
         // Pegar uma lista de cards
+        // Depois implemetar um modo, que só pode ver os cards quem está autenticado e
+        // só vai poder ver seus proprios cards, isso atraves do id do usuario
+        // o id do usuario aqui vai ser um guid, tornando muito mais seguro
         [HttpGet]
         public async Task<ActionResult<List<Card>>> GetTodos() {
             var cards = await _cardService.ObterTodos(); 
