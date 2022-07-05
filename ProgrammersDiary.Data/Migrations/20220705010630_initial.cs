@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProgrammersDiary.Identity.Migrations
+namespace ProgrammersDiary.Data.Migrations
 {
     public partial class initial : Migration
     {
@@ -46,6 +46,20 @@ namespace ProgrammersDiary.Identity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Linguagens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LabelLinguagem = table.Column<string>(type: "varchar(50)", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Linguagens", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +168,51 @@ namespace ProgrammersDiary.Identity.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Cards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(type: "text", nullable: false),
+                    LinguagemId = table.Column<int>(type: "int", nullable: false),
+                    Codigo = table.Column<string>(type: "text", nullable: false),
+                    UsuarioId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(255)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cards_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cards_Linguagens_LinguagemId",
+                        column: x => x.LinguagemId,
+                        principalTable: "Linguagens",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Linguagens",
+                columns: new[] { "Id", "LabelLinguagem", "Nome" },
+                values: new object[,]
+                {
+                    { 1, "js", "babel" },
+                    { 2, "css", "css" },
+                    { 3, "json", "babel" },
+                    { 4, "ts", "typescript" },
+                    { 5, "scss", "scss" },
+                    { 6, "less", "less" },
+                    { 7, "markdown", "markdown" },
+                    { 8, "html", "html" },
+                    { 9, "php", "php" },
+                    { 10, "xml", "xml" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -192,6 +251,16 @@ namespace ProgrammersDiary.Identity.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_LinguagemId",
+                table: "Cards",
+                column: "LinguagemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_UsuarioId",
+                table: "Cards",
+                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -212,10 +281,16 @@ namespace ProgrammersDiary.Identity.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Cards");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Linguagens");
         }
     }
 }

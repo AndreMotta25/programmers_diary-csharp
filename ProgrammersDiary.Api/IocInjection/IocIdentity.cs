@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ProgrammersDiary.Identity.Data;
+using ProgrammersDiary.Data.Context;
+using ProgrammersDiary.Domain.Entities;
+// using ProgrammersDiary.Identity.Data;
 using ProgrammersDiary.Identity.Interfaces;
 using ProgrammersDiary.Identity.Services;
 
@@ -11,15 +13,15 @@ namespace ProgrammersDiary.Api.IocInjection
          public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddDbContext<IdentityDataContext>(options => options.UseSqlServer(
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(
                 configuration.GetSection("ConnectionStrings")["Andre"]
             ));
             services.AddScoped<IIdentityService,IdentityService>();
             
             // Quem permite esse metodo aqui e o UI
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<User>()
                 .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDataContext>()
+                .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
             
             //São regras para a criação da senha(identity)   

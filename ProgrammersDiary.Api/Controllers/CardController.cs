@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProgrammersDiary.Api.DTOs;
@@ -14,6 +15,7 @@ namespace ProgrammersDiary.Api.Controllers
     // se ficar sem esse apiController, o post em modo body request não funciona
     [ApiController]
     [Route("[controller]")]
+    // [Authorize(Roles = "usuario")]
     public class CardController : Controller
     {
         private readonly ICardService _cardService;

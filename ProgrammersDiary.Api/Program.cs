@@ -16,19 +16,23 @@ builder.Services.AddCors();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DataContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Andre"));
-    options.EnableSensitiveDataLogging();
-    });
+// builder.Services.AddDbContext<DataContext>(options => {
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("Andre"));
+//     options.EnableSensitiveDataLogging();
+//     });
 
 builder.Services.AddScoped<ICardService, CardService>();
 builder.Services.AddScoped<ILinguagemService, LinguagemService>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 builder.Services.AddScoped<ILinguagemRepository, LinguagemRepository>();
-builder.Services.AddTokenService(builder.Configuration);
+
+// injections customizadas
+
 builder.Services.AddIdentityService(builder.Configuration);
+builder.Services.AddTokenService(builder.Configuration);
+builder.Services.AddSwaggerService(builder.Configuration);
 
 var app = builder.Build();
 
@@ -43,7 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(builder => builder.SetIsOriginAllowed(origin => true).AllowAnyMethod().AllowAnyHeader());
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthentication().UseAuthorization();
 
 app.MapControllers();
 
