@@ -36,6 +36,10 @@ namespace ProgrammersDiary.Domain.Services
         {
             await _repository.Deletar(id);
         }
-        
+
+        public async Task<List<Card>> GetCards(string email)
+        {
+           return await _repository.GetCards(email);
+        }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProgrammersDiary.Api.DTOs;
+using ProgrammersDiary.Application.DTOs;
 using ProgrammersDiary.Domain.Entities;
 using ProgrammersDiary.Domain.Interfaces.Services;
 
@@ -25,17 +26,29 @@ namespace ProgrammersDiary.Api.Controllers
             _cardService = cardService;
         }
 
-        // Pegar uma lista de cards
-        // Depois implemetar um modo, que só pode ver os cards quem está autenticado e
-        // só vai poder ver seus proprios cards, isso atraves do id do usuario
-        // o id do usuario aqui vai ser um guid, tornando muito mais seguro
-        [HttpGet]
-        public async Task<ActionResult<List<Card>>> GetTodos() {
-            var cards = await _cardService.ObterTodos(); 
-            return Ok(cards);
-        }
-
         // Pegar por id
+        [HttpGet]
+        public async Task<ActionResult<List<CardResponse>>> GetCards() {
+            var email = User.Claims.FirstOrDefault(user => user.Type == "Email")?.Value;
+            if(email != null ){
+                var cards = await _cardService.GetCards(email);
+                // depois retirar isso daqui, não é pra ter muita logica aqui
+                if(cards.Count > 0)
+                    return Ok(cards.Select(card => new CardResponse() {
+                        Id = card.Id,
+                        Nome = card.Nome,
+                        Descricao = card.Descricao,
+                        Codigo = card.Codigo,
+                        Linguagem = card.Linguagem,
+                        UsuarioEmail = card.Usuario?.Email,
+                        UsuarioId = card.UsuarioId
+                    }));
+                return NotFound(cards);    
+            }
+            return Unauthorized();
+        }
+  
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Card?>> GetCardPorId(int id) {
             Card? card = await _cardService.ObterPorId(id); 

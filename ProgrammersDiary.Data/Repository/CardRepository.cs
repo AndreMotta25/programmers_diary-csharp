@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProgrammersDiary.Data.Context;
 using ProgrammersDiary.Domain.Entities;
@@ -39,5 +40,12 @@ namespace SqlServer.Repository
 
         public async ValueTask DisposeAsync() =>
             await _context.DisposeAsync();
+
+        public async Task<List<Card>> GetCards(string email)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            return await _context.Cards.Include(c => c.Usuario).Include(c => c.Linguagem).Where(c => c.UsuarioId == user.Id).ToListAsync();
+            
+        }
     }
 }
