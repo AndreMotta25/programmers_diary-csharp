@@ -50,6 +50,8 @@ namespace ProgrammersDiary.Identity.Services
                 {
                     Succeeded = true,
                     Token = token,
+                    Email= email ,
+                    Id = (await _manager.FindByEmailAsync(email)).Id,
                     Erro = ""
                 };
         }

@@ -6,8 +6,9 @@ export const Input = styled.input`
   width: 100%;
   outline: none;
   border: ${({ border }) => (border ? border : "none")};
-  margin-bottom: 5px;
   font-family: "Roboto Slab", serif;
+  position: relative;
+  margin-bottom: 5px;
 `;
 export const Label = styled.label`
   font-family: "Roboto Slab", serif;
@@ -25,4 +26,10 @@ export const Error = styled.div`
   color: red;
   font-weight: bold;
   margin-bottom: 10px;
+`;
+export const InputContainer = styled.div`
+  display: flex;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
 `;

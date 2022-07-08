@@ -55,8 +55,8 @@ namespace ProgrammersDiary.Identity.Services
 
         public async Task<UsuarioLoginResponse> LoginUsuario(UsuarioLoginRequest usuario)
         {
-            string? identificacao  = usuario?.Email != "user@example.com" ? usuario?.Email : usuario?.Username;
-            IdentityUser? user = await _manager.FindByEmailAsync(identificacao) ?? await _manager.FindByNameAsync(identificacao);
+            // string? identificacao  = usuario?.Email != "user@example.com" ? usuario?.Email : usuario?.Username;
+            IdentityUser? user = await _manager.FindByEmailAsync(usuario.Identificacao) ?? await _manager.FindByNameAsync(usuario.Identificacao);
             
             var login = new UsuarioLoginResponse();
             
@@ -74,7 +74,7 @@ namespace ProgrammersDiary.Identity.Services
                     else if(result.RequiresTwoFactor)
                         login.Erro = "Requer a autenticação de 2 fatores";
                     else
-                        login.Erro = "Impossivel fazer a conexão";    
+                        login.Erro = "Usuario ou Senha estão incorretos";    
                 }
             }
             else 

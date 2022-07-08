@@ -1,5 +1,5 @@
 import React from "react";
-import InputComponente from "../Input/Input";
+import Input from "../InputIcon";
 import * as S from "./styles";
 import { BsSearch } from "react-icons/bs";
 
@@ -7,13 +7,12 @@ const SearchBar = ({ ...otherProps }) => {
   return (
     <>
       <S.Container>
-        <InputComponente
-          style={{ boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.25)" }}
+        <Input
+          width={"100%"}
+          padding="10px"
           {...otherProps}
+          icon={<BsSearch size={"20px"} />}
         />
-        <S.Icone>
-          <BsSearch size={"20px"} />
-        </S.Icone>
       </S.Container>
     </>
   );

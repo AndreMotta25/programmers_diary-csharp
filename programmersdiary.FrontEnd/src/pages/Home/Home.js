@@ -62,8 +62,9 @@ const Home = () => {
   // faz um fetch para pegar todas as linguagens do banco de
   useEffect(() => {
     async function getAll() {
-      let listaLinguagens = await (await axios.get("linguagem")).data;
-      setLinguagens(listaLinguagens);
+      let listaLinguagens = await await axios.get("linguagem");
+      console.log(listaLinguagens);
+      setLinguagens(listaLinguagens.data);
     }
     getAll();
   }, []);

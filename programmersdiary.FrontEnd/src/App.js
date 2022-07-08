@@ -5,13 +5,15 @@ import { WrapperGlobal } from "./styles";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
     <>
       <WrapperGlobal>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
         <ToastContainer />
       </WrapperGlobal>

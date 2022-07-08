@@ -7,7 +7,7 @@ using ProgrammersDiary.Identity.Interfaces;
 namespace ProgrammersDiary.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UsuarioController:Controller
     {
         private readonly IIdentityService _identityService;
@@ -33,7 +33,7 @@ namespace ProgrammersDiary.Api.Controllers
                 return Ok(usuarioResponse);
             else 
                 if(usuarioResponse.Erro.Equals("Usuario ou Senha estão incorretos")) 
-                    return NotFound();
+                    return NotFound("Usuario ou Senha estão incorretos");
 
             return BadRequest(usuarioResponse);        
         }
@@ -41,6 +41,10 @@ namespace ProgrammersDiary.Api.Controllers
         [HttpGet("Validar-Token/{token}")]
         public bool ValidarToken(string token) {    
             return _token.ValidarToken(token);
+        }
+        [HttpGet]
+        public ActionResult Get() {
+            return Ok("Ola mundo");
         }
     }
 }

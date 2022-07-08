@@ -9,4 +9,8 @@ export const WrapperDefault = styled.div`
   /* padding: 38px 30px; */
   background-image: linear-gradient(to right, #e981d9, #6d22c4);
   position: relative;
+
+  @media screen and (min-width: 1500px) {
+    max-width: 1500px;
+  }
 `;
