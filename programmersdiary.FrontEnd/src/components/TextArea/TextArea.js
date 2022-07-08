@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "../CommonError";
 import * as S from "./styles";
 
 const TextArea = ({ label, width, error, ...otherProps }) => {
@@ -7,7 +8,7 @@ const TextArea = ({ label, width, error, ...otherProps }) => {
       <S.Container width={width}>
         {label && <S.Label>{label}</S.Label>}
         <S.Text {...otherProps}></S.Text>
-        <S.Error>{error}</S.Error>
+        {error && <Error error={error} />}
       </S.Container>
     </>
   );

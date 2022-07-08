@@ -1,4 +1,4 @@
-import Input from "../../components/InputIcon";
+import Input from "../../components/Input";
 
 import * as S from "./styles";
 import logo from "../../assets/logo.png";
@@ -73,7 +73,7 @@ const Login = () => {
             <Input
               width={"50%"}
               padding="10px"
-              icon={<AiOutlineMail size={25} />}
+              label={<AiOutlineMail size={25} />}
               placeholder="email ou username"
               id="email"
               value={identificacao}
@@ -81,11 +81,13 @@ const Login = () => {
                 setidentificacao(e.target.value);
               }}
               error={erros.identificacao}
+              borderRadius="5px"
+              shadow="4px 4px 4px rgba(0,0,0,70%)"
             ></Input>
             <Input
               width={"50%"}
               padding="10px"
-              icon={<BiLockAlt size={25} />}
+              label={<BiLockAlt size={25} />}
               type="password"
               placeholder="senha"
               id="senha"
@@ -94,6 +96,8 @@ const Login = () => {
                 setPassword(e.target.value);
               }}
               error={erros.password}
+              borderRadius="5px"
+              shadow="4px 4px 4px rgba(0,0,0,70%)"
             ></Input>
 
             <S.ContainerButtons>

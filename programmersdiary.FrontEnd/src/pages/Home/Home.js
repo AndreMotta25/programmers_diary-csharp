@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Menu from "../../components/Menu/Menu";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import Card from "../../components/Card/Card";
-import InputComponente from "../../components/Input/Input";
 import TextArea from "../../components/TextArea/TextArea";
 import Select from "../../components/Select/";
 import Header from "../../components/Header/Header";
@@ -19,8 +18,9 @@ import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
 
 import * as S from "./styles";
-import ErroComun from "../../components/ErroComum/ErroComun";
 import axios from "axios";
+import Input from "../../components/Input";
+import Error from "../../components/CommonError";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -234,19 +234,31 @@ const Home = () => {
             <S.Form onSubmit={handleSubmit}>
               <S.ContainerMestre>
                 <S.Container1>
-                  <InputComponente
+                  <Input
                     label="Nome"
+                    fontSizeLabel="16px"
+                    fontWeigth="bold"
+                    padding="10px"
                     border="1px solid #ccc"
+                    align="flex-start"
+                    widthInput="100%"
+                    placeholder="Digite o nome do card"
                     value={nome}
+                    borderRadius="5px"
+                    gap="10px"
+                    margin="0px 0px 10px 0px"
                     onChange={(e) => {
                       setNome(e.target.value);
                     }}
+                    direction="column-reverse"
                     error={errors.nome}
-                  ></InputComponente>
+                    id="cardNome"
+                  />
                   <TextArea
                     label="Descricao"
                     border="1px solid #ccc"
                     value={desc}
+                    placeholder="Insira aqui a descrição do seu card"
                     onChange={(e) => {
                       setDesc(e.target.value);
                     }}
@@ -320,7 +332,7 @@ const Home = () => {
                 />
               ))) ||
               (found.length <= 0 && search && <S.Result>{result}</S.Result>)}
-            {cards.length <= 0 && <ErroComun texto={erro} />}
+            {cards.length <= 0 && <Error color="black" error={erro} />}
           </S.WrapperCards>
         </Menu>
       </Wrapper>

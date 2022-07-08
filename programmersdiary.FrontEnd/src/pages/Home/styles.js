@@ -75,6 +75,7 @@ export const Form = styled.form`
 `;
 export const Container1 = styled.div`
   width: 50%;
+  margin-bottom: 20px;
 `;
 export const Container2 = styled.div`
   width: 50%;

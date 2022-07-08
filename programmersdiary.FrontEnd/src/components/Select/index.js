@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "../CommonError/index";
 import * as S from "./styles";
 
 function Select({
@@ -24,7 +25,7 @@ function Select({
           </option>
         ))}
       </S.List>
-      <S.Error>{error}</S.Error>
+      {error && <Error error={error}></Error>}
     </S.ContainerSelect>
   );
 }
