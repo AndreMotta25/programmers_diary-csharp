@@ -39,8 +39,12 @@ export const WrapperCards = styled.div`
   width: 100%;
   padding: 30px 38px;
   overflow: auto;
-  height: 70%;
+  /* height: 70%; */
+  flex: 0 0 70%;
 
+  @media screen and (max-width: 900px) {
+    flex: 0 0 45%;
+  }
   &::-webkit-scrollbar {
     width: 7px;
     display: block;

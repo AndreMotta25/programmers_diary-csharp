@@ -154,3 +154,9 @@ table {
 /* html {
   font-size: 62.5%;
 } */
+/* html {
+  height: 100%;
+} */
+.cm-theme {
+  height: 100%;
+}

@@ -26,6 +26,12 @@ namespace ProgrammersDiary.Api.Controllers
             _cardService = cardService;
         }
 
+        [HttpGet("todos")]
+        public async Task<ActionResult<Card>> Get(){
+            var cards = await _cardService.ObterTodos(); 
+            return Ok(cards);
+        }
+        
         // Pegar por id
         [HttpGet]
         public async Task<ActionResult<List<CardResponse>>> GetCards() {

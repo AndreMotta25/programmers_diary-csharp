@@ -216,7 +216,7 @@ const Home = () => {
           ></Header>
           <CodeMirror
             value={textCode}
-            height="64vh"
+            height="100%"
             width={"100%"}
             onChange={(value) => {
               setTextCode(value);
@@ -230,6 +230,7 @@ const Home = () => {
             ]}
             theme={oneDark}
           />
+
           <Modal setModalActive={setModalActive} modalActive={modalActive}>
             <S.Form onSubmit={handleSubmit}>
               <S.ContainerMestre>

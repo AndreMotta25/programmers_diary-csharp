@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const WrapperDefault = styled.div`
   width: 80%;
   margin: auto auto;
+  max-height: 656px;
   height: 80vh;
   display: flex;
   border-radius: 10px;

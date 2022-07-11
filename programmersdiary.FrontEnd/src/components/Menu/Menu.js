@@ -23,7 +23,7 @@ const Menu = ({
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const cards = await api.get();
+        const cards = await api.get("todos");
         setCards(cards.data);
         setLoading(false);
       } catch (e) {

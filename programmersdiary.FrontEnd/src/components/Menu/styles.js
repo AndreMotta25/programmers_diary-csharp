@@ -7,24 +7,7 @@ export const WrapperMenu = styled.div`
   flex-direction: column;
   gap: 5%;
   align-items: center;
-  @media screen and (max-width: 900px) {
-    display: ${({ mobile }) => (mobile === true ? "block" : "none")};
-    position: absolute;
-    background-image: linear-gradient(to right, #e981d9, #6d22c4 0%);
-    width: 70%;
-    box-shadow: 10px 0px 20px rgba(0, 0, 0, 70%);
-  }
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
-`;
-
-export const WrapperCards = styled.div`
-  width: 100%;
-  padding: 30px 38px;
   overflow: auto;
-  height: 70%;
-
   &::-webkit-scrollbar {
     width: 7px;
     display: block;
@@ -38,14 +21,17 @@ export const WrapperCards = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: violet;
   }
-  /* @media screen and (max-width: 900px) {
-    height: 80%;
-  } */
-`;
-export const Result = styled.span`
-  font-weight: bold;
-  font-family: "Roboto Slab", serif;
-  font-size: 18px;
+  @media screen and (max-width: 900px) {
+    display: ${({ mobile }) => (mobile === true ? "flex" : "none")};
+    position: absolute;
+    background-image: linear-gradient(to right, #e981d9, #6d22c4 0%);
+    width: 70%;
+    box-shadow: 10px 0px 20px 0px rgba (0, 0, 0, 70%);
+    height: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 export const ButtonZoom = styled.button`

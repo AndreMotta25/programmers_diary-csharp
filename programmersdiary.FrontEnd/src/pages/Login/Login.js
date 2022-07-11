@@ -60,11 +60,11 @@ const Login = () => {
   return (
     <>
       <S.Wrapper>
-        <S.WrapperImage>
-          <S.WrapperTitle>
+        {/* <S.WrapperImage> */}
+        {/* <S.WrapperTitle>
             <S.Title>Diario do Programador</S.Title>
-          </S.WrapperTitle>
-        </S.WrapperImage>
+          </S.WrapperTitle> */}
+        {/* </S.WrapperImage> */}
         <S.Form onSubmit={handleSubmit}>
           <S.WrapperForm>
             <div>

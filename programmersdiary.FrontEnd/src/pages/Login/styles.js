@@ -1,26 +1,32 @@
 import styled from "styled-components";
-import foto from "../../assets/fundo.png";
+import foto from "../../assets/fundo2.png";
 import { WrapperDefault } from "../../components/Wrapper/styles";
 
-export const Wrapper = styled(WrapperDefault)``;
-
-export const WrapperImage = styled.div`
+export const Wrapper = styled(WrapperDefault)`
+  min-width: 100%;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-x: center;
   background-image: url(${foto});
-  width: 50%;
-  border-radius: 10px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media screen and (max-width: 960px) {
-    display: none;
-  }
 `;
+
+// export const WrapperImage = styled.div`
+//   width: 50%;
+//   border-radius: 10px;
+//   border-top-right-radius: 0px;
+//   border-bottom-right-radius: 0px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   @media screen and (max-width: 960px) {
+//     display: none;
+//   }
+// `;
 
 export const WrapperTitle = styled.div`
   width: 80%;
@@ -46,6 +52,11 @@ export const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (min-width: 1440px) {
+    width: 40%;
+  }
+
   @media screen and (max-width: 960px) {
     width: 100%;
   }
