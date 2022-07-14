@@ -4,9 +4,10 @@ import * as S from "./styles";
 import logo from "../../assets/logo.png";
 import { AiOutlineMail } from "react-icons/ai";
 import { BiLockAlt } from "react-icons/bi";
+import { HiOutlineCursorClick } from "react-icons/hi";
 import { useState } from "react";
 import userRepository from "../../utils/userRepository";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -60,52 +61,54 @@ const Login = () => {
   return (
     <>
       <S.Wrapper>
-        {/* <S.WrapperImage> */}
-        {/* <S.WrapperTitle>
-            <S.Title>Diario do Programador</S.Title>
-          </S.WrapperTitle> */}
-        {/* </S.WrapperImage> */}
-        <S.Form onSubmit={handleSubmit}>
-          <S.WrapperForm>
-            <div>
-              <img src={logo}></img>
-            </div>
-            <Input
-              width={"50%"}
-              padding="10px"
-              label={<AiOutlineMail size={25} />}
-              placeholder="email ou username"
-              id="email"
-              value={identificacao}
-              onChange={(e) => {
-                setidentificacao(e.target.value);
-              }}
-              error={erros.identificacao}
-              borderRadius="5px"
-              shadow="4px 4px 4px rgba(0,0,0,70%)"
-            ></Input>
-            <Input
-              width={"50%"}
-              padding="10px"
-              label={<BiLockAlt size={25} />}
-              type="password"
-              placeholder="senha"
-              id="senha"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              error={erros.password}
-              borderRadius="5px"
-              shadow="4px 4px 4px rgba(0,0,0,70%)"
-            ></Input>
+        <S.WrapperWithColor>
+          <S.Form onSubmit={handleSubmit}>
+            <S.WrapperForm>
+              <div>
+                <img src={logo}></img>
+              </div>
+              <S.Title>Entre no seu Diário do Programador</S.Title>
+              <Input
+                width={"50%"}
+                padding="10px"
+                label={<AiOutlineMail size={25} />}
+                placeholder="Email ou Username"
+                id="email"
+                value={identificacao}
+                onChange={(e) => {
+                  setidentificacao(e.target.value);
+                }}
+                error={erros.identificacao}
+                borderRadius="10px"
+                shadow="4px 4px 4px rgba(0,0,0,70%)"
+              ></Input>
+              <Input
+                width={"50%"}
+                padding="10px"
+                label={<BiLockAlt size={25} />}
+                type="password"
+                placeholder="Senha"
+                id="senha"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                error={erros.password}
+                borderRadius="10px"
+                shadow="4px 4px 4px rgba(0,0,0,70%)"
+              ></Input>
 
-            <S.ContainerButtons>
-              <S.Logar type="submit">Fazer login</S.Logar>
-              <S.Cadastrar type="button">Cadastrar-se</S.Cadastrar>
-            </S.ContainerButtons>
-          </S.WrapperForm>
-        </S.Form>
+              <S.ContainerButtons>
+                <S.Logar type="submit">Fazer login</S.Logar>
+                <span style={{ color: "#fff" }}>ou</span>
+                <S.Span onClick={() => navigate("/cadastrar")}>
+                  Crie uma conta
+                  <HiOutlineCursorClick size={25} color={"#fff"} />
+                </S.Span>
+              </S.ContainerButtons>
+            </S.WrapperForm>
+          </S.Form>
+        </S.WrapperWithColor>
       </S.Wrapper>
     </>
   );
