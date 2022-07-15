@@ -29,10 +29,13 @@ export const WrapperWithColor = styled.div`
   margin: 0 auto;
   background-image: linear-gradient(to right, #e981d9, #6d22c4);
   border-radius: 10px;
-  padding: 110px 0;
+  /* padding: 7% 0; */
   position: relative;
   z-index: 2;
-
+  max-height: 600px;
+  height: 100%;
+  display: flex;
+  align-items: center;
   @media screen and (max-width: 664px) {
     width: 90%;
   }

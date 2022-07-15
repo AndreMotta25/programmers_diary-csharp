@@ -56,29 +56,31 @@ namespace ProgrammersDiary.Identity.Services
                 };
         }
 
-        public bool ValidarToken(string token)
+        public ClaimsPrincipal? ValidarToken(string token)
         {
-            var jwt = new JwtSecurityToken(token);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tvp = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = _jwt.Issuer,
-                ValidAudience = _jwt.Audience,
-                IssuerSigningKey = _jwt.SigningCredentials.Key,
-                RequireExpirationTime = true,
-                ClockSkew = TimeSpan.Zero,
-            };
             try{
-                tokenHandler.ValidateToken(token,tvp,out SecurityToken securityToken);
-                return true;
+                var jwt = new JwtSecurityToken(token);
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var tvp = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = _jwt.Issuer,
+                    ValidAudience = _jwt.Audience,
+                    IssuerSigningKey = _jwt.SigningCredentials.Key,
+                    RequireExpirationTime = true,
+                    ClockSkew = TimeSpan.Zero,
+                };
+            
+                var claims = tokenHandler.ValidateToken(token,tvp,out SecurityToken securityToken);
+                return claims;
+                // return true;
             }   
             // Se o erro ocorrer é pq o token é invalido
             catch(Exception) {
-              return false;  
+              return null;  
             }
         }
 

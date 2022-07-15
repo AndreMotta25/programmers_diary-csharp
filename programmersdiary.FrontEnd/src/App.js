@@ -6,17 +6,28 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login/Login";
+import UserProvider from "./contexts/Auth";
+import RequireAuth from "./pages/RequireAuth";
 
 function App() {
   return (
     <>
-      <WrapperGlobal>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
-        <ToastContainer />
-      </WrapperGlobal>
+      <UserProvider>
+        <WrapperGlobal>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route
+              path="/home"
+              element={
+                <RequireAuth>
+                  <Home />
+                </RequireAuth>
+              }
+            />
+          </Routes>
+          <ToastContainer />
+        </WrapperGlobal>
+      </UserProvider>
     </>
   );
 }

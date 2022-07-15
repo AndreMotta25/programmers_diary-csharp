@@ -23,7 +23,10 @@ const Menu = ({
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const cards = await api.get("todos");
+        const token = localStorage.getItem("authToken");
+        const cards = await api.get("", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setCards(cards.data);
         setLoading(false);
       } catch (e) {
@@ -85,4 +88,4 @@ const Menu = ({
   );
 };
 
-export default React.memo(Menu);
+export default Menu;

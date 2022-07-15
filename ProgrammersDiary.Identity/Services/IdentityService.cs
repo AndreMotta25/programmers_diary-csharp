@@ -38,7 +38,7 @@ namespace ProgrammersDiary.Identity.Services
                 EmailConfirmed = true
             };
             // Cria um papel de usuario no banco
-            await _role.CreateAsync(new IdentityRole {Name= "usuario"});
+            // await _role.CreateAsync(new IdentityRole {Name= "usuario"});
 
             var result = await _manager.CreateAsync(newUser,usuario.Password);
             
@@ -83,5 +83,9 @@ namespace ProgrammersDiary.Identity.Services
             return login;   
         }
 
+        public async Task<User?> FindUser(string email) {
+            var user  = await _manager.FindByEmailAsync(email);
+            return user;
+        }
     }
 }

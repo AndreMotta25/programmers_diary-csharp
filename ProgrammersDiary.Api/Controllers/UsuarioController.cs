@@ -39,8 +39,21 @@ namespace ProgrammersDiary.Api.Controllers
         }
 
         [HttpGet("Validar-Token/{token}")]
-        public bool ValidarToken(string token) {    
-            return _token.ValidarToken(token);
+        public async Task<ActionResult<UsuarioLoginResponse?>> ValidarToken(string token) { 
+
+            // return _token.ValidarToken(token);
+            var tokenResult = _token.ValidarToken(token);
+            if(tokenResult != null ) {
+                var email = tokenResult.Claims.FirstOrDefault(u => u.Type == "Email")?.Value;
+                var user = await _identityService.FindUser(email);
+                return Ok(new UsuarioLoginResponse{
+                    Succeeded = true,
+                    Id = user.Id,
+                    Email = user.Email,
+                    Erro = "",
+                });
+            }
+            return BadRequest(new UsuarioLoginResponse{Erro = "Esse token não está mais valido", Succeeded = false});
         }
         [HttpGet]
         public ActionResult Get() {
