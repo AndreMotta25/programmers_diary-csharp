@@ -16,6 +16,7 @@ const Menu = ({
   setSearch,
   setResult,
   setErro,
+  setId,
 }) => {
   const [menuAtivo, setMenuAtivo] = useState(false);
 
@@ -79,6 +80,8 @@ const Menu = ({
         <S.Button
           onClick={() => {
             setModalActive((opt) => !opt);
+            // setLimpar((opt) => !opt);
+            setId("");
           }}
         >
           <BsCodeSlash size={"25px"} color="#8333C8" />{" "}
@@ -88,4 +91,4 @@ const Menu = ({
   );
 };
 
-export default Menu;
+export default React.memo(Menu);

@@ -19,6 +19,7 @@ import prettier from "prettier";
 
 import * as S from "./styles";
 import axios from "axios";
+import api from "../../utils/cardRepository";
 import Input from "../../components/Input";
 import Error from "../../components/CommonError";
 
@@ -62,7 +63,7 @@ const Home = () => {
   // faz um fetch para pegar todas as linguagens do banco de
   useEffect(() => {
     async function getAll() {
-      let listaLinguagens = await await axios.get("linguagem");
+      let listaLinguagens = await axios.get("linguagem");
       console.log(listaLinguagens);
       setLinguagens(listaLinguagens.data);
     }
@@ -85,6 +86,7 @@ const Home = () => {
       setCode(cardVelho.codigo);
       setLinguagemObj(cardVelho.linguagem);
       setCardVelho({});
+      console.log(itemManipulavel);
     }
   }, [cardVelho]);
 
@@ -119,6 +121,7 @@ const Home = () => {
 
   // sendo um card novo, vamos acha-lo na lista e vamos atribuir seu id  __OU__  Salva o conteudo de um card já existente  para assim permanecer "aberto"
   useEffect(() => {
+    console.log(itemManipulavel);
     let cardIndice = cards.findIndex((card) => card.id === "");
     cardIndice =
       cardIndice >= 0
@@ -131,17 +134,22 @@ const Home = () => {
 
   useEffect(() => {
     if (deletar.decisao === true) {
+      const token = localStorage.getItem("authToken");
       // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
       if (deletar.id === itemManipulavel.id) {
         setTextCode("");
         setManipulavelItem({});
-      } else api.delete(`${deletar.id}`);
+      } else
+        api.delete(`${deletar.id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
 
       let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
       setCards(cardsRestantes);
       setDeletar({});
     }
   }, [deletar]);
+  console.log(itemManipulavel);
 
   function checkFields() {
     const error = {};
@@ -297,6 +305,7 @@ const Home = () => {
           setResult={setResult}
           setSearch={setSearch}
           setErro={setErro}
+          setId={setId}
         >
           <S.WrapperCards>
             {!search &&
@@ -304,7 +313,7 @@ const Home = () => {
               !loading &&
               cards.map((card) => (
                 <Card
-                  key={crypto.randomUUID()}
+                  key={card.id}
                   card={card}
                   setModalActive={setModalActive}
                   color={card.id === itemManipulavel.id ? "white" : "black"}
@@ -324,7 +333,7 @@ const Home = () => {
               found.length > 0 &&
               found.map((card) => (
                 <Card
-                  key={crypto.randomUUID()}
+                  key={card.id}
                   card={card}
                   setModalActive={setModalActive}
                   color={card.id === itemManipulavel.id ? "white" : "black"}

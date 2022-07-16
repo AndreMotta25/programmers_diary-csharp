@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as S from "./styles";
 import { AiOutlineSave } from "react-icons/ai";
 import prettier from "prettier";
@@ -6,6 +6,7 @@ import Error from "../Error/Error";
 import { pluginsLista } from "../../utils/utils";
 import { toast } from "react-toastify";
 import api from "../../utils/cardRepository";
+import { UserContext } from "../../contexts/Auth";
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
@@ -13,18 +14,38 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
   const [code, setCode] = useState(codigo);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     let identificador;
     if (itemManipulavel.aberto === true && !error.err) {
       let salvar = async () => {
         try {
+          const token = localStorage.getItem("authToken");
           if (itemManipulavel.id) {
             itemManipulavel.codigo = codigo;
-            await api.put(`${itemManipulavel.id}`, itemManipulavel);
+            await api.put(
+              `${itemManipulavel.id}`,
+              {
+                ...itemManipulavel,
+                usuarioId: user.id,
+              },
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
           } else {
             itemManipulavel.codigo = codigo;
-            identificador = await api.post("", itemManipulavel);
+            identificador = await api.post(
+              "",
+              {
+                ...itemManipulavel,
+                usuarioId: user.id,
+              },
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
           }
 
           toast.success("salvando", {
@@ -37,11 +58,12 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
           Vai forçar a renderização de todos os componentes que usam esse contexto, assim corrigindo
           o problema do assincrono
         */
+          console.log(identificador);
           setManipulavelItem({
             ...itemManipulavel,
             novo: false,
             salvo: true,
-            id: identificador ? identificador : itemManipulavel.id,
+            id: identificador ? identificador.data : itemManipulavel.id,
             codigo: codigo,
           });
         } catch (e) {

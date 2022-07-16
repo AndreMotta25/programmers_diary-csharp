@@ -1,4 +1,24 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const UpCard = keyframes`
+    from {
+        transform: translateY(3px)
+    }
+    to {
+        transform: translateY(-3px);
+    }
+`;
+const Teste = keyframes`
+  from {
+    /* border-radius: 90%; */
+    transform: translateY(-150px);
+
+  }
+  to {
+    border-radius: 10px;
+    transform: translateY(50px);
+  }
+`;
 
 export const Wrapper = styled.div`
   font-family: "Roboto Slab", serif;
@@ -13,10 +33,13 @@ export const Wrapper = styled.div`
   justify-content: space-around;
   min-height: 28.5%;
   cursor: pointer;
-  transition: box-shadow 300ms, transform 300ms;
+
   &&:active {
     box-shadow: 0px 0px 0px;
     transform: translateX(4px), translateY(4px);
+  }
+  &:hover {
+    animation: ${UpCard} 0.5s ease;
   }
 
   @media screen and (min-width: 1441px) and (max-width: 1900px),
@@ -24,6 +47,8 @@ export const Wrapper = styled.div`
     min-height: 20%;
     margin-bottom: 40px;
   }
+
+  animation: ${Teste} 1s 1 ease backwards;
 `;
 export const WrapperInfo = styled.div`
   display: flex;

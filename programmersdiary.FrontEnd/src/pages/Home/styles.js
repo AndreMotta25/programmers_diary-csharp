@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { ButtonZoom } from "../../components/Menu/styles";
 
 export const BlackWrapper = styled.div`
@@ -39,7 +39,6 @@ export const WrapperCards = styled.div`
   width: 100%;
   padding: 30px 38px;
   overflow: auto;
-  /* height: 70%; */
   flex: 0 0 70%;
 
   @media screen and (max-width: 900px) {
