@@ -16,7 +16,7 @@ namespace ProgrammersDiary.Api.Controllers
     // se ficar sem esse apiController, o post em modo body request não funciona
     [ApiController]
     [Route("[controller]")]
-    // [Authorize(Roles = "usuario")]
+    [Authorize(Roles = "usuario")]
     public class CardController : Controller
     {
         private readonly ICardService _cardService;
@@ -33,6 +33,7 @@ namespace ProgrammersDiary.Api.Controllers
         }
         
         // Pegar por id
+        // talvez eu modifique esse metodo no futuro, ele tem uma segurança que não é muito necessaria
         [HttpGet]
         public async Task<ActionResult<List<CardResponse>>> GetCards() {
             var email = User.Claims.FirstOrDefault(user => user.Type == "Email")?.Value;
@@ -74,6 +75,7 @@ namespace ProgrammersDiary.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> AtualizarCard(int id, CardRequest cardAtualizado){
             var cardOriginal = await _cardService.ObterPorId(id);
+            
             if(cardOriginal is null)
                 return NotFound();
             cardOriginal.AtualizarDados(cardAtualizado.ConverteParaEntidade()); 
