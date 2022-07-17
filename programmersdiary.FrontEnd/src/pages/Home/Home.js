@@ -238,6 +238,7 @@ const Home = () => {
               ],
             ]}
             theme={oneDark}
+            placeholder="// Digite seu codigo aqui"
           />
 
           <Modal setModalActive={setModalActive} modalActive={modalActive}>
