@@ -11,13 +11,14 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  min-height: 28.5%;
+  /* min-height: 28.5%; */
+  /* min-height: 38.5%; */
 
-  @media screen and (min-width: 1441px) and (max-width: 1900px),
+  /* @media screen and (min-width: 1441px) and (max-width: 1900px),
     screen and (min-width: 1901px) {
     min-height: 20%;
     margin-bottom: 40px;
-  }
+  } */
 `;
 export const WrapperInfo = styled.div`
   display: flex;

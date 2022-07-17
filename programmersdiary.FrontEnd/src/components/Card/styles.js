@@ -8,18 +8,16 @@ const UpCard = keyframes`
         transform: translateY(-3px);
     }
 `;
-const Teste = keyframes`
-  from {
-    /* border-radius: 90%; */
-    transform: translateY(-150px);
-
+const AnimationNewCard = keyframes`
+  0% {
+    width: 0%;
+    opacity: 0;
   }
-  to {
-    border-radius: 10px;
-    transform: translateY(50px);
+  100% {
+    width: 100%;
+    opacity : 1;
   }
 `;
-
 export const Wrapper = styled.div`
   font-family: "Roboto Slab", serif;
   width: 100%;
@@ -31,7 +29,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  min-height: 28.5%;
+  /* min-height: 38.5%; */
   cursor: pointer;
 
   &&:active {
@@ -39,16 +37,17 @@ export const Wrapper = styled.div`
     transform: translateX(4px), translateY(4px);
   }
   &:hover {
-    animation: ${UpCard} 0.5s ease;
+    animation: ${UpCard} 0.5s ease forwards;
   }
-
-  @media screen and (min-width: 1441px) and (max-width: 1900px),
+  &.novo {
+    animation: ${AnimationNewCard} 0.8s ease-in-out forwards;
+    animation-iteration-count: 1;
+  }
+  /* @media screen and (min-width: 1441px) and (max-width: 1900px),
     screen and (min-width: 1901px) {
     min-height: 20%;
-    margin-bottom: 40px;
-  }
-
-  animation: ${Teste} 1s 1 ease backwards;
+    margin-bottom: 20px;
+  } */
 `;
 export const WrapperInfo = styled.div`
   display: flex;
@@ -56,18 +55,18 @@ export const WrapperInfo = styled.div`
   align-items: center;
 `;
 export const Info = styled.p`
-  font-size: clamp(0.8rem, 1vw, (2rem));
+  font-size: 14px;
   color: white;
   letter-spacing: 1px;
   margin-bottom: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
 export const Language = styled.div`
-  font-size: clamp(1rem, 1vw, (2rem));
+  font-size: 16px;
   text-transform: uppercase;
   background-color: #282828;
   color: white;
@@ -89,7 +88,8 @@ export const Name = styled.h2`
   border-radius: 5px;
   color: white;
   font-size: 18px;
-  @media screen and (min-width: 1900px) {
+  /* text-transform: uppercase; */
+  /* @media screen and (min-width: 1900px) {
     font-size: clamp(1rem, 1vw + 1rem, (2rem+0.5rem));
-  }
+  } */
 `;

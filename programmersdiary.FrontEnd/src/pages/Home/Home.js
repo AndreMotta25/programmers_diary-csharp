@@ -22,6 +22,7 @@ import axios from "axios";
 import api from "../../utils/cardRepository";
 import Input from "../../components/Input";
 import Error from "../../components/CommonError";
+import { useRef } from "react";
 
 const Home = () => {
   const [itemManipulavel, setManipulavelItem] = useState({});
@@ -49,6 +50,7 @@ const Home = () => {
   function atualizarConteudoCard(indice) {
     cards[indice].id = itemManipulavel.id;
     cards[indice].codigo = itemManipulavel.codigo;
+    cards[indice].novo = false;
     setTextCode(itemManipulavel.codigo);
     setCards([...cards]);
     return;
@@ -103,7 +105,7 @@ const Home = () => {
   // adiciona o card novo a lista no menu
   useEffect(() => {
     if (itemManipulavel.novo === true) {
-      setCards([...cards, newItem]);
+      setCards([newItem, ...cards]);
     }
   }, [newItem]);
 
@@ -149,7 +151,6 @@ const Home = () => {
       setDeletar({});
     }
   }, [deletar]);
-  console.log(itemManipulavel);
 
   function checkFields() {
     const error = {};

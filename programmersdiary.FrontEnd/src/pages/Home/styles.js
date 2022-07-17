@@ -40,6 +40,10 @@ export const WrapperCards = styled.div`
   padding: 30px 38px;
   overflow: auto;
   flex: 0 0 70%;
+  /* display: flex; */
+  /* flex-direction: column-reverse; */
+  /* scroll-behavior: auto; */
+  /* align-items: flex-start; */
 
   @media screen and (max-width: 900px) {
     flex: 0 0 45%;
@@ -47,6 +51,8 @@ export const WrapperCards = styled.div`
   &::-webkit-scrollbar {
     width: 7px;
     display: block;
+    /* top: 0; */
+    /* position: relative; */
   }
   &::-webkit-scrollbar-thumb {
     background-color: #ccc;
