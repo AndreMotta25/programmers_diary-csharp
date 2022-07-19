@@ -32,6 +32,8 @@ namespace ProgrammersDiary.Api.IocInjection
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 2;
+                options.User.AllowedUserNameCharacters ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+";
+                options.User.RequireUniqueEmail = true;
             });     
             return services;
         }   

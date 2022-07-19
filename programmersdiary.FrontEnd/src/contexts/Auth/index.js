@@ -42,7 +42,13 @@ const UserProvider = ({ children }) => {
     setUser({ email: userData.data.email, id: userData.data.id });
     setToken(userData.data.token);
   };
-  const logout = () => {};
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    setUser({});
+    setTimeout(() => {
+      navigate("/");
+    }, 3000);
+  };
   const setToken = (token) => {
     localStorage.setItem("authToken", token);
   };
@@ -53,6 +59,7 @@ const UserProvider = ({ children }) => {
         loading,
         user,
         sign,
+        logout,
       }}
     >
       {children}

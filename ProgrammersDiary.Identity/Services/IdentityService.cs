@@ -37,14 +37,13 @@ namespace ProgrammersDiary.Identity.Services
                 Email = usuario.Email,
                 EmailConfirmed = true
             };
-            // Cria um papel de usuario no banco
-            // await _role.CreateAsync(new IdentityRole {Name= "usuario"});
 
             var result = await _manager.CreateAsync(newUser,usuario.Password);
             
             await _manager.AddToRoleAsync(newUser,"usuario");
             
             var usuarioResponse = new UsuarioResponse(result.Succeeded);
+            
             // desbloqueia a conta
             if(result.Succeeded) await _manager.SetLockoutEnabledAsync(newUser,false);
             if(!result.Succeeded && result.Errors.Count() > 0 )
@@ -83,6 +82,7 @@ namespace ProgrammersDiary.Identity.Services
             return login;   
         }
 
+        public async Task AlterarSenhaUsuario() {} 
         public async Task<User?> FindUser(string email) {
             var user  = await _manager.FindByEmailAsync(email);
             return user;

@@ -50,7 +50,7 @@ namespace ProgrammersDiary.Api.Controllers
                         UsuarioEmail = card.Usuario?.Email,
                         UsuarioId = card.UsuarioId
                     }));
-                return NotFound(cards);    
+                return NotFound(new List<Card>());    
             }
             return Unauthorized();
         }

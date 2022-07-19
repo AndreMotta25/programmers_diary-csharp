@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login/Login";
 import UserProvider from "./contexts/Auth";
 import RequireAuth from "./pages/RequireAuth";
+import Cadastro from "./pages/Cadastro";
+import Atualizar from "./pages/Atualizar";
 
 function App() {
   return (
@@ -21,6 +23,15 @@ function App() {
               element={
                 <RequireAuth>
                   <Home />
+                </RequireAuth>
+              }
+            />
+            <Route path="/cadastrar" element={<Cadastro />} />
+            <Route
+              path="/atualizar"
+              element={
+                <RequireAuth>
+                  <Atualizar />
                 </RequireAuth>
               }
             />

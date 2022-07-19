@@ -3,7 +3,7 @@ import * as S from "./styles";
 
 const Error = ({ error, color = "red" }) => {
   return (
-    <S.ContainerErro>
+    <S.ContainerErro className="erro">
       <BiErrorAlt color="red" size={25}></BiErrorAlt>
       <S.Erro color={color}>{error}</S.Erro>
     </S.ContainerErro>

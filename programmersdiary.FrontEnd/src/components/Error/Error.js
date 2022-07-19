@@ -6,7 +6,7 @@ const Error = ({ texto }) => {
   return (
     <>
       <S.Container>
-        <VscError size={"25px"} color="red" />
+        {/* <VscError size={"25px"} color="red" /> */}
         <S.ContainerErro>
           <S.ErroGerado>{String(texto)}</S.ErroGerado>
         </S.ContainerErro>

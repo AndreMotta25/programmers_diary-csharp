@@ -16,6 +16,8 @@ const SearchBar = ({ ...otherProps }) => {
           id="seach"
           shadow="4px 4px 4px rgba(0,0,0,70%)"
           placeholder="Procure seu card"
+          type="search"
+          autosave
         />
       </S.Container>
     </>

@@ -58,7 +58,7 @@ export const Form = styled.form`
 export const WrapperForm = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 25px;
   width: 100%;
   align-items: center;
   justify-content: center;

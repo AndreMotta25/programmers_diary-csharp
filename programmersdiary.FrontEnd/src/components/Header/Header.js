@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as S from "./styles";
-import { AiOutlineSave } from "react-icons/ai";
+import { AiOutlineSave, AiOutlineUser } from "react-icons/ai";
+import { BsFileEarmarkCheck, BsFileEarmarkExcel } from "react-icons/bs";
+import { BiErrorAlt } from "react-icons/bi";
+import { FiLogOut } from "react-icons/fi";
+import { MdDriveFileRenameOutline } from "react-icons/md";
 import prettier from "prettier";
-import Error from "../Error/Error";
 import { pluginsLista } from "../../utils/utils";
 import { toast } from "react-toastify";
 import api from "../../utils/cardRepository";
 import { UserContext } from "../../contexts/Auth";
+import Toastfy from "../Toast";
+import { Navigate, useNavigate } from "react-router-dom";
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
@@ -14,7 +19,11 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
   const [code, setCode] = useState(codigo);
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
+  const [invocaErro, setInvocaErro] = useState(false);
+  const [saindo, setSaindo] = useState(false);
+  const [contador, setContador] = useState(3);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let identificador;
@@ -80,7 +89,7 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
 
   // vai verificar se ha erro no codigo digitado
   useEffect(() => {
-    if (codigo) {
+    if (codigo && itemManipulavel.aberto) {
       try {
         setCode(
           prettier.format(codigo, {
@@ -91,9 +100,9 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
           })
         );
         setErrors({ err: false });
-      } catch (err) {
-        console.log(err);
-        setErrors({ err: err });
+      } catch (e) {
+        console.log(e);
+        setErrors({ err: e.message });
       }
     }
   }, [codigo]);
@@ -107,23 +116,67 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
       setSalvar((value) => !value);
     } else {
       setErrors({ err: "Crie um card antes de começar a digitar" });
+      setInvocaErro((value) => !value);
     }
   }
 
+  console.log(error);
   return (
     <>
       <div>
         <S.HeaderWrapper>
-          <S.Title>
-            {error.err ? (
-              <Error texto={error.err} />
-            ) : itemManipulavel.linguagem ? (
-              itemManipulavel.linguagem.labelLinguagem
-            ) : null}
-          </S.Title>
-          <S.Save onClick={save}>
-            <AiOutlineSave size="30px" />
-          </S.Save>
+          <S.WrapperActions>
+            <S.ActionUser>
+              <AiOutlineUser size={32} color="#fff" />
+              <S.WrapperDecision>
+                <S.ListOfDecisions>
+                  <S.DecisionsItem
+                    onClick={() => {
+                      logout();
+                      setSaindo(true);
+                      setInterval(() => {
+                        setContador((value) => value - 1);
+                      }, 1000);
+                    }}
+                  >
+                    {!saindo && (
+                      <>
+                        Logout
+                        <FiLogOut color="#fff" size={18} />
+                      </>
+                    )}
+                    {saindo && <span>Saindo em {contador}</span>}
+                  </S.DecisionsItem>
+                  <S.DecisionsItem
+                    onClick={() => {
+                      navigate("/atualizar");
+                    }}
+                  >
+                    Alterar Dados
+                    <MdDriveFileRenameOutline color="#fff" size={18} />
+                  </S.DecisionsItem>
+                </S.ListOfDecisions>
+              </S.WrapperDecision>
+            </S.ActionUser>
+            <S.Action onClick={() => setInvocaErro((value) => !value)}>
+              {!error.err && <BsFileEarmarkCheck size={32} color="#fff" />}
+              {error.err && (
+                <div>
+                  <BsFileEarmarkExcel size={32} color="#fff" />{" "}
+                  {invocaErro && (
+                    <Toastfy
+                      text={error.err}
+                      background="#fff"
+                      icon={<BiErrorAlt size={"100%"} color="red" />}
+                    />
+                  )}
+                </div>
+              )}
+            </S.Action>
+            <S.Action onClick={save}>
+              <AiOutlineSave size={32} color="#fff" />
+            </S.Action>
+          </S.WrapperActions>
         </S.HeaderWrapper>
       </div>
     </>

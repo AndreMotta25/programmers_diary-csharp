@@ -14,7 +14,7 @@ import {
   pluginsLista,
 } from "../../utils/utils";
 import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiFillGithub } from "react-icons/ai";
 import prettier from "prettier";
 
 import * as S from "./styles";
@@ -296,6 +296,14 @@ const Home = () => {
               </S.Button>
             </S.Form>
           </Modal>
+          <S.Footer>
+            <S.Texto>
+              <S.Link href="https://github.com/AndreMotta25" target="_blank">
+                Diario do Programador Developed by André Motta
+                <AiFillGithub size={25} />
+              </S.Link>
+            </S.Texto>
+          </S.Footer>
         </S.BlackWrapper>
         <Menu
           setModalActive={setModalActive}
@@ -344,7 +352,8 @@ const Home = () => {
                 />
               ))) ||
               (found.length <= 0 && search && <S.Result>{result}</S.Result>)}
-            {cards.length <= 0 && <Error color="black" error={erro} />}
+            {cards.length <= 0 && erro && <Error color="black" error={erro} />}
+            {cards.length <= 0 && !erro && <p>Faça seu primeiro card</p>}
           </S.WrapperCards>
         </Menu>
       </Wrapper>

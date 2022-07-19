@@ -19,6 +19,6 @@ namespace ProgrammersDiary.Application.DTOs.Request
 
         [Required]
         [Compare(nameof(Password),ErrorMessage = "Os campos de senha devem ser iguais")]
-        public string SenhaConfirmacao { get; set; }
+        public string SamePassword { get; set; }
     }
 }

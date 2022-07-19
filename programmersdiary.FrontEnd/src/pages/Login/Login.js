@@ -42,6 +42,8 @@ const Login = () => {
     if (!password) erros = { ...erros, password: mensagem };
     if (identificacao && password && !erros.identificacao && !erros.password) {
       logar(identificacao, password);
+    } else {
+      setEntrando(false);
     }
     setErros(erros);
   };

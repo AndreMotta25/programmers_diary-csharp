@@ -73,7 +73,7 @@ export const ButtonMenu = styled(ButtonZoom)`
   @media screen and (max-width: 900px) {
     display: flex;
     position: absolute;
-    top: 30px;
+    top: 35px;
     left: 30px;
     height: 33px;
   }

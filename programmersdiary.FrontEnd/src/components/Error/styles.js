@@ -19,19 +19,19 @@ export const ErroGerado = styled.p`
 `;
 export const ContainerErro = styled.div`
   position: absolute;
-  min-width: 300px;
+  /* min-width: 300px; */
   max-width: 350px;
   background-color: white;
   border-radius: 10px;
-  min-height: 200px;
+  min-height: 100px;
   padding: 10px;
-  top: 40px;
-  left: -8px;
+  /* top: 40px; */
+  left: -180px;
   opacity: 0;
   visibility: hidden;
   z-index: 9999;
   /* Faz o triangulo */
-  &::before {
+  /* &::before {
     width: 0;
     height: 0;
     content: "";
@@ -42,5 +42,5 @@ export const ContainerErro = styled.div`
     border-bottom: 10px solid white;
     top: -9px;
     align-self: center;
-  }
+  } */
 `;

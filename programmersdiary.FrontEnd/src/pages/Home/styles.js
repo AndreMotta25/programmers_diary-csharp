@@ -95,3 +95,25 @@ export const ContainerMestre = styled.div`
   gap: 40px;
   width: 100%;
 `;
+export const Footer = styled.footer`
+  width: 100%;
+  /* background-color: aqua; */
+  text-align: center;
+`;
+export const Texto = styled.p`
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+  margin-top: 20px;
+  padding: 5px;
+`;
+export const Link = styled.a`
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;

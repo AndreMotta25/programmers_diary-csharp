@@ -28,10 +28,14 @@ const Menu = ({
         const cards = await api.get("", {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(cards);
         setCards(cards.data);
         setLoading(false);
       } catch (e) {
-        setErro("Ocorreu um erro inesperado!");
+        if (e.response.status === 404) {
+          setLoading(false);
+          setCards([]);
+        } else setErro("Ocorreu um erro inesperado!");
       }
     };
     fetchdata();
