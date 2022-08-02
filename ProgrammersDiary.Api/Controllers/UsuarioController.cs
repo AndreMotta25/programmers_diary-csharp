@@ -1,4 +1,6 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammersDiary.Application.DTOs.Request;
 using ProgrammersDiary.Application.DTOs.Response;
@@ -55,9 +57,23 @@ namespace ProgrammersDiary.Api.Controllers
             }
             return BadRequest(new UsuarioLoginResponse{Erro = "Esse token não está mais valido", Succeeded = false});
         }
-        [HttpGet]
-        public ActionResult Get() {
-            return Ok("Ola mundo");
+        
+        [HttpPut]
+        [Authorize(Roles = "usuario")]
+        public async Task<ActionResult<IdentityResult>> AtualizarUsuario(UsuarioUpdateRequest usuario) {
+           var email_user = User.Claims.ToArray()[1].Value;
+           var result =  await _identityService.AlterarDadosUsuario(email_user,usuario);
+           if(result.Succeeded) 
+            return Ok(result);
+           return BadRequest(result)  ;
+        }
+        
+        [HttpGet("PegarUsername")]
+        [Authorize(Roles = "usuario")]
+        public async Task<ActionResult> GetUserData() {
+            var email = User.Claims.ToArray()[1]?.Value;
+            var user = await _identityService.FindUser(email);
+            return Ok(user.UserName);
         }
     }
 }
