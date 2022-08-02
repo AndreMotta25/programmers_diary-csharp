@@ -12,10 +12,12 @@ import api from "../../utils/cardRepository";
 import { UserContext } from "../../contexts/Auth";
 import Toastfy from "../Toast";
 import { Navigate, useNavigate } from "react-router-dom";
+import setAuthorization from "../../utils/setAuthorization";
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
 const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
+  setAuthorization(api);
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
   const [code, setCode] = useState(codigo);
@@ -24,37 +26,23 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [saindo, setSaindo] = useState(false);
   const [contador, setContador] = useState(3);
   const navigate = useNavigate();
-
   useEffect(() => {
     let identificador;
     if (itemManipulavel.aberto === true && !error.err) {
       let salvar = async () => {
         try {
-          const token = localStorage.getItem("authToken");
           if (itemManipulavel.id) {
             itemManipulavel.codigo = codigo;
-            await api.put(
-              `${itemManipulavel.id}`,
-              {
-                ...itemManipulavel,
-                usuarioId: user.id,
-              },
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            );
+            await api.put(`${itemManipulavel.id}`, {
+              ...itemManipulavel,
+              usuarioId: user.id,
+            });
           } else {
             itemManipulavel.codigo = codigo;
-            identificador = await api.post(
-              "",
-              {
-                ...itemManipulavel,
-                usuarioId: user.id,
-              },
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            );
+            identificador = await api.post("", {
+              ...itemManipulavel,
+              usuarioId: user.id,
+            });
           }
 
           toast.success("salvando", {

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import * as Herdado from "../Cadastro/styles";
 
 export const Form = styled(Herdado.Form)``;
-export const WrapperActions = styled(Herdado.WrapperActions)``;
+export const WrapperActions = styled(Herdado.WrapperActions)`
+  flex-direction: row-reverse;
+`;
 export const ButtonSubmit = styled(Herdado.ButtonSubmit)``;
 export const Footer = styled(Herdado.Footer)``;
 export const Texto = styled(Herdado.Texto)``;

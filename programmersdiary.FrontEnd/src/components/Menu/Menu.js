@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
 import api from "../../utils/cardRepository";
+import setAuthorization from "../../utils/setAuthorization";
 
 const Menu = ({
   setModalActive,
@@ -20,15 +21,12 @@ const Menu = ({
 }) => {
   const [menuAtivo, setMenuAtivo] = useState(false);
 
-  // busca os dados na api(talvez mudar para home)
+  setAuthorization(api);
+
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const token = localStorage.getItem("authToken");
-        const cards = await api.get("", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        console.log(cards);
+        const cards = await api.get("");
         setCards(cards.data);
         setLoading(false);
       } catch (e) {

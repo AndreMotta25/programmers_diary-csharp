@@ -43,6 +43,8 @@ const Cadastro = () => {
       } catch (e) {
         if (e.response.status === 400) {
           const erros = e.response.data.erros;
+          console.log(e);
+
           for (const erro of erros) {
             if (
               erro.indexOf("Email") >= 0 &&

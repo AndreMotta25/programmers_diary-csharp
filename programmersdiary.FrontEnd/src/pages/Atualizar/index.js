@@ -8,15 +8,28 @@ import * as utils from "../../utils/utils";
 import useVerifyPassword from "../../hooks/useVerifyPassword";
 import useValidacaoFront from "../../hooks/useValidacaoFront";
 import { UserContext } from "../../contexts/Auth";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import setAuthorization from "../../utils/setAuthorization";
 
 const Atualizar = () => {
+  setAuthorization(userRepository);
+
   const { user } = useContext(UserContext);
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState(user.email);
   const [samePassword, setSamePassWord] = useState("");
   const [erros, setErros] = useState({});
   const { password, setPassword, passwordIsValid } = useVerifyPassword("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getDataUser = async () => {
+      const data = await userRepository.get("PegarUsername");
+      setUserName(data.data);
+    };
+    getDataUser();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +43,7 @@ const Atualizar = () => {
     };
     const atualizar = async () => {
       try {
-        await userRepository.put("Atualizar", {
+        await userRepository.put("", {
           username: username,
           password: password,
           samePassword: samePassword,
@@ -38,12 +51,14 @@ const Atualizar = () => {
       } catch (e) {
         if (e.response.status === 400) {
           const erros = e.response.data.erros;
+          console.log(e);
           for (const erro of erros) {
             if (
               erro.indexOf("Username") >= 0 &&
               erro.indexOf("is already taken.") >= 0
             )
               errosCadastrais["username"] = "Usuario já em uso";
+            console.log("erro");
           }
         }
         setErros({ ...errosCadastrais });
@@ -144,6 +159,14 @@ const Atualizar = () => {
         />
         <S.WrapperActions>
           <S.ButtonSubmit>Salvar</S.ButtonSubmit>
+          <S.ButtonSubmit
+            type="button"
+            onClick={() => {
+              navigate("/home");
+            }}
+          >
+            Voltar
+          </S.ButtonSubmit>
         </S.WrapperActions>
       </S.Form>
       <S.Footer>

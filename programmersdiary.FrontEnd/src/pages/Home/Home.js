@@ -22,9 +22,10 @@ import axios from "axios";
 import api from "../../utils/cardRepository";
 import Input from "../../components/Input";
 import Error from "../../components/CommonError";
-import { useRef } from "react";
+import setAuthorization from "../../utils/setAuthorization";
 
 const Home = () => {
+  setAuthorization(api);
   const [itemManipulavel, setManipulavelItem] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
@@ -136,15 +137,12 @@ const Home = () => {
 
   useEffect(() => {
     if (deletar.decisao === true) {
-      const token = localStorage.getItem("authToken");
+      // const token = localStorage.getItem("authToken");
       // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
       if (deletar.id === itemManipulavel.id) {
         setTextCode("");
         setManipulavelItem({});
-      } else
-        api.delete(`${deletar.id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+      } else api.delete(`${deletar.id}`);
 
       let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
       setCards(cardsRestantes);
