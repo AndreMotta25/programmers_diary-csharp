@@ -82,7 +82,24 @@ namespace ProgrammersDiary.Identity.Services
             return login;   
         }
 
-        public async Task AlterarSenhaUsuario() {} 
+        public async Task<UsuarioUpdateResponse> AlterarDadosUsuario(string email, UsuarioUpdateRequest usuario) {
+            var user = await _manager.FindByEmailAsync(email);
+            user.UserName = usuario.UserName;
+            user.PasswordHash = new PasswordHasher<User>().HashPassword(user,usuario.Password);
+            
+            
+            var result = await _manager.UpdateAsync(user); 
+            var userResponse = new UsuarioUpdateResponse(result.Succeeded);
+
+            if(!result.Succeeded && result.Errors.Count() > 0 )
+            {
+                userResponse.AdicionarErros(result.Errors.Select(r => r.Description).ToList());
+                return userResponse;
+            }
+            return userResponse;
+            
+        } 
+        
         public async Task<User?> FindUser(string email) {
             var user  = await _manager.FindByEmailAsync(email);
             return user;

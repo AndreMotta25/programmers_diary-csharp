@@ -62,10 +62,10 @@ namespace ProgrammersDiary.Api.Controllers
         [Authorize(Roles = "usuario")]
         public async Task<ActionResult<IdentityResult>> AtualizarUsuario(UsuarioUpdateRequest usuario) {
            var email_user = User.Claims.ToArray()[1].Value;
-           var result =  await _identityService.AlterarDadosUsuario(email_user,usuario);
-           if(result.Succeeded) 
-            return Ok(result);
-           return BadRequest(result)  ;
+           var response =  await _identityService.AlterarDadosUsuario(email_user,usuario);
+           if(response.Succeeded) 
+            return Ok(response);
+           return BadRequest(response)  ;
         }
         
         [HttpGet("PegarUsername")]
