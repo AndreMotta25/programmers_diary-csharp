@@ -11,7 +11,7 @@ namespace ProgrammersDiary.Identity.Interfaces
          Task<UsuarioResponse> CadastrarUsuario(UsuarioCadastroRequest usuario);
          Task<UsuarioLoginResponse> LoginUsuario(UsuarioLoginRequest usuario);
          public Task<User?> FindUser(string email);
-         Task<UsuarioUpdateResponse> AlterarDadosUsuario(string email, UsuarioUpdateRequest usuario);
+         Task<UsuarioUpdateResponse2> AlterarDadosUsuario(string email, UsuarioUpdateRequest usuario);
 
     }
 }

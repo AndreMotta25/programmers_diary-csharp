@@ -21,12 +21,13 @@ const Menu = ({
 }) => {
   const [menuAtivo, setMenuAtivo] = useState(false);
 
-  setAuthorization(api);
+  // DEIXAR ISSO SÓ NA HOME
+  // setAuthorization(api);
 
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const cards = await api.get("");
+        const cards = await api.get("/card");
         setCards(cards.data);
         setLoading(false);
       } catch (e) {

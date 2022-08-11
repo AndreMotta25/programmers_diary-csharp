@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import userRepository from "../../utils/userRepository";
+import api from "../../utils/cardRepository";
 import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({});
@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
       try {
         const token = localStorage.getItem("authToken");
         if (token !== null) {
-          const response = await userRepository.get(`/Validar-Token/${token}`);
+          const response = await api.get(`/usuario/Validar-Token/${token}`);
           if (response.data.succeeded) {
             setUser({ email: response.data.email, id: response.data.id });
             setLoading(false);
@@ -34,8 +34,19 @@ const UserProvider = ({ children }) => {
     validaToken();
   }, []);
 
+  useEffect(() => {
+    setAuthorization(api);
+    console.log("insert the auth");
+  }, [user]);
+
+  const setAuthorization = (api) => {
+    api.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${localStorage.getItem("authToken")}`;
+  };
+
   const sign = async (identificacao, password) => {
-    const userData = await userRepository.post("login", {
+    const userData = await api.post("usuario/login", {
       identificacao: identificacao,
       password: password,
     });

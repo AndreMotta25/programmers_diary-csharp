@@ -100,3 +100,49 @@ export const linguagens = [
 export function possuiAtributos(obj) {
   return Object.getOwnPropertyNames(obj).length;
 }
+
+export function verifyPassword(password) {
+  let passwordIsValid = false;
+  if (password) {
+    const regex = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
+    if (regex.test(password)) {
+      passwordIsValid = true;
+    } else {
+      passwordIsValid = false;
+    }
+  }
+  return { password, passwordIsValid };
+}
+
+export function validateForm(form) {
+  const mensagem = "o campo não pode ficar vazio";
+  const errosCadastrais1 = {};
+
+  const { password, passwordIsValid } = verifyPassword(
+    form.elements["password"].value
+  );
+  const verifyFields = {
+    samePassword: (pass) =>
+      (pass === password && true) || "Deve ser igual a senha",
+    username: (user) =>
+      (!user.includes("@") && true) || "O nome de usuario não pode conter @",
+    password: (pass) =>
+      (!passwordIsValid &&
+        "A Senha deve ter numero, um simbolo especial e uma letra maiuscula") ||
+      true,
+    oldPassword: (pass) => true,
+  };
+
+  for (const field of form.elements) {
+    if (field.name) {
+      if (!field.value) errosCadastrais1[field.name] = mensagem;
+      else if (field.value) {
+        const mensage = verifyFields[field.name](field.value);
+        if (mensage !== true) errosCadastrais1[field.name] = mensage;
+      }
+    }
+  }
+  return errosCadastrais1;
+}

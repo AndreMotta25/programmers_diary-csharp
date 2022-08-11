@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors();
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
@@ -33,6 +34,7 @@ builder.Services.AddScoped<ILinguagemRepository, LinguagemRepository>();
 builder.Services.AddIdentityService(builder.Configuration);
 builder.Services.AddTokenService(builder.Configuration);
 builder.Services.AddSwaggerService(builder.Configuration);
+
 
 var app = builder.Build();
 

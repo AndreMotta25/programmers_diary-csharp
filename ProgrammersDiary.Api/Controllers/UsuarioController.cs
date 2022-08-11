@@ -9,7 +9,7 @@ using ProgrammersDiary.Identity.Interfaces;
 namespace ProgrammersDiary.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsuarioController:Controller
     {
         private readonly IIdentityService _identityService;

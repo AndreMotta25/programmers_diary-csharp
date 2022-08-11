@@ -33,13 +33,13 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
         try {
           if (itemManipulavel.id) {
             itemManipulavel.codigo = codigo;
-            await api.put(`${itemManipulavel.id}`, {
+            await api.put(`card/${itemManipulavel.id}`, {
               ...itemManipulavel,
               usuarioId: user.id,
             });
           } else {
             itemManipulavel.codigo = codigo;
-            identificador = await api.post("", {
+            identificador = await api.post("card", {
               ...itemManipulavel,
               usuarioId: user.id,
             });

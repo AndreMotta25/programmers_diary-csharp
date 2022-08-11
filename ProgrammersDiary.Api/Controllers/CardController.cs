@@ -15,7 +15,7 @@ namespace ProgrammersDiary.Api.Controllers
 {
     // se ficar sem esse apiController, o post em modo body request não funciona
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize(Roles = "usuario")]
     public class CardController : Controller
     {

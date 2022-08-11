@@ -142,7 +142,7 @@ const Home = () => {
       if (deletar.id === itemManipulavel.id) {
         setTextCode("");
         setManipulavelItem({});
-      } else api.delete(`${deletar.id}`);
+      } else api.delete(`card/${deletar.id}`);
 
       let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
       setCards(cardsRestantes);

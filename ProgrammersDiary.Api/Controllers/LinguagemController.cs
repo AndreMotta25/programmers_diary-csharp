@@ -5,7 +5,7 @@ using ProgrammersDiary.Domain.Interfaces.Services;
 namespace ProgrammersDiary.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LinguagemController:Controller
     {
         private readonly ILinguagemService _cardService;

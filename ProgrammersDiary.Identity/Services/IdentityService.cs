@@ -82,18 +82,29 @@ namespace ProgrammersDiary.Identity.Services
             return login;   
         }
 
-        public async Task<UsuarioUpdateResponse> AlterarDadosUsuario(string email, UsuarioUpdateRequest usuario) {
+        public async Task<UsuarioUpdateResponse2> AlterarDadosUsuario(string email, UsuarioUpdateRequest usuario) {
+            
+            var errors = new List<IdentityError>();
             var user = await _manager.FindByEmailAsync(email);
             user.UserName = usuario.UserName;
-            user.PasswordHash = new PasswordHasher<User>().HashPassword(user,usuario.Password);
-            
+
+            var changePassResult = await _manager.ChangePasswordAsync(user,usuario.OldPassword,usuario.Password);        
             
             var result = await _manager.UpdateAsync(user); 
-            var userResponse = new UsuarioUpdateResponse(result.Succeeded);
+            var userResponse = new UsuarioUpdateResponse2(result.Succeeded && changePassResult.Succeeded);
+            
+            errors.AddRange(result.Errors);
+            errors.AddRange(changePassResult.Errors);  
 
-            if(!result.Succeeded && result.Errors.Count() > 0 )
+            if((!result.Succeeded || !changePassResult.Succeeded) && errors.Count() > 0 )
             {
-                userResponse.AdicionarErros(result.Errors.Select(r => r.Description).ToList());
+                  
+                // userResponse.AdicionarErro(errors.Select(r => r).First());
+                foreach (var item in errors)
+                {
+                    userResponse.AdicionarErro(item);
+                }
+                
                 return userResponse;
             }
             return userResponse;

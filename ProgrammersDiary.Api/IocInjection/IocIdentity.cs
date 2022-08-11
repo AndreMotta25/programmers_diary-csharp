@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProgrammersDiary.Data.Context;
 using ProgrammersDiary.Domain.Entities;
+using ProgrammersDiary.Identity.Configuration;
 // using ProgrammersDiary.Identity.Data;
 using ProgrammersDiary.Identity.Interfaces;
 using ProgrammersDiary.Identity.Services;
@@ -27,10 +28,10 @@ namespace ProgrammersDiary.Api.IocInjection
             //São regras para a criação da senha(identity)   
             services.Configure<IdentityOptions>(options => 
             {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 2;
                 options.User.AllowedUserNameCharacters ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._+";
                 options.User.RequireUniqueEmail = true;

@@ -3,7 +3,7 @@ import * as S from "./styles";
 import { AiFillGithub } from "react-icons/ai";
 import { HiOutlineCursorClick } from "react-icons/hi";
 import { useContext, useState } from "react";
-import userRepository from "../../utils/userRepository";
+import api from "../../utils/cardRepository";
 import * as utils from "../../utils/utils";
 import useVerifyPassword from "../../hooks/useVerifyPassword";
 import useValidacaoFront from "../../hooks/useValidacaoFront";
@@ -32,7 +32,7 @@ const Cadastro = () => {
 
     const cadastrar = async () => {
       try {
-        await userRepository.post("Cadastrar", {
+        await api.post("Cadastrar", {
           username: username,
           email: email,
           password: password,
