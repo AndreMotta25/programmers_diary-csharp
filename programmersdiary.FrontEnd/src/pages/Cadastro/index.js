@@ -1,38 +1,42 @@
-import Input from "../../components/Input";
-import * as S from "./styles";
 import { AiFillGithub } from "react-icons/ai";
 import { HiOutlineCursorClick } from "react-icons/hi";
-import { useContext, useState } from "react";
-import api from "../../utils/cardRepository";
-import * as utils from "../../utils/utils";
-import useVerifyPassword from "../../hooks/useVerifyPassword";
-import useValidacaoFront from "../../hooks/useValidacaoFront";
-import PaginaGenerica from "../PaginaGenerica";
+import { useContext, useState, useRef } from "react";
 import { UserContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
+
+import api from "../../utils/cardRepository";
+
+import * as utils from "../../utils/utils";
+import * as S from "./styles";
+
+import PaginaGenerica from "../PaginaGenerica";
+import Input from "../../components/Input";
 
 const Cadastro = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [samePassword, setSamePassWord] = useState("");
   const [erros, setErros] = useState({});
-  const { password, setPassword, passwordIsValid } = useVerifyPassword("");
+  const [password, setPassword] = useState("");
+
   const { sign } = useContext(UserContext);
   const navigate = useNavigate();
+  const form = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     let errosCadastrais = {};
-    const campos = {
-      username: username,
-      email: email,
-      password: password,
-      samePassword: samePassword,
+
+    const validateFields = () => {
+      const errors = utils.validateForm(form.current);
+      errosCadastrais = { ...errors };
+      setErros({ ...errors });
     };
 
     const cadastrar = async () => {
       try {
-        await api.post("Cadastrar", {
+        await api.post("Usuario/Cadastrar", {
           username: username,
           email: email,
           password: password,
@@ -41,52 +45,37 @@ const Cadastro = () => {
         await sign(email, password);
         navigate("/home");
       } catch (e) {
-        if (e.response.status === 400) {
-          const erros = e.response.data.erros;
-          console.log(e);
+        const backendErrors = e.response.data.errors;
+        const errorsIdentity = utils.typeErrorsIdentity;
 
-          for (const erro of erros) {
-            if (
-              erro.indexOf("Email") >= 0 &&
-              erro.indexOf("is already taken.") >= 0
-            )
-              errosCadastrais["email"] = "Email já em uso";
-            if (
-              erro.indexOf("Username") >= 0 &&
-              erro.indexOf("is already taken.") >= 0
-            )
-              errosCadastrais["username"] = "Usuario já em uso";
+        if (e.response.status === 400) {
+          for (const error in backendErrors) {
+            const errorType = Object.prototype.toString.call(
+              backendErrors[error]
+            );
+            for (const errorIdentity in errorsIdentity) {
+              if (
+                errorsIdentity[errorIdentity].hasOwnProperty(error) &&
+                errorType !== "[object Array]"
+              )
+                errosCadastrais[errorIdentity] =
+                  errorsIdentity[errorIdentity][error];
+              else if (errorType === "[object Array]")
+                errosCadastrais[utils.toCamelCase(error)] =
+                  backendErrors[error][0];
+            }
           }
         }
-        console.log(errosCadastrais);
         setErros({ ...errosCadastrais });
-        console.log(e);
       }
     };
-    const resultadoValidacao = useValidacaoFront(
-      username,
-      email,
-      password,
-      samePassword,
-      passwordIsValid,
-      campos
-    );
-
-    errosCadastrais = { ...resultadoValidacao };
-    if (
-      username &&
-      email &&
-      password &&
-      samePassword &&
-      utils.possuiAtributos(errosCadastrais) <= 0
-    )
-      cadastrar();
-    setErros(errosCadastrais);
+    validateFields();
+    if (utils.possuiAtributos(errosCadastrais) <= 0) cadastrar();
   };
 
   return (
     <PaginaGenerica title="Cadastre-se">
-      <S.Form onSubmit={handleSubmit}>
+      <S.Form ref={form} onSubmit={handleSubmit}>
         <Input
           label="Username"
           width={"100%"}
@@ -102,6 +91,7 @@ const Cadastro = () => {
           value={username}
           onChange={(e) => setUserName(e.target.value)}
           error={erros.username}
+          name="username"
         />
         <Input
           label="Email"
@@ -119,6 +109,7 @@ const Cadastro = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           error={erros.email}
+          name="email"
         />
 
         <Input
@@ -137,6 +128,7 @@ const Cadastro = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           error={erros.password}
+          name="password"
         />
         <Input
           label="Repita a Senha"
@@ -154,6 +146,7 @@ const Cadastro = () => {
           value={samePassword}
           onChange={(e) => setSamePassWord(e.target.value)}
           error={erros.samePassword}
+          name="samePassword"
         />
         <S.WrapperActions>
           <S.ButtonSubmit>Se cadastrar</S.ButtonSubmit>

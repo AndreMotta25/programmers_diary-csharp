@@ -7,46 +7,45 @@ import api from "../../utils/cardRepository";
 import { UserContext } from "../../contexts/Auth";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import setAuthorization from "../../utils/setAuthorization";
 
 import * as S from "./styles";
 import * as utils from "../../utils/utils";
 
-const typeErrors = {
-  username: {
-    DuplicateUserName: "Usuario já em uso",
-    InvalidUserName:
-      "Usuario é inválido, pode conter apenas letras ou dígitos.",
-    UserName: "O campo do usuario não pode estar vazio",
-  },
-  email: {
-    DuplicateEmail: "Email já em uso",
-    InvalidEmail: "Email invalido",
-  },
+// const typeErrors = {
+//   username: {
+//     DuplicateUserName: "Usuario já em uso",
+//     InvalidUserName:
+//       "Usuario é inválido, pode conter apenas letras ou dígitos.",
+//     UserName: "O campo do usuario não pode estar vazio",
+//   },
+//   email: {
+//     DuplicateEmail: "Email já em uso",
+//     InvalidEmail: "Email invalido",
+//   },
 
-  oldPassword: {
-    PasswordMismatch: "Senha errada",
-  },
+//   oldPassword: {
+//     PasswordMismatch: "Senha errada",
+//   },
 
-  password: {
-    PasswordRequiresUpper:
-      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
-    PasswordRequiresLower:
-      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
-    PasswordRequiresDigit:
-      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
-    PasswordRequiresNonAlphanumeric:
-      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
-    PasswordTooShort: "A senha deve conter ao menos 5 caracteres",
-    Password: "A senha deve conter ao menos 5 caracteres",
-  },
-};
+//   password: {
+//     PasswordRequiresUpper:
+//       "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+//     PasswordRequiresLower:
+//       "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+//     PasswordRequiresDigit:
+//       "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+//     PasswordRequiresNonAlphanumeric:
+//       "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+//     PasswordTooShort: "A senha deve conter ao menos 5 caracteres",
+//     Password: "A senha deve conter ao menos 5 caracteres",
+//   },
+// };
 
 const Atualizar = () => {
   const { user } = useContext(UserContext);
-  const [username, setUserName] = useState("livia");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState(user.email);
-  const [samePassword, setSamePassWord] = useState("desenhos@");
+  const [samePassword, setSamePassWord] = useState("");
   const [erros, setErros] = useState({});
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
@@ -61,14 +60,6 @@ const Atualizar = () => {
     };
     getDataUser();
   }, []);
-
-  const toCamelCase = (str) => {
-    return str
-      .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-        return index == 0 ? word.toLowerCase() : word.toUpperCase();
-      })
-      .replace(/\s+/g, "");
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -90,20 +81,22 @@ const Atualizar = () => {
         });
       } catch (e) {
         const backendErrors = e.response.data.errors;
+        const errorsIdentity = utils.typeErrorsIdentity;
         if (e.response.status === 400) {
           for (const error in backendErrors) {
             const errorType = Object.prototype.toString.call(
               backendErrors[error]
             );
-            for (const errorIdentity in typeErrors) {
+            for (const errorIdentity in errorsIdentity) {
               if (
-                typeErrors[errorIdentity].hasOwnProperty(error) &&
+                errorsIdentity[errorIdentity].hasOwnProperty(error) &&
                 errorType !== "[object Array]"
               )
                 errosCadastrais[errorIdentity] =
-                  typeErrors[errorIdentity][error];
+                  errorsIdentity[errorIdentity][error];
               else if (errorType === "[object Array]")
-                errosCadastrais[toCamelCase(error)] = backendErrors[error][0];
+                errosCadastrais[utils.toCamelCase(error)] =
+                  backendErrors[error][0];
             }
           }
         }

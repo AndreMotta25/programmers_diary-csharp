@@ -133,6 +133,8 @@ export function validateForm(form) {
         "A Senha deve ter numero, um simbolo especial e uma letra maiuscula") ||
       true,
     oldPassword: (pass) => true,
+    email: (email) =>
+      (email.includes("@") && true) || "Endereço de email invalido",
   };
 
   for (const field of form.elements) {
@@ -146,3 +148,40 @@ export function validateForm(form) {
   }
   return errosCadastrais1;
 }
+
+export const toCamelCase = (str) => {
+  return str
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+      return index == 0 ? word.toLowerCase() : word.toUpperCase();
+    })
+    .replace(/\s+/g, "");
+};
+export const typeErrorsIdentity = {
+  username: {
+    DuplicateUserName: "Usuario já em uso",
+    InvalidUserName:
+      "Usuario é inválido, pode conter apenas letras ou dígitos.",
+    UserName: "O campo do usuario não pode estar vazio",
+  },
+  email: {
+    DuplicateEmail: "Email já em uso",
+    InvalidEmail: "Email invalido",
+  },
+
+  oldPassword: {
+    PasswordMismatch: "Senha errada",
+  },
+
+  password: {
+    PasswordRequiresUpper:
+      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+    PasswordRequiresLower:
+      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+    PasswordRequiresDigit:
+      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+    PasswordRequiresNonAlphanumeric:
+      "A Senha deve ter numero, um simbolo especial e uma letra maiuscula",
+    PasswordTooShort: "A senha deve conter ao menos 5 caracteres",
+    Password: "A senha deve conter ao menos 5 caracteres",
+  },
+};
