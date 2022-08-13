@@ -22,10 +22,10 @@ import axios from "axios";
 import api from "../../utils/cardRepository";
 import Input from "../../components/Input";
 import Error from "../../components/CommonError";
-import setAuthorization from "../../utils/setAuthorization";
+// import setAuthorization from "../../utils/setAuthorization";
 
 const Home = () => {
-  setAuthorization(api);
+  // setAuthorization(api);
   const [itemManipulavel, setManipulavelItem] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);

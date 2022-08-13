@@ -5,19 +5,21 @@ import { BsFileEarmarkCheck, BsFileEarmarkExcel } from "react-icons/bs";
 import { BiErrorAlt } from "react-icons/bi";
 import { FiLogOut } from "react-icons/fi";
 import { MdDriveFileRenameOutline } from "react-icons/md";
-import prettier from "prettier";
 import { pluginsLista } from "../../utils/utils";
-import { toast } from "react-toastify";
-import api from "../../utils/cardRepository";
 import { UserContext } from "../../contexts/Auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import prettier from "prettier";
+
+import api from "../../utils/cardRepository";
 import Toastfy from "../Toast";
-import { Navigate, useNavigate } from "react-router-dom";
-import setAuthorization from "../../utils/setAuthorization";
+
+// todo mudar como o salvamento é feito
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
 const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
-  setAuthorization(api);
   const [error, setErrors] = useState({ err: false });
   const [salvar, setSalvar] = useState(false);
   const [code, setCode] = useState(codigo);
