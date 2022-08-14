@@ -15,67 +15,17 @@ import prettier from "prettier";
 import api from "../../utils/cardRepository";
 import Toastfy from "../Toast";
 
-// todo mudar como o salvamento é feito
 /*
   o header vai ser responsavel por salvar o conteudo que está no contexto manipulado.
 */
 const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   const [error, setErrors] = useState({ err: false });
-  const [salvar, setSalvar] = useState(false);
   const [code, setCode] = useState(codigo);
   const { user, logout } = useContext(UserContext);
   const [invocaErro, setInvocaErro] = useState(false);
   const [saindo, setSaindo] = useState(false);
   const [contador, setContador] = useState(3);
   const navigate = useNavigate();
-  useEffect(() => {
-    let identificador;
-    if (itemManipulavel.aberto === true && !error.err) {
-      let salvar = async () => {
-        try {
-          if (itemManipulavel.id) {
-            itemManipulavel.codigo = codigo;
-            await api.put(`card/${itemManipulavel.id}`, {
-              ...itemManipulavel,
-              usuarioId: user.id,
-            });
-          } else {
-            itemManipulavel.codigo = codigo;
-            identificador = await api.post("card", {
-              ...itemManipulavel,
-              usuarioId: user.id,
-            });
-          }
-
-          toast.success("salvando", {
-            autoClose: 200,
-            theme: "dark",
-            delay: 100,
-          });
-
-          /*
-          Vai forçar a renderização de todos os componentes que usam esse contexto, assim corrigindo
-          o problema do assincrono
-        */
-          console.log(identificador);
-          setManipulavelItem({
-            ...itemManipulavel,
-            novo: false,
-            salvo: true,
-            id: identificador ? identificador.data : itemManipulavel.id,
-            codigo: codigo,
-          });
-        } catch (e) {
-          toast.error("Ocorreu um erro", {
-            autoClose: 200,
-            theme: "dark",
-            delay: 100,
-          });
-        }
-      };
-      salvar();
-    }
-  }, [salvar]);
 
   // vai verificar se ha erro no codigo digitado
   useEffect(() => {
@@ -97,17 +47,55 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
     }
   }, [codigo]);
 
-  // VOU TER QUE ALTERAR ISSO DEPOIS, NÃO FAZ O MINIMO SENTIDO SER ASSIM
-  /*Alem de salvar, quando o card for alterado va devolver o codigo ja formatado para home*/
   function save() {
-    // try {
-    if (itemManipulavel.nome) {
-      // gatilho para invocar o useEffect de cima(é ele quem salva no banco de dados)
-      setSalvar((value) => !value);
-    } else {
-      setErrors({ err: "Crie um card antes de começar a digitar" });
-      setInvocaErro((value) => !value);
-    }
+    const saveCard = async () => {
+      let identificador;
+      if (
+        itemManipulavel.nome &&
+        itemManipulavel.aberto === true &&
+        !error.err
+      ) {
+        try {
+          if (itemManipulavel.id) {
+            itemManipulavel.codigo = codigo;
+            await api.put(`card/${itemManipulavel.id}`, {
+              ...itemManipulavel,
+              usuarioId: user.id,
+            });
+          } else {
+            itemManipulavel.codigo = codigo;
+            identificador = await api.post("card", {
+              ...itemManipulavel,
+              usuarioId: user.id,
+            });
+          }
+
+          toast.success("salvando", {
+            autoClose: 200,
+            theme: "dark",
+            delay: 100,
+          });
+
+          setManipulavelItem({
+            ...itemManipulavel,
+            novo: false,
+            salvo: true,
+            id: identificador ? identificador.data : itemManipulavel.id,
+            codigo: codigo,
+          });
+        } catch (e) {
+          toast.error("Ocorreu um erro", {
+            autoClose: 200,
+            theme: "dark",
+            delay: 100,
+          });
+        }
+      } else {
+        setErrors({ err: "Crie um card antes de começar a digitar" });
+        setInvocaErro((value) => !value);
+      }
+    };
+    saveCard();
   }
 
   return (

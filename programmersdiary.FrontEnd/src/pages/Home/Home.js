@@ -156,7 +156,7 @@ const Home = () => {
   function handleSubmit(e) {
     e.preventDefault();
     const error = checkFields();
-    if (possuiAtributos(error) == 0) {
+    if (utils.possuiAtributos(error) == 0) {
       if (!id) {
         let obj = {
           id: id ? id : "",
