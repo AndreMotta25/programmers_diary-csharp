@@ -1,21 +1,24 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import { WrapperGlobal } from "./styles";
 import { ToastContainer } from "react-toastify";
 
+import * as S from "./styles";
 import "react-toastify/dist/ReactToastify.css";
-import Login from "./pages/Login/Login";
+
 import UserProvider from "./contexts/Auth";
+
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
 import RequireAuth from "./pages/RequireAuth";
 import Cadastro from "./pages/Cadastro";
 import Atualizar from "./pages/Atualizar";
+import Notification from "./components/Notification";
 
 function App() {
   return (
     <>
       <UserProvider>
-        <WrapperGlobal>
+        <S.WrapperGlobal>
           <Routes>
             <Route path="/" element={<Login />} />
             <Route
@@ -37,7 +40,10 @@ function App() {
             />
           </Routes>
           <ToastContainer />
-        </WrapperGlobal>
+        </S.WrapperGlobal>
+        {/* <S.ShadowContainer>
+          <Notification>O seu token expirou</Notification>
+        </S.ShadowContainer> */}
       </UserProvider>
     </>
   );
