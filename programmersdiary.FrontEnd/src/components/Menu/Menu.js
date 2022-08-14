@@ -4,7 +4,6 @@ import SearchBar from "../SearchBar/SearchBar";
 import { BsCodeSlash } from "react-icons/bs";
 import { AiOutlineMenu } from "react-icons/ai";
 import api from "../../utils/cardRepository";
-import setAuthorization from "../../utils/setAuthorization";
 
 const Menu = ({
   setModalActive,
@@ -21,23 +20,19 @@ const Menu = ({
 }) => {
   const [menuAtivo, setMenuAtivo] = useState(false);
 
-  // DEIXAR ISSO SÓ NA HOME
-  // setAuthorization(api);
-
   useEffect(() => {
-    const fetchdata = async () => {
+    const fetchData = async () => {
       try {
-        const cards = await api.get("/card");
+        const cards = await api.get("/card/");
         setCards(cards.data);
-        setLoading(false);
       } catch (e) {
-        if (e.response.status === 404) {
-          setLoading(false);
-          setCards([]);
-        } else setErro("Ocorreu um erro inesperado!");
+        if (!e.response.status === 401 || !e.response.status === 404)
+          setErro("Ocorreu um erro");
       }
+      setLoading(false);
     };
-    fetchdata();
+
+    fetchData();
   }, []);
 
   // faz a pesquisa
@@ -55,6 +50,7 @@ const Menu = ({
     }
     // eslint-disable-next-line
   }, [search]);
+  console.log(cards);
 
   return (
     <>
@@ -94,4 +90,4 @@ const Menu = ({
   );
 };
 
-export default React.memo(Menu);
+export default Menu;

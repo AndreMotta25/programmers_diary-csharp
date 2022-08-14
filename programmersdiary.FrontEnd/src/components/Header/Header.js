@@ -110,7 +110,6 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
     }
   }
 
-  console.log(error);
   return (
     <>
       <div>

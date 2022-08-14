@@ -7,7 +7,7 @@ import api from "../../utils/cardRepository";
 import { UserContext } from "../../contexts/Auth";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import * as S from "./styles";
 import * as utils from "../../utils/utils";
 
@@ -79,6 +79,11 @@ const Atualizar = () => {
           samePassword: samePassword,
           oldPassword: oldPassword,
         });
+        toast.success("Atualizado com sucesso", {
+          autoClose: 200,
+          theme: "dark",
+          delay: 100,
+        });
       } catch (e) {
         const backendErrors = e.response.data.errors;
         const errorsIdentity = utils.typeErrorsIdentity;
@@ -99,7 +104,12 @@ const Atualizar = () => {
                   backendErrors[error][0];
             }
           }
-        }
+        } else
+          toast.error("Ocorreu algum problema", {
+            autoClose: 200,
+            theme: "dark",
+            delay: 100,
+          });
         setErros({ ...errosCadastrais });
       }
     };

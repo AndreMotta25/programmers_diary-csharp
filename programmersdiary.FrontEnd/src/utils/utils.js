@@ -156,6 +156,7 @@ export const toCamelCase = (str) => {
     })
     .replace(/\s+/g, "");
 };
+
 export const typeErrorsIdentity = {
   username: {
     DuplicateUserName: "Usuario já em uso",

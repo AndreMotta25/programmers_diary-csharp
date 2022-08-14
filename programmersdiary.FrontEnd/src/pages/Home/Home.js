@@ -6,26 +6,21 @@ import TextArea from "../../components/TextArea/TextArea";
 import Select from "../../components/Select/";
 import Header from "../../components/Header/Header";
 import Modal from "../../components/Modal/Modal";
-import CodeMirror from "@uiw/react-codemirror";
-import { oneDark } from "@codemirror/theme-one-dark";
-import {
-  codeLanguages,
-  possuiAtributos,
-  pluginsLista,
-} from "../../utils/utils";
-import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
-import { AiOutlineCheck, AiFillGithub } from "react-icons/ai";
-import prettier from "prettier";
-
-import * as S from "./styles";
-import axios from "axios";
-import api from "../../utils/cardRepository";
 import Input from "../../components/Input";
 import Error from "../../components/CommonError";
-// import setAuthorization from "../../utils/setAuthorization";
+import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
+
+import CodeMirror from "@uiw/react-codemirror";
+import { oneDark } from "@codemirror/theme-one-dark";
+
+import { AiOutlineCheck, AiFillGithub } from "react-icons/ai";
+
+import * as S from "./styles";
+import * as utils from "../../utils/utils";
+import api from "../../utils/cardRepository";
+import prettier from "prettier";
 
 const Home = () => {
-  // setAuthorization(api);
   const [itemManipulavel, setManipulavelItem] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
@@ -56,18 +51,16 @@ const Home = () => {
     setCards([...cards]);
     return;
   }
-
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
       itemManipulavel.salvo = false;
     }
   }, [textCode]);
 
-  // faz um fetch para pegar todas as linguagens do banco de
+  // faz um fetch para pegar todas as linguagens do banco
   useEffect(() => {
     async function getAll() {
-      let listaLinguagens = await axios.get("linguagem");
-      console.log(listaLinguagens);
+      let listaLinguagens = await api.get("linguagem");
       setLinguagens(listaLinguagens.data);
     }
     getAll();
@@ -81,7 +74,7 @@ const Home = () => {
 
   // preenche o modal se for um card existente
   useEffect(() => {
-    if (possuiAtributos(cardVelho) >= 3) {
+    if (utils.possuiAtributos(cardVelho) >= 3) {
       setNome(cardVelho.nome);
       setDesc(cardVelho.descricao);
       setId(cardVelho.id);
@@ -137,7 +130,6 @@ const Home = () => {
 
   useEffect(() => {
     if (deletar.decisao === true) {
-      // const token = localStorage.getItem("authToken");
       // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
       if (deletar.id === itemManipulavel.id) {
         setTextCode("");
@@ -174,7 +166,7 @@ const Home = () => {
           descricao: desc,
           codigo: prettier.format(code, {
             parser: linguagemObj.nome,
-            plugins: pluginsLista,
+            plugins: utils.pluginsLista,
           }),
           aberto: true,
           novo: true,
@@ -229,7 +221,7 @@ const Home = () => {
               setTextCode(value);
             }}
             extensions={[
-              codeLanguages[
+              utils.codeLanguages[
                 itemManipulavel.labelLinguagem
                   ? itemManipulavel.labelLinguagem
                   : "js"
