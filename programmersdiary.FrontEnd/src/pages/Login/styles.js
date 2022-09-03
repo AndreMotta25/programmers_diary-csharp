@@ -13,11 +13,14 @@ export const Wrapper = styled(WrapperDefault)`
   align-items: center;
   justify-content: center;
   position: relative;
+  background-attachment: fixed;
+  height: auto;
+  padding: 10px 0;
   &::before {
     content: "";
     display: block;
     width: 100%;
-    height: 100vh;
+    min-height: 100%;
     background-color: rgba(0, 0, 0, 50%);
     position: absolute;
     z-index: 1;
@@ -36,6 +39,7 @@ export const WrapperWithColor = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  padding: 60px 0px;
   @media screen and (max-width: 664px) {
     width: 90%;
   }

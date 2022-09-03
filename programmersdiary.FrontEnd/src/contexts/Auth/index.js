@@ -7,32 +7,34 @@ export const UserContext = createContext({});
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [logged, setLogged] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    const validaToken = async () => {
-      try {
-        const token = localStorage.getItem("authToken");
-        if (token !== null) {
-          const response = await api.get(`/usuario/Validar-Token/${token}`);
-          if (response.data.succeeded) {
-            setUser({ email: response.data.email, id: response.data.id });
-            setLoading(false);
-            return;
-          }
-        }
-        setUser({ erro: "Faça login para ver essa pagina" });
-      } catch (e) {
-        // só vai entrar aqui se o token for invalido
-        localStorage.removeItem("authToken");
-        setUser({
-          erro: "O tempo do seu token expirou, faça login novamente!",
-        });
-      }
+    const teste = async () => {
+      const token = localStorage.getItem("authToken");
+      if (token !== null) await validaToken(token);
+
       setLoading(false);
     };
-    validaToken();
+    teste();
   }, []);
+
+  const validaToken = async (token) => {
+    try {
+      const response = await api.get(`/usuario/Validar-Token/${token}`);
+      if (response.data.succeeded) {
+        setUser({ email: response.data.email, id: response.data.id });
+      }
+    } catch (e) {
+      localStorage.removeItem("authToken");
+      setError("O tempo do seu token expirou, faça login novamente!");
+      setUser(null);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
     setAuthorization(api);
@@ -53,12 +55,20 @@ const UserProvider = ({ children }) => {
     setUser({ email: userData.data.email, id: userData.data.id });
     setToken(userData.data.token);
   };
-  const logout = () => {
-    localStorage.removeItem("authToken");
-    setUser({});
-    setTimeout(() => {
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setUser({});
       navigate("/");
     }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [logged]);
+
+  const logout = () => {
+    localStorage.removeItem("authToken");
+    setLogged(!logged);
   };
   const setToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -71,6 +81,8 @@ const UserProvider = ({ children }) => {
         user,
         sign,
         logout,
+        error,
+        insertError: setError,
       }}
     >
       {children}

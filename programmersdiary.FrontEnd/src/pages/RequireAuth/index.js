@@ -1,11 +1,12 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
-import * as S from "./styles";
+
 import Notification from "../../components/Notification";
+import * as utils from "../../utils/utils";
 
 const RequireAuth = ({ children }) => {
-  const { user, loading } = useContext(UserContext);
+  const { user, loading, error, insertError } = useContext(UserContext);
   const navigate = useNavigate();
 
   const redirecionar = () => {
@@ -16,14 +17,22 @@ const RequireAuth = ({ children }) => {
 
   useEffect(() => {
     const verifyLogin = async () => {
-      if (user.erro && !loading) redirecionar();
+      if (
+        (error && !loading && !user?.email) ||
+        utils.possuiAtributos(user) <= 0
+      )
+        redirecionar();
+      else if (!loading && user.email) insertError(null);
     };
     verifyLogin();
-  }, [loading]);
+  }, [loading, user]);
 
   return (
-    (!user.erro && !loading && children) ||
-    (user.erro && !loading && <Notification>{user.erro}</Notification>)
+    (!error && !loading && utils.possuiAtributos(user) >= 1 && children) ||
+    (error && !loading && <Notification>{error}</Notification>) ||
+    (!error && !loading && utils.possuiAtributos(user) <= 0 && (
+      <Notification>Faça login para ver essa pagina</Notification>
+    ))
   );
 };
 export default RequireAuth;

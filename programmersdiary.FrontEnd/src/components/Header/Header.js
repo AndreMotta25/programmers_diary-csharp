@@ -98,6 +98,14 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
     saveCard();
   }
 
+  // useEffect(() => {
+  //   console.log("saindo");
+  // }, [user]);
+
+  // useEffect(() => {
+  //   console.log("ssss");
+  //   console.log(user);
+  // });
   return (
     <>
       <div>
@@ -160,4 +168,4 @@ const Header = ({ itemManipulavel, setManipulavelItem, codigo }) => {
   );
 };
 
-export default React.memo(Header);
+export default Header;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Menu from "../../components/Menu/Menu";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import Card from "../../components/Card/Card";
@@ -12,15 +12,17 @@ import CardSkeleton from "../../components/CardSkeleton/CardSkeleton";
 
 import CodeMirror from "@uiw/react-codemirror";
 import { oneDark } from "@codemirror/theme-one-dark";
-
+import jwt_decode from "jwt-decode";
 import { AiOutlineCheck, AiFillGithub } from "react-icons/ai";
+// import { useNavigate } from "react-router-dom";
 
 import * as S from "./styles";
 import * as utils from "../../utils/utils";
 import api from "../../utils/cardRepository";
 import prettier from "prettier";
+import { UserContext } from "../../contexts/Auth";
 
-const Home = () => {
+const Home = ({ tokenExpired }) => {
   const [itemManipulavel, setManipulavelItem] = useState({});
   const [textCode, setTextCode] = useState("");
   const [modalActive, setModalActive] = useState(false);
@@ -43,6 +45,10 @@ const Home = () => {
   const [deletar, setDeletar] = useState({});
   const [erro, setErro] = useState("");
 
+  const { user } = useContext(UserContext);
+
+  // const navigate = useNavigate();
+
   function atualizarConteudoCard(indice) {
     cards[indice].id = itemManipulavel.id;
     cards[indice].codigo = itemManipulavel.codigo;
@@ -51,6 +57,26 @@ const Home = () => {
     setCards([...cards]);
     return;
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    let timer;
+    if (token && user?.email) {
+      const timeToExpire = jwt_decode(token).exp * 1000;
+      timer = setInterval(() => {
+        if (Date.now() >= timeToExpire && user?.email) {
+          tokenExpired(true);
+          clearInterval(timer);
+        }
+        console.log(user);
+        console.log("Contando...");
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  }, [user]);
+
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {
       itemManipulavel.salvo = false;
@@ -204,6 +230,8 @@ const Home = () => {
       setModalActive(false);
     }
   }
+
+  console.log(user);
   return (
     <>
       <Wrapper>

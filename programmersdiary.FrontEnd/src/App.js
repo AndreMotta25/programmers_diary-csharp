@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 import * as S from "./styles";
 import "react-toastify/dist/ReactToastify.css";
 
-import UserProvider from "./contexts/Auth";
+import UserProvider, { UserContext } from "./contexts/Auth";
 
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -14,7 +14,20 @@ import Cadastro from "./pages/Cadastro";
 import Atualizar from "./pages/Atualizar";
 import Notification from "./components/Notification";
 
+import { useNavigate } from "react-router-dom";
+
 function App() {
+  const [tokenExpire, setTokenExpire] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (tokenExpire)
+      setTimeout(() => {
+        setTokenExpire(false);
+        navigate("/");
+      }, 5000);
+  }, [tokenExpire]);
+
   return (
     <>
       <UserProvider>
@@ -25,7 +38,7 @@ function App() {
               path="/home"
               element={
                 <RequireAuth>
-                  <Home />
+                  <Home tokenExpired={setTokenExpire} />
                 </RequireAuth>
               }
             />
@@ -41,9 +54,11 @@ function App() {
           </Routes>
           <ToastContainer />
         </S.WrapperGlobal>
-        {/* <S.ShadowContainer>
-          <Notification>O seu token expirou</Notification>
-        </S.ShadowContainer> */}
+        {tokenExpire && (
+          <S.ShadowContainer>
+            <Notification>O seu token expirou</Notification>
+          </S.ShadowContainer>
+        )}
       </UserProvider>
     </>
   );
