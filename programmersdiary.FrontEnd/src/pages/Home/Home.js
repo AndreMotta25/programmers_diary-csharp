@@ -58,24 +58,24 @@ const Home = ({ tokenExpired }) => {
     return;
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    let timer;
-    if (token && user?.email) {
-      const timeToExpire = jwt_decode(token).exp * 1000;
-      timer = setInterval(() => {
-        if (Date.now() >= timeToExpire && user?.email) {
-          tokenExpired(true);
-          clearInterval(timer);
-        }
-        console.log(user);
-        console.log("Contando...");
-      }, 1000);
-    }
-    return () => {
-      clearInterval(timer);
-    };
-  }, [user]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("authToken");
+  //   let timer;
+  //   if (token && user?.email) {
+  //     const timeToExpire = jwt_decode(token).exp * 1000;
+  //     timer = setInterval(() => {
+  //       if (Date.now() >= timeToExpire && user?.email) {
+  //         tokenExpired(true);
+  //         clearInterval(timer);
+  //       }
+  //       console.log(user);
+  //       console.log("Contando...");
+  //     }, 1000);
+  //   }
+  //   return () => {
+  //     clearInterval(timer);
+  //   };
+  // }, [user]);
 
   useEffect(() => {
     if (itemManipulavel.codigo != textCode) {

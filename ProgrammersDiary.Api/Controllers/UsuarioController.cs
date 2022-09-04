@@ -73,7 +73,7 @@ namespace ProgrammersDiary.Api.Controllers
         public async Task<ActionResult> GetUserData() {
             var email = User.Claims.ToArray()[1]?.Value;
             var user = await _identityService.FindUser(email);
-            return Ok(user.UserName);
+            return Ok(user?.UserName);
         }
     }
 }
