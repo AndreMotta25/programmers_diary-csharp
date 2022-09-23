@@ -153,7 +153,7 @@ const Home = ({ tokenExpired }) => {
     if (cardIndice >= 0 && itemManipulavel.salvo === true)
       atualizarConteudoCard(cardIndice);
   }, [itemManipulavel]);
-
+  // transformar isso numa função
   useEffect(() => {
     if (deletar.decisao === true) {
       // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
