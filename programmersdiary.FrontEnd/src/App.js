@@ -28,8 +28,12 @@ function App() {
         setTokenExpire(false);
         navigate("/");
       }, 5000);
+
+    // todo, colocar uma funçao de limpar aqui depois
   }, [tokenExpire]);
 
+  // se não limparmos, vamos ficar acumulando um monte de setTimeout
+  // causar varios bugs
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     let timer;

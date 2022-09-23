@@ -59,9 +59,11 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setUser({});
+      console.log("aqui");
       navigate("/");
     }, 3000);
     return () => {
+      console.log("Desmontando");
       clearTimeout(timer);
     };
   }, [logged]);
