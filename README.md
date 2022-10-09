@@ -13,11 +13,9 @@ Um lugar para salvar pequenos trechos de codigo (ainda em desenvolvimento)
 - Prettier
 
 ### Back-End
-- Styled-Components
-- React-Toastify
-- React-Icons
-- React-Loading-Skeleton
-- Axios
-- CodeMirror
-- Jwt-Decode
-- Prettier
+- .NET C#
+- Swagger
+- Entity Framework Core
+- Identity
+- SQL Server
+- Jwt 
