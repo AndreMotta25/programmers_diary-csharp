@@ -27,6 +27,7 @@ const UserProvider = ({ children }) => {
       const response = await api.get(`/usuario/Validar-Token/${token}`);
       if (response.data.succeeded) {
         setUser({ email: response.data.email, id: response.data.id });
+        navigate("/home")
       }
     } catch (e) {
       localStorage.removeItem("authToken");
@@ -57,10 +58,14 @@ const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    let timer;
+    if(user.id){
+     timer = setTimeout(() => {
       setUser({});
+      console.log("Saindo")
       navigate("/");
     }, 3000);
+  }
     return () => {
       clearTimeout(timer);
     };

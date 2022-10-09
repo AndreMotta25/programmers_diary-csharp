@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { UserContext } from "../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
 
@@ -8,23 +8,28 @@ import * as utils from "../../utils/utils";
 const RequireAuth = ({ children }) => {
   const { user, loading, error, insertError } = useContext(UserContext);
   const navigate = useNavigate();
+  const timer = useRef();
 
   const redirecionar = () => {
-    setTimeout(() => {
+    
+    timer.current = setTimeout(() => {
+      console.log("req")
       navigate("/");
+
     }, 5000);
+
   };
 
   useEffect(() => {
     const verifyLogin = async () => {
-      if (
-        (error && !loading && !user?.email) ||
-        utils.possuiAtributos(user) <= 0
-      )
+      if ((error && !loading && !user?.email) || utils.possuiAtributos(user) <= 0)
         redirecionar();
       else if (!loading && user.email) insertError(null);
     };
     verifyLogin();
+    return () => {
+      clearInterval(timer.current)
+    }
   }, [loading, user]);
 
   return (

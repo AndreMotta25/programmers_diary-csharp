@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SubMenu from "../SubMenu/SubMenu";
 import * as S from "./styles";
 
-const Card = ({ card, setModalActive, color, setCardVelho, setDeletar }) => {
+const Card = ({ card, setModalActive, color, setCardVelho, deleteCard }) => {
   console.log(card.novo);
   const wrapper = useRef(null);
 
@@ -32,7 +32,7 @@ const Card = ({ card, setModalActive, color, setCardVelho, setDeletar }) => {
       <S.Info>{card.descricao}</S.Info>
       <S.WrapperInfo>
         <S.Language>{card.linguagem.labelLinguagem}</S.Language>
-        <SubMenu item={card} setDelete={setDeletar} />
+        <SubMenu item={card} deleteCard={deleteCard} />
       </S.WrapperInfo>
     </S.Wrapper>
   );

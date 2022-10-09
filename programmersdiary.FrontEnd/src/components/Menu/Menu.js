@@ -49,7 +49,7 @@ const Menu = ({
       setResult("Nada achado...");
     }
     // eslint-disable-next-line
-  }, [search]);
+  }, [search,cards]);
   console.log(cards);
 
   return (

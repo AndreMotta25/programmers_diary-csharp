@@ -113,21 +113,21 @@ const Home = ({ tokenExpired }) => {
   }, [cardVelho]);
 
   // limpa o modal quando for fechado
-  useEffect(() => {
-    setNome("");
-    setDesc("");
-    setId("");
-    setLanguage("");
-    setCode("");
-    setLinguagemObj({});
-  }, [limpar]);
+  // useEffect(() => {
+  //   setNome("");
+  //   setDesc("");
+  //   setId("");
+  //   setLanguage("");
+  //   setCode("");
+  //   setLinguagemObj({});
+  // }, [limpar]);
 
   // adiciona o card novo a lista no menu
-  useEffect(() => {
-    if (itemManipulavel.novo === true) {
-      setCards([newItem, ...cards]);
-    }
-  }, [newItem]);
+  // useEffect(() => {
+  //   if (itemManipulavel.novo === true) {
+  //     setCards([newItem, ...cards]);
+  //   }
+  // }, [newItem]);
 
   // quando um card tiver seu nome alterado, vamos forcar a renderizacao para ser atualizado em tempo real
   useEffect(() => {
@@ -154,19 +154,30 @@ const Home = ({ tokenExpired }) => {
       atualizarConteudoCard(cardIndice);
   }, [itemManipulavel]);
 
-  useEffect(() => {
-    if (deletar.decisao === true) {
-      // caso o item a ser deletado seja o mesmo que está aberto, vamos limpar o container de texto
-      if (deletar.id === itemManipulavel.id) {
-        setTextCode("");
-        setManipulavelItem({});
-      } else api.delete(`card/${deletar.id}`);
 
-      let cardsRestantes = cards.filter((card) => card.id !== deletar.id);
-      setCards(cardsRestantes);
-      setDeletar({});
-    }
-  }, [deletar]);
+  function cleanModal() {
+    setNome("");
+    setDesc("");
+    setId("");
+    setLanguage("");
+    setCode("");
+    setLinguagemObj({});
+  }
+  function addCard(card)
+  {
+    setCards([...cards,card])
+  }
+  function deleteCard(id) {
+    if ((id === itemManipulavel.id && typeof id == "number" && itemManipulavel.aberto) || itemManipulavel.aberto) {
+      setTextCode("");
+      setManipulavelItem({});
+    } 
+    if(id) api.delete(`card/${id}`);
+    
+    let cardsRestantes = cards.filter((card) => card.id !== id);
+    setCards(cardsRestantes);
+
+  }
 
   function checkFields() {
     const error = {};
@@ -178,6 +189,7 @@ const Home = ({ tokenExpired }) => {
     setErros(error);
     return error;
   }
+  
   // evento de submit
   function handleSubmit(e) {
     e.preventDefault();
@@ -203,10 +215,14 @@ const Home = ({ tokenExpired }) => {
           alert("Salve antes de iniciar outro card");
         else {
           setManipulavelItem(obj);
-          setLimpar((v) => !v);
-          setNewItem(obj);
+          // setLimpar((v) => !v);
+          cleanModal();
+          // setNewItem(obj);
+          // setCards([...cards, obj])
+          addCard(obj)
         }
-      } else {
+      } 
+      else {
         let obj = {
           aberto: true,
           novo: false,
@@ -224,14 +240,13 @@ const Home = ({ tokenExpired }) => {
           alert("Salve antes de iniciar outro card");
         } else {
           setManipulavelItem(obj);
-          setLimpar((v) => !v);
+          cleanModal();
         }
       }
       setModalActive(false);
     }
   }
 
-  console.log(user);
   return (
     <>
       <Wrapper>
@@ -346,7 +361,7 @@ const Home = ({ tokenExpired }) => {
                   setModalActive={setModalActive}
                   color={card.id === itemManipulavel.id ? "white" : "black"}
                   setCardVelho={setCardVelho}
-                  setDeletar={setDeletar}
+                  deleteCard={deleteCard}
                 />
               ))}
             {!search &&
@@ -366,7 +381,7 @@ const Home = ({ tokenExpired }) => {
                   setModalActive={setModalActive}
                   color={card.id === itemManipulavel.id ? "white" : "black"}
                   setCardVelho={setCardVelho}
-                  setDeletar={setDeletar}
+                  deleteCard={deleteCard}
                 />
               ))) ||
               (found.length <= 0 && search && <S.Result>{result}</S.Result>)}

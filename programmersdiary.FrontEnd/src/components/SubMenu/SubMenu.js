@@ -3,7 +3,7 @@ import url from "../../assets/teste.png";
 import { AiFillDelete } from "react-icons/ai";
 import * as S from "./styles";
 
-const SubMenu = ({ item, setDelete }) => {
+const SubMenu = ({ item, deleteCard }) => {
   return (
     <>
       <S.WrapperSubMenu className="subMenu">
@@ -15,7 +15,7 @@ const SubMenu = ({ item, setDelete }) => {
           <S.ListItem data-submenu="submenu">
             <S.Button
               onClick={() => {
-                setDelete({ ...item, decisao: true });
+                deleteCard(item.id);
               }}
             >
               <AiFillDelete size={"18px"} color={"red"} />

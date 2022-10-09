@@ -23,13 +23,19 @@ function App() {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
+    let timer;
     if (tokenExpire)
-      setTimeout(() => {
+      timer = setTimeout(() => {
         setTokenExpire(false);
+        console.log("ola")
         navigate("/");
       }, 5000);
+    // return () => {
+    //   clearTimeout(timer);
+    // }  
   }, [tokenExpire]);
 
+  // useEffect(()=> {setTokenExpire(false)},[tokenExpire])
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     let timer;
@@ -39,6 +45,8 @@ function App() {
         if (Date.now() >= timeToExpire && user?.email) {
           setTokenExpire(true);
           clearInterval(timer);
+          console.log("aqui")
+          // navigate("/")
         }
         console.log(user);
         console.log("Contando...");
